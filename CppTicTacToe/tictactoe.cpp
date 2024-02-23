@@ -13,7 +13,7 @@ int round_counter = 1;
 bool game_over = false;
 bool three_in_a_row = false; // variable for algorithm to return later
 
-char test_char = 'A';
+char test_char = '~';
 char a1 = test_char;
 char a2 = test_char;
 char a3 = test_char;
