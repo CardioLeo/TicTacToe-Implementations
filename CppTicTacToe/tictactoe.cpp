@@ -9,19 +9,29 @@
 #include<iostream>
 using namespace std;
 
-int main(){
-bool win_check = false;
-while (win_check == false) {
-	cout << "while(win_check == false){\n";
-	cout << "	draw_board()\n";
-	cout << "	win_check()\n";
-	cout << "	change_turn()\n";
-        cout << "	player_move()\n";
-        cout << "}\n";
-	cout << "return 0\n";
-	cout << win_check;
-	win_check = true;
-	cout << win_check;
+
+void play_game(){
+	{
+	bool win_check = false;
+        while (win_check == false) {
+                cout << "while(win_check == false){\n";
+                cout << "       draw_board()\n";
+                cout << "       win_check()\n";
+                cout << "       change_turn()\n";
+                cout << "       player_move()\n";
+                cout << "}\n";
+                cout << "return 0\n";
+                cout << win_check << "\n";
+                win_check = true;
+                cout << win_check << "\n";
+                // print(win_check);
+        }
+	}
 }
+
+int main(){
+
+	play_game();
+
 return 0;
 }
