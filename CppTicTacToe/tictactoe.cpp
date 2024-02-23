@@ -22,6 +22,8 @@ char c3 = test_char;
 
 void draw_board(){
         cout << "\n\n";
+	cout << "Below are three rows across: 1, 2, and 3,\nand three columns down: a, b, and c.\nPlayer inputs row and column together in the format:\nb2\n";
+	cout << "\n\n";
        	cout << "     |     |     \n";
 	cout << "  " << a1 << "  |  " << a2 << "  |  " << a3 << "  \n";
 	cout << "_____|_____|_____\n";
@@ -32,26 +34,6 @@ void draw_board(){
 	cout << "  " << c1 << "  |  " << c2 << "  |  " << c3 << "  \n";
 	cout << "     |     |     \n";
 	cout << "\n\n";
-}
-
-void draw_board2(){
-	cout << "\n\n";
-	cout << "   |   |   \n";
-	cout << "___|___|___\n";
-        cout << "   |   |   \n";
-        cout << "___|___|___\n";
-        cout << "   |   |   \n";
-        cout << "   |   |   \n";
-	cout << "\n\n";
-	cout	<< a1 << "\n"
-		<< a2 << "\n"
-		<< a3 << "\n"
-		<< b1 << "\n"
-		<< b2 << "\n"
-		<< b3 << "\n"
-		<< c1 << "\n"
-		<< c2 << "\n"
-		<< c3 << "\n";
 }
 
 void play_game(){
