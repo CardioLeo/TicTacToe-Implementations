@@ -9,7 +9,9 @@
 #include<iostream>
 using namespace std;
 
-int round_counter = 0;
+int round_counter = 1;
+bool game_over = false;
+bool three_in_a_row = false; // variable for algorithm to return later
 
 char test_char = 'A';
 char a1 = test_char;
@@ -23,6 +25,7 @@ char c2 = test_char;
 char c3 = test_char;
 
 void draw_board(){
+	cout << "       draw_board()\n";
         cout << "\n\n";
 	cout << "Below are three rows across: 1, 2, and 3,\nand three columns down: a, b, and c.\nPlayer inputs row and column together in the format:\nb2\n";
 	cout << "\n\n";
@@ -38,17 +41,37 @@ void draw_board(){
 	cout << "\n\n";
 }
 
+void win_check(){
+        switch(round_counter){
+		case 'p': // game is in play
+			if (round_counter <= 9){
+	                	game_over = false;
+			}
+		case 's': // tie or stalemate
+			if (round_counter == 9){
+                		game_over = true; // because there is a tie or stalemate
+			}
+        	case 't': // three in a row algorithm has returned true
+			if (three_in_a_row == true){
+				game_over = true;
+			}
+        }
+                cout << "       win_check()\n";
+                cout << "If the game is over, the following value will be 1: " << game_over << "\n";
+                cout << "If the algorithm has found a winner, the following value will be 1: " << three_in_a_row << "\n";
+}
+
 void change_turn(){
 	bool player_one_turn = true;
 	bool player_two_turn = false;
 	if (round_counter % 2 == 1){
-		player_one_turn = false;
-		player_two_turn = true;
+		player_one_turn = true;
+		player_two_turn = false;
 		cout << "\nplayer one's turn is " << player_one_turn << "\n";
 		cout << "\nplayer two's turn is " << player_two_turn << "\n";
 	} else {
-		player_one_turn = true;
-        	player_two_turn = false;
+		player_one_turn = false;
+        	player_two_turn = true;
 		cout << "\nplayer one's turn is " << player_one_turn << "\n";
                 cout << "\nplayer two's turn is " << player_two_turn << "\n";
 	}
@@ -56,23 +79,17 @@ void change_turn(){
 
 void play_game(){
 	{
-	bool win_check = false;
-	while (round_counter <= 2) {
-                cout << "while(win_check == false){\n";
-                cout << "       draw_board()\n";
+	while (round_counter <= 3) {
+                cout << "while(game_over == false){\n";
 		draw_board();
-                cout << "       win_check()\n";
-                cout << "       change_turn()\n";
+                win_check();
+		cout << "round_counter is " << round_counter << "\n";
+		round_counter++;
+		cout << "       change_turn()\n";
 		change_turn();
                 cout << "       player_move()\n";
                 cout << "}\n";
                 cout << "return 0\n";
-                cout << win_check << "\n";
-                win_check = true;
-		cout << "round_counter is " << round_counter << "\n";
-		round_counter++;
-		cout << win_check << "\n";
-                // print(win_check);
         }
 	}
 }
