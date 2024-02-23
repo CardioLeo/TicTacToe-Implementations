@@ -27,8 +27,7 @@ char c2 = test_char;
 char c3 = test_char;
 
 void draw_board(){
-	cout << "       draw_board()\n";
-        cout << "\n\n";
+	cout << "draw_board()\n";
 	cout << "Below are three rows across: 1, 2, and 3,\nand three columns down: a, b, and c.\nPlayer inputs row and column together in the format:\nb2\n";
 	cout << "\n\n";
        	cout << "     |     |     \n";
@@ -50,7 +49,7 @@ void win_check(){
 	                	game_over = false;
 			}
 		case 's': // tie or stalemate
-			if (round_counter == 9){
+			if (round_counter == 9 && three_in_a_row == false){
                 		game_over = true; // because there is a tie or stalemate
 				cout << "There has been a tie or a stalemate.\n";
 			}
@@ -60,9 +59,20 @@ void win_check(){
 				cout << "A player has won by getting three marks in a row!";
 			}
         }
-                cout << "       win_check()\n";
+                cout << "win_check()\n";
                 cout << "If the game is over, the following value will be 1: " << game_over << "\n";
                 cout << "If the algorithm has found a winner, the following value will be 1: " << three_in_a_row << "\n";
+}
+
+void change_mark(){
+        char mark;
+        if (player_one_turn == true){
+                mark = 'X';
+                cout << "Player mark is " << mark << "\n";
+        } else {
+                mark = 'O';
+                cout << "Player mark is " << mark << "\n";
+        }
 }
 
 void change_turn(){
@@ -70,42 +80,29 @@ void change_turn(){
 	if (round_counter % 2 == 1){
 		player_one_turn = true;
 		player_two_turn = false;
-		cout << "\nplayer one's turn is " << player_one_turn << "\n";
-		cout << "\nplayer two's turn is " << player_two_turn << "\n";
+		cout << "player one's turn is " << player_one_turn << "\n";
+		cout << "player two's turn is " << player_two_turn << "\n";
 	} else {
 		player_one_turn = false;
         	player_two_turn = true;
-		cout << "\nplayer one's turn is " << player_one_turn << "\n";
-                cout << "\nplayer two's turn is " << player_two_turn << "\n";
+		cout << "player one's turn is " << player_one_turn << "\n";
+                cout << "player two's turn is " << player_two_turn << "\n";
 	}
-}
-
-void change_mark(){
-	char mark;
-	if (player_one_turn == true){
-		mark = 'X';
-		cout << "Player mark is " << mark << "\n";
-	} else {
-		mark = 'O';
-                cout << "Player mark is " << mark << "\n";
-	}
+change_mark();
 }
 
 void player_move(){
 	cout << "player_move()\n";
-	change_mark();
 }
 
 void play_game(){
 	{
 	while (round_counter <= 3) {
-                cout << "while(game_over == false){\n";
+                cout << "while(game_over == false) do\n";
 		draw_board();
                 win_check();
 		change_turn();
                 player_move();
-		cout << "}\n";
-                cout << "return 0\n";
                 cout << "round_counter is " << round_counter << "\n";
 		round_counter++;
         }
