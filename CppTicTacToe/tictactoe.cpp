@@ -21,6 +21,17 @@ char c2 = test_char;
 char c3 = test_char;
 
 void draw_board(){
+        cout << "\n\n";
+        cout << "   |   |   \n";
+        cout << "_" << a1 << "_|_" << a2 << "_|_" << a3 << "_\n";
+        cout << "   |   |   \n";
+        cout << "_" << a1 << "_|_" << a2 << "_|_" << a3 << "_\n";
+	cout << "   |   |   \n";
+        cout << "_" << a1 << "_|_" << a2 << "_|_" << a3 << "_\n";
+	cout << "\n\n";
+}
+
+void draw_board2(){
 	cout << "\n\n";
 	cout << "   |   |   \n";
 	cout << "___|___|___\n";
