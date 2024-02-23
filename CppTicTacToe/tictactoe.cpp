@@ -42,6 +42,49 @@ void draw_board(){
 	cout << "\n\n";
 }
 
+
+void find_three_in_a_row(){
+	int array_values = 0;
+	switch(array_values){
+		case '1': // three across top
+			if (array_values == 1){
+				cout << "The three across the top are a match!\n";
+			}
+		case '2': // three across middle
+			if (array_values == 2){
+                                cout << "The three across the middle are a match!\n";
+                        }
+		case '3': // three across bottom
+			if (array_values == 3){
+                                cout << "The three across the bottom are a match!\n";
+                        }
+		case '4': // three down on left
+			if (array_values == 4){
+                                cout << "The three down on the left are a match!\n";
+                        }
+		case '5': // three down on middle
+			if (array_values == 5){
+                                cout << "The three down on the middle are a match!\n";
+                        }
+		case '6': // three down on right
+			if (array_values == 6){
+                                cout << "The three down on the right are a match!\n";
+                        }
+		case '7': // three diagonal, top left to bottom right
+			if (array_values == 7){
+                                cout << "The three diagonal, top left to bottom right, are a match!\n";
+                        }
+		case '8': // three diagonal, bottom left to top right
+			if (array_values == 8){
+                                cout << "The three diagonal, bottom left to top right, are a match!\n";
+                        }
+	        case '9': // no winning combination found; game continues
+                        if (array_values == 0){
+                                cout << "No winning combination found! Game continues\n";
+                        }
+	}
+}
+
 void win_check(){
         switch(round_counter){
 		case 'p': // game is in play
@@ -105,6 +148,10 @@ void play_game(){
                 player_move();
                 cout << "round_counter is " << round_counter << "\n";
 		round_counter++;
+		if (round_counter >= 3) {
+			three_in_a_row = true;
+			cout << "The algorithm has found a winner!\n\n";
+		}
         }
 	}
 }
