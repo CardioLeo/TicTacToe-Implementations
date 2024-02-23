@@ -9,6 +9,16 @@
 #include<iostream>
 using namespace std;
 
+char a1 = 'A';
+char a2 = 'A';
+char a3 = 'A';
+char b1 = 'A';
+char b2 = 'A';
+char b3 = 'A';
+char c1 = 'A';
+char c2 = 'A';
+char c3 = 'A';
+
 void draw_board(){
 	cout << "\n\n";
 	cout << "   |   |   \n";
@@ -18,6 +28,15 @@ void draw_board(){
         cout << "   |   |   \n";
         cout << "   |   |   \n";
 	cout << "\n\n";
+	cout	<< a1 << "\n";
+	cout 	<< a2 << "\n"
+		<< a3 << "\n"
+		<< b1 << "\n"
+		<< b2 << "\n"
+		<< b3 << "\n"
+		<< c1 << "\n"
+		<< c2 << "\n"
+		<< c3 << "\n";
 }
 
 void play_game(){
