@@ -10,8 +10,6 @@
 using namespace std;
 
 int round_counter = 1;
-bool player_one_turn = true;
-bool player_two_turn = false;
 char mark = 'X';
 bool game_over = false;
 bool three_in_a_row = false; // variable for algorithm to return later
@@ -28,7 +26,6 @@ char c2 = blank_spot;
 char c3 = blank_spot;
 
 void draw_board(){
-	cout << "draw_board()\n";
 //	cout << "Below are three rows across: 1, 2, and 3,\nand three columns down: a, b, and c.\nPlayer inputs row and column together in the format:\nb2\n";
 	cout << "\n\n";
        	cout << "     |     |     \n";
@@ -88,7 +85,9 @@ void find_three_in_a_row(){
 				cout << "Player " << a3 << " wins!\n";
                         }
 	        case '9': // no winning combination found; game continues
-                        cout << "No winning combination found! Game continues\n";
+                        if (round_counter < 9){
+				cout << "No winning combination found! Game continues\n";
+			}
 	}
 }
 
@@ -120,7 +119,6 @@ void display_turn(){
 }
 
 void change_turn(){
-	cout << "change_turn()\n";
 	if (round_counter % 2 == 1){
 	//	player_one_turn = true;
 	//	player_two_turn = false;
@@ -135,12 +133,12 @@ display_turn();
 
 void player_move(){
 	cout << "player_move()\n";
+//	spot_to_fill = cin >> "Please select which spot you wish to place your mark in.\n";
 }
 
 void play_game(){
 	{
-	while (round_counter <= 3) {
-                cout << "while(game_over == false) do\n";
+	while (round_counter <= 9) {
 		draw_board();
                 win_check();
 		change_turn();
