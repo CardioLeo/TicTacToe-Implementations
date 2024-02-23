@@ -12,6 +12,7 @@ using namespace std;
 int round_counter = 1;
 bool player_one_turn = true;
 bool player_two_turn = false;
+char mark = 'X';
 bool game_over = false;
 bool three_in_a_row = false; // variable for algorithm to return later
 
@@ -90,6 +91,7 @@ void win_check(){
 		case 'p': // game is in play
 			if (round_counter <= 9){
 	                	game_over = false;
+				find_three_in_a_row();
 			}
 		case 's': // tie or stalemate
 			if (round_counter == 9 && three_in_a_row == false){
@@ -108,7 +110,6 @@ void win_check(){
 }
 
 void change_mark(){
-        char mark;
         if (player_one_turn == true){
                 mark = 'X';
                 cout << "Player mark is " << mark << "\n";
@@ -118,18 +119,22 @@ void change_mark(){
         }
 }
 
+void display_turn(){
+	cout << "It is " << mark << "'s turn";
+               // cout << "player one's turn is " << player_one_turn << "\n";
+               // cout << "player two's turn is " << player_two_turn << "\n";
+}
+
 void change_turn(){
 	cout << "change_turn()\n";
 	if (round_counter % 2 == 1){
 		player_one_turn = true;
 		player_two_turn = false;
-		cout << "player one's turn is " << player_one_turn << "\n";
-		cout << "player two's turn is " << player_two_turn << "\n";
+		display_turn();
 	} else {
 		player_one_turn = false;
         	player_two_turn = true;
-		cout << "player one's turn is " << player_one_turn << "\n";
-                cout << "player two's turn is " << player_two_turn << "\n";
+		display_turn();
 	}
 change_mark();
 }
@@ -148,12 +153,8 @@ void play_game(){
                 player_move();
                 cout << "round_counter is " << round_counter << "\n";
 		round_counter++;
-		if (round_counter >= 3) {
-			three_in_a_row = true;
-			cout << "The algorithm has found a winner!\n\n";
 		}
         }
-	}
 }
 
 int main(){
