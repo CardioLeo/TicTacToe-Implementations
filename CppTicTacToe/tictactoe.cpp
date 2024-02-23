@@ -50,10 +50,12 @@ void win_check(){
 		case 's': // tie or stalemate
 			if (round_counter == 9){
                 		game_over = true; // because there is a tie or stalemate
+				cout << "There has been a tie or a stalemate.\n";
 			}
         	case 't': // three in a row algorithm has returned true
 			if (three_in_a_row == true){
 				game_over = true;
+				cout << "A player has won by getting three marks in a row!";
 			}
         }
                 cout << "       win_check()\n";
