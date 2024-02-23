@@ -10,6 +10,8 @@
 using namespace std;
 
 int round_counter = 1;
+bool player_one_turn = true;
+bool player_two_turn = false;
 bool game_over = false;
 bool three_in_a_row = false; // variable for algorithm to return later
 
@@ -64,8 +66,7 @@ void win_check(){
 }
 
 void change_turn(){
-	bool player_one_turn = true;
-	bool player_two_turn = false;
+	cout << "change_turn()\n";
 	if (round_counter % 2 == 1){
 		player_one_turn = true;
 		player_two_turn = false;
@@ -79,19 +80,34 @@ void change_turn(){
 	}
 }
 
+void change_mark(){
+	char mark;
+	if (player_one_turn == true){
+		mark = 'X';
+		cout << "Player mark is " << mark << "\n";
+	} else {
+		mark = 'O';
+                cout << "Player mark is " << mark << "\n";
+	}
+}
+
+void player_move(){
+	cout << "player_move()\n";
+	change_mark();
+}
+
 void play_game(){
 	{
 	while (round_counter <= 3) {
                 cout << "while(game_over == false){\n";
 		draw_board();
                 win_check();
-		cout << "round_counter is " << round_counter << "\n";
-		round_counter++;
-		cout << "       change_turn()\n";
 		change_turn();
-                cout << "       player_move()\n";
-                cout << "}\n";
+                player_move();
+		cout << "}\n";
                 cout << "return 0\n";
+                cout << "round_counter is " << round_counter << "\n";
+		round_counter++;
         }
 	}
 }
