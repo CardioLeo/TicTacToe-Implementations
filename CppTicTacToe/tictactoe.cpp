@@ -16,16 +16,16 @@ char mark = 'X';
 bool game_over = false;
 bool three_in_a_row = false; // variable for algorithm to return later
 
-char test_char = '~';
-char a1 = test_char;
-char a2 = test_char;
-char a3 = test_char;
-char b1 = test_char;
-char b2 = test_char;
-char b3 = test_char;
-char c1 = test_char;
-char c2 = test_char;
-char c3 = test_char;
+char blank_spot = '~';
+char a1 = blank_spot;
+char a2 = blank_spot;
+char a3 = blank_spot;
+char b1 = blank_spot;
+char b2 = blank_spot;
+char b3 = blank_spot;
+char c1 = blank_spot;
+char c2 = blank_spot;
+char c3 = blank_spot;
 
 void draw_board(){
 	cout << "draw_board()\n";
@@ -48,41 +48,47 @@ void find_three_in_a_row(){
 	int array_values = 0;
 	switch(array_values){
 		case '1': // three across top
-			if (array_values == 1){
+			if (a1 != '~' && a1 == a2 && a2 == a3){
 				cout << "The three across the top are a match!\n";
+				cout << "Player " << a1 << " wins!\n";
 			}
 		case '2': // three across middle
-			if (array_values == 2){
+			if (b1 != '~' && b1 == b2 && b2 == b3){
                                 cout << "The three across the middle are a match!\n";
+				cout << "Player " << b1 << " wins!\n";
                         }
 		case '3': // three across bottom
-			if (array_values == 3){
+			if (c1 != '~' && c1 == c2 && c2 == c3){
                                 cout << "The three across the bottom are a match!\n";
+				cout << "Player " << c1 << " wins!\n";
                         }
 		case '4': // three down on left
-			if (array_values == 4){
+			if (a1 != '~' && a1 == b1 && b1 == c1){
                                 cout << "The three down on the left are a match!\n";
+				cout << "Player " << a1 << " wins!\n";
                         }
 		case '5': // three down on middle
-			if (array_values == 5){
+			if (a2 != '~' && a2 == b2 && b2 == c2){
                                 cout << "The three down on the middle are a match!\n";
+				cout << "Player " << a2 << " wins!\n";
                         }
 		case '6': // three down on right
-			if (array_values == 6){
+			if (a3 != '~' && a3 == b3 && b3 == c3){
                                 cout << "The three down on the right are a match!\n";
+				cout << "Player " << a3 << " wins!\n";
                         }
 		case '7': // three diagonal, top left to bottom right
-			if (array_values == 7){
+			if (a1 != '~' && a1 == b2 && b2 == c3){
                                 cout << "The three diagonal, top left to bottom right, are a match!\n";
+				cout << "Player " << a1 << " wins!\n";
                         }
 		case '8': // three diagonal, bottom left to top right
-			if (array_values == 8){
+			if (a3 != '~' && a3 == b2 && b2 == c1){
                                 cout << "The three diagonal, bottom left to top right, are a match!\n";
+				cout << "Player " << a3 << " wins!\n";
                         }
 	        case '9': // no winning combination found; game continues
-                        if (array_values == 0){
-                                cout << "No winning combination found! Game continues\n";
-                        }
+                        cout << "No winning combination found! Game continues\n";
 	}
 }
 
@@ -116,17 +122,13 @@ void display_turn(){
 void change_turn(){
 	cout << "change_turn()\n";
 	if (round_counter % 2 == 1){
-		player_one_turn = true;
-		player_two_turn = false;
+	//	player_one_turn = true;
+	//	player_two_turn = false;
                 mark = 'X';
-                // cout << "Player mark is " << mark << "\n";
-
 	} else {
-		player_one_turn = false;
-		player_two_turn = true;
+	//	player_one_turn = false;
+	//	player_two_turn = true;
                 mark = 'O';
-                // cout << "Player mark is " << mark << "\n";
-
 	}
 display_turn();
 }
