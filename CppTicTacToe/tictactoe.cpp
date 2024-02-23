@@ -48,7 +48,7 @@ void announce_end(){
 void round_limit_checker(){
                 cout << "Round Number: " << round_counter << "\n";
                 if (round_counter >= 9){
-			cout << "There are no more rounds.\n";
+			cout << "This is the final round.\n";
                 	announce_end();
                 }
                 round_counter++;
@@ -61,67 +61,43 @@ void display_info(){
 
 void find_three_in_a_row(){
 	// int array_values = 0; // a placeholder to pass intow switch until I can use player input
-	switch(spot_to_fill){
-		case '1': // three across top
-			if (a1 == a2 && a2 == a3){
-				cout << "The three across the top are a match!\n";
-				cout << "Player " << a1 << " wins!\n";
-				announce_end();
-			}
-			break;
-		case '2': // three across middle
-			if (b1 == b2 && b2 == b3){
-                                cout << "The three across the middle are a match!\n";
-				cout << "Player " << b1 << " wins!\n";
-				announce_end();
-                        }
-			break;
-		case '3': // three across bottom
-			if (c1 == c2 && c2 == c3){
-                                cout << "The three across the bottom are a match!\n";
-				cout << "Player " << c1 << " wins!\n";
-				announce_end();
-                        }
-			break;
-		case '4': // three down on left
-			if (a1 == b1 && b1 == c1){
-                                cout << "The three down on the left are a match!\n";
-				cout << "Player " << a1 << " wins!\n";
-				announce_end();
-                        }
-			break;
-		case '5': // three down on middle
-			if (a2 == b2 && b2 == c2){
-                                cout << "The three down on the middle are a match!\n";
-				cout << "Player " << a2 << " wins!\n";
-				announce_end();
-                        }
-			break;
-		case '6': // three down on right
-			if (a3 == b3 && b3 == c3){
-                                cout << "The three down on the right are a match!\n";
-				cout << "Player " << a3 << " wins!\n";
-				announce_end();
-                        }
-			break;
-		case '7': // three diagonal, top left to bottom right
-			if (a1 == b2 && b2 == c3){
-                                cout << "The three diagonal, top left to bottom right, are a match!\n";
-				cout << "Player " << a1 << " wins!\n";
-				announce_end();
-                        }
-			break;
-		case '8': // three diagonal, bottom left to top right
-			if (a3 == b2 && b2 == c1){
-                                cout << "The three diagonal, bottom left to top right, are a match!\n";
-				cout << "Player " << a3 << " wins!\n";
-				announce_end();
-                        }
-			break;
-	        default: // no winning combination found; game continues
+	// three across top
+		if (a1 == a2 && a2 == a3) {
+			cout << "The three across the top are a match!\n";
+			cout << "Player " << a1 << " wins!\n";
+			announce_end();
+		} else if (b1 == b2 && b2 == b3) { // three across middle
+                        cout << "The three across the middle are a match!\n";
+			cout << "Player " << b1 << " wins!\n";
+			announce_end();
+                } else if (c1 == c2 && c2 == c3) { // three across bottom
+	                cout << "The three across the bottom are a match!\n";
+			cout << "Player " << c1 << " wins!\n";
+			announce_end();
+		} else if (a1 == b1 && b1 == c1) { // three down on right
+	                cout << "The three down on the left are a match!\n";
+			cout << "Player " << a1 << " wins!\n";
+			announce_end();
+                } else if (a2 == b2 && b2 == c2) { // three down on middle
+                        cout << "The three down on the middle are a match!\n";
+			cout << "Player " << a2 << " wins!\n";
+			announce_end();
+                } else if (a3 == b3 && b3 == c3) { // three down on right
+                        cout << "The three down on the right are a match!\n";
+			cout << "Player " << a3 << " wins!\n";
+			announce_end();
+                } else if (a1 == b2 && b2 == c3) { // three diagonal, top left to bottom right
+                        cout << "The three diagonal, top left to bottom right, are a match!\n";
+			cout << "Player " << a1 << " wins!\n";
+			announce_end();
+		} else if (a3 == b2 && b2 == c1) { // three diagonal, bottom left to top right
+                        cout << "The three diagonal, bottom left to top right, are a match!\n";
+			cout << "Player " << a3 << " wins!\n";
+			announce_end();
+                } else { // no winning combination found; game continues
                         if (round_counter < 9){
 				cout << "No wins yet!\n";
-			}
+		}
 	}
 }
 
@@ -171,10 +147,10 @@ void play_game(){
 	{
 	while (game_over == false) {
 		display_info();
-		find_three_in_a_row();
                 player_move();
                 change_turn();
 		draw_board();
+		find_three_in_a_row();
 		}
         }
 }
