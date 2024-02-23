@@ -40,6 +40,10 @@ void draw_board(){
 	cout << "\n\n";
 }
 
+void match(){
+	cout << "That's three in a row!\n";
+}
+
 void announce_end(){
         game_over = true;
         draw_board();
@@ -62,36 +66,36 @@ void display_info(){
 void find_three_in_a_row(){
 	// int array_values = 0; // a placeholder to pass intow switch until I can use player input
 	// three across top
-		if (a1 == a2 && a2 == a3) {
-			cout << "The three across the top are a match!\n";
+		if (a1 == a2 && a2 == a3) { // three across middle
+			match();
 			cout << "Player " << a1 << " wins!\n";
 			announce_end();
 		} else if (b1 == b2 && b2 == b3) { // three across middle
-                        cout << "The three across the middle are a match!\n";
+			match();
 			cout << "Player " << b1 << " wins!\n";
 			announce_end();
                 } else if (c1 == c2 && c2 == c3) { // three across bottom
-	                cout << "The three across the bottom are a match!\n";
+			match();
 			cout << "Player " << c1 << " wins!\n";
 			announce_end();
 		} else if (a1 == b1 && b1 == c1) { // three down on right
-	                cout << "The three down on the left are a match!\n";
+			match();
 			cout << "Player " << a1 << " wins!\n";
 			announce_end();
                 } else if (a2 == b2 && b2 == c2) { // three down on middle
-                        cout << "The three down on the middle are a match!\n";
+			match();
 			cout << "Player " << a2 << " wins!\n";
 			announce_end();
                 } else if (a3 == b3 && b3 == c3) { // three down on right
-                        cout << "The three down on the right are a match!\n";
+			match();
 			cout << "Player " << a3 << " wins!\n";
 			announce_end();
                 } else if (a1 == b2 && b2 == c3) { // three diagonal, top left to bottom right
-                        cout << "The three diagonal, top left to bottom right, are a match!\n";
+			match();
 			cout << "Player " << a1 << " wins!\n";
 			announce_end();
 		} else if (a3 == b2 && b2 == c1) { // three diagonal, bottom left to top right
-                        cout << "The three diagonal, bottom left to top right, are a match!\n";
+			match();
 			cout << "Player " << a3 << " wins!\n";
 			announce_end();
                 } else { // no winning combination found; game continues
