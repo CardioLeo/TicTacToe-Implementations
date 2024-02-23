@@ -64,42 +64,50 @@ void find_three_in_a_row(){
 				cout << "The three across the top are a match!\n";
 				cout << "Player " << a1 << " wins!\n";
 			}
+			break;
 		case '2': // three across middle
 			if (b1 != '~' && b1 == b2 && b2 == b3){
                                 cout << "The three across the middle are a match!\n";
 				cout << "Player " << b1 << " wins!\n";
                         }
+			break;
 		case '3': // three across bottom
 			if (c1 != '~' && c1 == c2 && c2 == c3){
                                 cout << "The three across the bottom are a match!\n";
 				cout << "Player " << c1 << " wins!\n";
                         }
+			break;
 		case '4': // three down on left
 			if (a1 != '~' && a1 == b1 && b1 == c1){
                                 cout << "The three down on the left are a match!\n";
 				cout << "Player " << a1 << " wins!\n";
                         }
+			break;
 		case '5': // three down on middle
 			if (a2 != '~' && a2 == b2 && b2 == c2){
                                 cout << "The three down on the middle are a match!\n";
 				cout << "Player " << a2 << " wins!\n";
                         }
+			break;
 		case '6': // three down on right
 			if (a3 != '~' && a3 == b3 && b3 == c3){
                                 cout << "The three down on the right are a match!\n";
 				cout << "Player " << a3 << " wins!\n";
                         }
+			break;
 		case '7': // three diagonal, top left to bottom right
 			if (a1 != '~' && a1 == b2 && b2 == c3){
                                 cout << "The three diagonal, top left to bottom right, are a match!\n";
 				cout << "Player " << a1 << " wins!\n";
                         }
+			break;
 		case '8': // three diagonal, bottom left to top right
 			if (a3 != '~' && a3 == b2 && b2 == c1){
                                 cout << "The three diagonal, bottom left to top right, are a match!\n";
 				cout << "Player " << a3 << " wins!\n";
                         }
-	        case '9': // no winning combination found; game continues
+			break;
+	        default: // no winning combination found; game continues
                         if (round_counter < 9){
 				cout << "No winning combination found! Game continues\n";
 			}
