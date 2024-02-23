@@ -15,16 +15,16 @@ bool game_over = false;
 bool three_in_a_row = false; // variable for algorithm to return later
 
 char blank_spot = '~';
-char spot_to_fill = 'e'; // for empty, until filled by player and used by player_move()
-char a1 = blank_spot;
-char a2 = blank_spot;
-char a3 = blank_spot;
-char b1 = blank_spot;
-char b2 = blank_spot;
-char b3 = blank_spot;
-char c1 = blank_spot;
-char c2 = blank_spot;
-char c3 = blank_spot;
+int spot_to_fill = 0; // for empty, until filled by player and used by player_move()
+char a1 = '1';
+char a2 = '2';
+char a3 = '3';
+char b1 = '4';
+char b2 = '5';
+char b3 = '6';
+char c1 = '7';
+char c2 = '8';
+char c3 = '9';
 
 void round_limit_checker(){
                 cout << "Round Number: " << round_counter << "\n";
@@ -124,8 +124,37 @@ void change_turn(){
 }
 
 void player_move(){
-	cout << "player_move()\n";
-//	spot_to_fill = cin >> "Please select which spot you wish to place your mark in.\n";
+	cout << "Please select which spot you wish to place your mark in.\n";
+	cin >> spot_to_fill;
+	switch(spot_to_fill){
+		case 1:
+			a1 = mark;
+			break;
+		case 2:
+			a2 = mark;
+			break;
+		case 3:
+			a3 = mark;
+			break;
+		case 4:
+			b1 = mark;
+			break;
+		case 5:
+			b2 = mark;
+			break;
+		case 6:
+			b3 = mark;
+			break;
+		case 7:
+			c1 = mark;
+			break;
+		case 8:
+			c2 = mark;
+			break;
+		case 9:
+			c3 = mark;
+			break;
+	}
 }
 
 void play_game(){
