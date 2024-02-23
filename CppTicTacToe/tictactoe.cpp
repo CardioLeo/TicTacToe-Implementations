@@ -9,6 +9,8 @@
 #include<iostream>
 using namespace std;
 
+int round_counter = 0;
+
 char test_char = 'A';
 char a1 = test_char;
 char a2 = test_char;
@@ -36,23 +38,39 @@ void draw_board(){
 	cout << "\n\n";
 }
 
+void change_turn(){
+	bool player_one_turn = true;
+	bool player_two_turn = false;
+	if (round_counter % 2 == 1){
+		player_one_turn = false;
+		player_two_turn = true;
+		cout << "\nplayer one's turn is " << player_one_turn << "\n";
+		cout << "\nplayer two's turn is " << player_two_turn << "\n";
+	} else {
+		player_one_turn = true;
+        	player_two_turn = false;
+		cout << "\nplayer one's turn is " << player_one_turn << "\n";
+                cout << "\nplayer two's turn is " << player_two_turn << "\n";
+	}
+}
+
 void play_game(){
 	{
 	bool win_check = false;
-        int win_check_count = 0;
-	while (win_check_count <= 2) {
+	while (round_counter <= 2) {
                 cout << "while(win_check == false){\n";
                 cout << "       draw_board()\n";
 		draw_board();
                 cout << "       win_check()\n";
                 cout << "       change_turn()\n";
+		change_turn();
                 cout << "       player_move()\n";
                 cout << "}\n";
                 cout << "return 0\n";
                 cout << win_check << "\n";
                 win_check = true;
-		cout << "win_check_count is " << win_check_count << "\n";
-		win_check_count++;
+		cout << "round_counter is " << round_counter << "\n";
+		round_counter++;
 		cout << win_check << "\n";
                 // print(win_check);
         }
