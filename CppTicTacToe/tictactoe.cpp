@@ -15,6 +15,7 @@ bool game_over = false;
 bool three_in_a_row = false; // variable for algorithm to return later
 
 char blank_spot = '~';
+char spot_to_fill = 'e'; // for empty, until filled by player and used by player_move()
 char a1 = blank_spot;
 char a2 = blank_spot;
 char a3 = blank_spot;
