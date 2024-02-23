@@ -9,6 +9,9 @@
 #include<iostream>
 using namespace std;
 
+void draw_board(){
+	cout << "\n\n --- the board here --- \n\n\n";
+}
 
 void play_game(){
 	{
@@ -16,6 +19,7 @@ void play_game(){
         while (win_check == false) {
                 cout << "while(win_check == false){\n";
                 cout << "       draw_board()\n";
+		draw_board();
                 cout << "       win_check()\n";
                 cout << "       change_turn()\n";
                 cout << "       player_move()\n";
