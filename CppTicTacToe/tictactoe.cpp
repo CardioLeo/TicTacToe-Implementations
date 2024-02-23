@@ -10,7 +10,14 @@
 using namespace std;
 
 void draw_board(){
-	cout << "\n\n --- the board here --- \n\n\n";
+	cout << "\n\n";
+	cout << "   |   |   \n";
+	cout << "___|___|___\n";
+        cout << "   |   |   \n";
+        cout << "___|___|___\n";
+        cout << "   |   |   \n";
+        cout << "   |   |   \n";
+	cout << "\n\n";
 }
 
 void play_game(){
