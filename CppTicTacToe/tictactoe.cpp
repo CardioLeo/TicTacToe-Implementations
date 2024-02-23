@@ -108,12 +108,8 @@ void find_three_in_a_row(){
 
 void change_turn(){
 	if (round_counter % 2 == 1){
-	//	player_one_turn = true;
-	//	player_two_turn = false;
                 mark = 'X';
 	} else {
-	//	player_one_turn = false;
-	//	player_two_turn = true;
                 mark = 'O';
 	}
 }
@@ -123,15 +119,11 @@ void player_move(){
 //	spot_to_fill = cin >> "Please select which spot you wish to place your mark in.\n";
 }
 
-void win_check(){
-	find_three_in_a_row();
-}
-
 void play_game(){
 	{
 	while (game_over == false) {
 		draw_board();
-                win_check();
+		find_three_in_a_row();
 		change_turn();
                 player_move();
 		}
