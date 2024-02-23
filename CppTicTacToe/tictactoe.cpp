@@ -29,7 +29,7 @@ char c3 = test_char;
 
 void draw_board(){
 	cout << "draw_board()\n";
-	cout << "Below are three rows across: 1, 2, and 3,\nand three columns down: a, b, and c.\nPlayer inputs row and column together in the format:\nb2\n";
+//	cout << "Below are three rows across: 1, 2, and 3,\nand three columns down: a, b, and c.\nPlayer inputs row and column together in the format:\nb2\n";
 	cout << "\n\n";
        	cout << "     |     |     \n";
 	cout << "  " << a1 << "  |  " << a2 << "  |  " << a3 << "  \n";
@@ -105,24 +105,12 @@ void win_check(){
 			}
         }
                 cout << "win_check()\n";
-                cout << "If the game is over, the following value will be 1: " << game_over << "\n";
-                cout << "If the algorithm has found a winner, the following value will be 1: " << three_in_a_row << "\n";
-}
-
-void change_mark(){
-        if (player_one_turn == true){
-                mark = 'X';
-                cout << "Player mark is " << mark << "\n";
-        } else {
-                mark = 'O';
-                cout << "Player mark is " << mark << "\n";
-        }
+//                cout << "If the game is over, the following value will be 1: " << game_over << "\n";
+//                cout << "If the algorithm has found a winner, the following value will be 1: " << three_in_a_row << "\n";
 }
 
 void display_turn(){
-	cout << "It is " << mark << "'s turn";
-               // cout << "player one's turn is " << player_one_turn << "\n";
-               // cout << "player two's turn is " << player_two_turn << "\n";
+	cout << "It is " << mark << "'s turn\n";
 }
 
 void change_turn(){
@@ -130,13 +118,17 @@ void change_turn(){
 	if (round_counter % 2 == 1){
 		player_one_turn = true;
 		player_two_turn = false;
-		display_turn();
+                mark = 'X';
+                // cout << "Player mark is " << mark << "\n";
+
 	} else {
 		player_one_turn = false;
-        	player_two_turn = true;
-		display_turn();
+		player_two_turn = true;
+                mark = 'O';
+                // cout << "Player mark is " << mark << "\n";
+
 	}
-change_mark();
+display_turn();
 }
 
 void player_move(){
