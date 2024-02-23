@@ -25,7 +25,22 @@ char c1 = blank_spot;
 char c2 = blank_spot;
 char c3 = blank_spot;
 
+void round_limit_checker(){
+                cout << "Round Number: " << round_counter << "\n";
+		if (round_counter >= 9){
+                        game_over = true;
+			cout << "There are no more rounds.\n";
+                }
+                round_counter++;
+}
+
+void display_info(){
+        cout << "Player Turn: " << mark << "\n";
+	round_limit_checker();
+}
+
 void draw_board(){
+	display_info();
 //	cout << "Below are three rows across: 1, 2, and 3,\nand three columns down: a, b, and c.\nPlayer inputs row and column together in the format:\nb2\n";
 	cout << "\n\n";
        	cout << "     |     |     \n";
@@ -42,7 +57,7 @@ void draw_board(){
 
 
 void find_three_in_a_row(){
-	int array_values = 0;
+	int array_values = 0; // a placeholder until I can use player input
 	switch(array_values){
 		case '1': // three across top
 			if (a1 != '~' && a1 == a2 && a2 == a3){
@@ -91,41 +106,6 @@ void find_three_in_a_row(){
 	}
 }
 
-void round_limit_checker(){
-                cout << game_over << "\n";
-                round_counter++;
-		if (round_counter >= 10){
-                        game_over = true;
-                }
-}
-
-void win_check(){
-        switch(round_counter){
-		case 'p': // game is in play
-			if (round_counter <= 9){
-	                	game_over = false;
-				find_three_in_a_row();
-			}
-		case 's': // tie or stalemate
-			if (round_counter == 9 && three_in_a_row == false){
-                		game_over = true; // because there is a tie or stalemate
-				cout << "There has been a tie or a stalemate.\n";
-			}
-        	case 't': // three in a row algorithm has returned true
-			if (three_in_a_row == true){
-				game_over = true;
-				cout << "A player has won by getting three marks in a row!";
-			}
-        }
-                cout << "win_check()\n";
-//                cout << "If the game is over, the following value will be 1: " << game_over << "\n";
-//                cout << "If the algorithm has found a winner, the following value will be 1: " << three_in_a_row << "\n";
-}
-
-void display_turn(){
-	cout << "It is " << mark << "'s turn\n";
-}
-
 void change_turn(){
 	if (round_counter % 2 == 1){
 	//	player_one_turn = true;
@@ -136,12 +116,15 @@ void change_turn(){
 	//	player_two_turn = true;
                 mark = 'O';
 	}
-display_turn();
 }
 
 void player_move(){
 	cout << "player_move()\n";
 //	spot_to_fill = cin >> "Please select which spot you wish to place your mark in.\n";
+}
+
+void win_check(){
+	find_three_in_a_row();
 }
 
 void play_game(){
@@ -151,8 +134,6 @@ void play_game(){
                 win_check();
 		change_turn();
                 player_move();
-                cout << "round_counter is " << round_counter << "\n";
-		round_limit_checker();
 		}
         }
 }
