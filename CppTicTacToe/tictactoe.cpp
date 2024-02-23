@@ -91,6 +91,14 @@ void find_three_in_a_row(){
 	}
 }
 
+void round_limit_checker(){
+                cout << game_over << "\n";
+                round_counter++;
+		if (round_counter >= 10){
+                        game_over = true;
+                }
+}
+
 void win_check(){
         switch(round_counter){
 		case 'p': // game is in play
@@ -138,13 +146,13 @@ void player_move(){
 
 void play_game(){
 	{
-	while (round_counter <= 9) {
+	while (game_over == false) {
 		draw_board();
                 win_check();
 		change_turn();
                 player_move();
                 cout << "round_counter is " << round_counter << "\n";
-		round_counter++;
+		round_limit_checker();
 		}
         }
 }
