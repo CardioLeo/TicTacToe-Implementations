@@ -64,43 +64,41 @@ void display_info(){
 }
 
 void find_three_in_a_row(){
-	// int array_values = 0; // a placeholder to pass intow switch until I can use player input
-	// three across top
-		if (a1 == a2 && a2 == a3) { // three across middle
-			match();
-			cout << "Player " << a1 << " wins!\n";
-			announce_end();
-		} else if (b1 == b2 && b2 == b3) { // three across middle
-			match();
-			cout << "Player " << b1 << " wins!\n";
-			announce_end();
-                } else if (c1 == c2 && c2 == c3) { // three across bottom
-			match();
-			cout << "Player " << c1 << " wins!\n";
-			announce_end();
-		} else if (a1 == b1 && b1 == c1) { // three down on right
-			match();
-			cout << "Player " << a1 << " wins!\n";
-			announce_end();
-                } else if (a2 == b2 && b2 == c2) { // three down on middle
-			match();
-			cout << "Player " << a2 << " wins!\n";
-			announce_end();
-                } else if (a3 == b3 && b3 == c3) { // three down on right
-			match();
-			cout << "Player " << a3 << " wins!\n";
-			announce_end();
-                } else if (a1 == b2 && b2 == c3) { // three diagonal, top left to bottom right
-			match();
-			cout << "Player " << a1 << " wins!\n";
-			announce_end();
-		} else if (a3 == b2 && b2 == c1) { // three diagonal, bottom left to top right
-			match();
-			cout << "Player " << a3 << " wins!\n";
-			announce_end();
-                } else { // no winning combination found; game continues
-                        if (round_counter < 9){
-				cout << "No wins yet!\n";
+	if (a1 == a2 && a2 == a3) { // three across middle
+		match();
+		cout << "Player " << a1 << " wins!\n";
+		announce_end();
+	} else if (b1 == b2 && b2 == b3) { // three across middle
+		match();
+		cout << "Player " << b1 << " wins!\n";
+		announce_end();
+        } else if (c1 == c2 && c2 == c3) { // three across bottom
+		match();
+		cout << "Player " << c1 << " wins!\n";
+		announce_end();
+	} else if (a1 == b1 && b1 == c1) { // three down on right
+		match();
+		cout << "Player " << a1 << " wins!\n";
+		announce_end();
+        } else if (a2 == b2 && b2 == c2) { // three down on middle
+		match();
+		cout << "Player " << a2 << " wins!\n";
+		announce_end();
+        } else if (a3 == b3 && b3 == c3) { // three down on right
+		match();
+		cout << "Player " << a3 << " wins!\n";
+		announce_end();
+        } else if (a1 == b2 && b2 == c3) { // three diagonal, top left to bottom right
+		match();
+		cout << "Player " << a1 << " wins!\n";
+		announce_end();
+	} else if (a3 == b2 && b2 == c1) { // three diagonal, bottom left to top right
+		match();
+		cout << "Player " << a3 << " wins!\n";
+		announce_end();
+        } else { // no winning combination found; game continues
+                if (round_counter < 9){
+			cout << "No wins yet!\n";
 		}
 	}
 }
@@ -115,7 +113,7 @@ void change_turn(){
 
 void player_move(){
 	cout << "Player " << mark << ", Please select the spot to place your mark.\n";
-	cin >> spot_to_fill;
+	cin >> spot_to_fill; // still need to validate input!
 	switch(spot_to_fill){
 		case 1:
 			a1 = mark;
