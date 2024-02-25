@@ -136,7 +136,7 @@ void player_move(){
 	}
 }
 
-void play_game(){
+void start_game(){
 	while (game_over == false) {
 		display_info();
                 player_move();
@@ -146,10 +146,37 @@ void play_game(){
 	}
 }
 
+int play_again_input = 0;
+
+void ask_to_play(){
+        cout << "\n\n\nThat game ended - and I hope you had fun!\n\nWould you like to play again?\n\nIf you want to play again, press 1. If you're done, press 2.\n\n";
+	cin >> play_again_input;
+}
+
+void play_again(){
+	while (game_over = true){
+		ask_to_play();
+		if (play_again_input == 1){
+			game_over = false;
+			round_counter = 1;
+			change_turn();
+			start_game();
+		} else if (play_again_input == 2){
+			cout << "\n\n\nHave a great day!\n" << endl;
+			game_over = false;
+			return;
+		} else {
+			cout << "Hm, looks like you pressed some other key..." << endl;
+			ask_to_play();
+		}
+	}
+}
+
 int main(){
 
 	draw_board();
-	play_game();
+	start_game();
+	play_again();
 
 return 0;
 }
