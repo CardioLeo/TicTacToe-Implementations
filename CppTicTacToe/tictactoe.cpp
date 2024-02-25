@@ -39,13 +39,11 @@ void draw_board(){
 	cout << "\n\n";
 }
 
-void match(){
+void announce_three_in_a_row(){
 	cout << "That's three in a row!\n";
-}
-
-void announce_end(){
-        game_over = true;
-        draw_board();
+	cout << "Player " << mark << " wins!\n";
+	game_over = true;
+	// draw_board();
 }
 
 void round_limit_checker(){
