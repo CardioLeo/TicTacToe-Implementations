@@ -99,6 +99,8 @@ void find_three_in_a_row(){
         } else { // no winning combination found; game continues
                 if (round_counter < 9){
 			cout << "No wins yet!\n";
+		} else if (round_counter >= 9) {
+			cout << "There are no turns left!\nI'm guessing this is a tie. Close game :)\n";
 		}
 	}
 }
@@ -142,19 +144,22 @@ void player_move(){
 		case 9:
 			c3 = mark;
 			break;
+	//	default:
+                        // if (spot_to_fill != [1-9]) {
+                        //      cout << "Please only enter a number between 1 and 9.\n";
+			// re-call player_move()? recursion?
+                        // }
 	}
 }
 
 void play_game(){
-	{
 	while (game_over == false) {
 		display_info();
                 player_move();
                 change_turn();
 		draw_board();
 		find_three_in_a_row();
-		}
-        }
+	}
 }
 
 int main(){
