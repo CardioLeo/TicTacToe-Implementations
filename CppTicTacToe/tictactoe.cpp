@@ -12,7 +12,6 @@ using namespace std;
 int round_counter = 1;
 char mark = 'X';
 bool game_over = false;
-bool three_in_a_row = false; // variable for algorithm to return later
 
 char blank_spot = '~';
 int spot_to_fill = 0; // for empty, until filled by player and used by player_move()
