@@ -40,63 +40,50 @@ void draw_board(){
 }
 
 void announce_three_in_a_row(){
-	cout << "That's three in a row!\n";
-	cout << "Player " << mark << " wins!\n";
-	game_over = true;
-	// draw_board();
+        cout << "That's three in a row!\n";
+        cout << "Player " << mark << " wins!\n";
+        game_over = true;
+        // draw_board();
 }
+
 
 void round_limit_checker(){
                 cout << "Round Number: " << round_counter << "\n";
-                if (round_counter >= 9){
-			cout << "This is the final round.\n";
-                	announce_end();
-                }
+		if (round_counter >= 9){
+			game_over = true;
+		}
                 round_counter++;
 }
 
 void display_info(){
         cout << "Player Turn: " << mark << "\n";
-        round_limit_checker();
+        if (round_counter == 9){
+                cout << "\n\nLast round!\n\n\n";
+        }
+	round_limit_checker();
 }
 
 void find_three_in_a_row(){
 	if (a1 == a2 && a2 == a3) { // three across middle
-		match();
-		cout << "Player " << mark << " wins!\n";
-		announce_end();
+		announce_three_in_a_row();
 	} else if (b1 == b2 && b2 == b3) { // three across middle
-		match();
-		cout << "Player " << b1 << " wins!\n";
-		announce_end();
-        } else if (c1 == c2 && c2 == c3) { // three across bottom
-		match();
-		cout << "Player " << c1 << " wins!\n";
-		announce_end();
+        	announce_three_in_a_row();
+	} else if (c1 == c2 && c2 == c3) { // three across bottom
+		announce_three_in_a_row();
 	} else if (a1 == b1 && b1 == c1) { // three down on right
-		match();
-		cout << "Player " << a1 << " wins!\n";
-		announce_end();
-        } else if (a2 == b2 && b2 == c2) { // three down on middle
-		match();
-		cout << "Player " << a2 << " wins!\n";
-		announce_end();
-        } else if (a3 == b3 && b3 == c3) { // three down on right
-		match();
-		cout << "Player " << a3 << " wins!\n";
-		announce_end();
-        } else if (a1 == b2 && b2 == c3) { // three diagonal, top left to bottom right
-		match();
-		cout << "Player " << a1 << " wins!\n";
-		announce_end();
+        	announce_three_in_a_row();
+	} else if (a2 == b2 && b2 == c2) { // three down on middle
+        	announce_three_in_a_row();
+	} else if (a3 == b3 && b3 == c3) { // three down on right
+        	announce_three_in_a_row();
+	} else if (a1 == b2 && b2 == c3) { // three diagonal, top left to bottom right
+		announce_three_in_a_row();
 	} else if (a3 == b2 && b2 == c1) { // three diagonal, bottom left to top right
-		match();
-		cout << "Player " << a3 << " wins!\n";
-		announce_end();
-        } else { // no winning combination found; game continues
+        	announce_three_in_a_row();
+	} else { // no winning combination found; game continues
                 if (round_counter < 9){
 			cout << "No wins yet!\n";
-		} else if (round_counter >= 9) {
+		} else if (round_counter > 9) {
 			cout << "There are no turns left!\nI'm guessing this is a tie. Close game :)\n";
 		}
 	}
