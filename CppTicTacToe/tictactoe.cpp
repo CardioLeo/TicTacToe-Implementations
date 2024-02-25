@@ -65,7 +65,7 @@ void display_info(){
 void find_three_in_a_row(){
 	if (a1 == a2 && a2 == a3) { // three across middle
 		match();
-		cout << "Player " << a1 << " wins!\n";
+		cout << "Player " << mark << " wins!\n";
 		announce_end();
 	} else if (b1 == b2 && b2 == b3) { // three across middle
 		match();
@@ -155,9 +155,9 @@ void play_game(){
 	while (game_over == false) {
 		display_info();
                 player_move();
-                change_turn();
 		draw_board();
 		find_three_in_a_row();
+		change_turn();
 	}
 }
 
