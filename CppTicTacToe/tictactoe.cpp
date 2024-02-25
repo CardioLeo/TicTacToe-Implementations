@@ -56,10 +56,10 @@ void round_limit_checker(){
 }
 
 void display_info(){
-        cout << "Player Turn: " << mark << "\n";
         if (round_counter == 9){
                 cout << "\n\nLast round!\n\n\n";
         }
+	cout << "Player Turn: " << mark << "\n";
 	round_limit_checker();
 }
 
