@@ -87,6 +87,7 @@ void find_three_in_a_row(){
 			cout << "No wins yet!\n";
 		} else if (round_counter > 9) {
 			cout << "There are no turns left!\nI'm guessing this is a tie. Close game :)\n";
+			game_over = true;
 			play_again();
 		}
 	}
