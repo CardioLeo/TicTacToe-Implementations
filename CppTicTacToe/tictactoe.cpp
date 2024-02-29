@@ -186,6 +186,7 @@ void play_again(){
 			return;
 		} else if (play_again_input != 1 && play_again_input != 2){
 			cout << "\n\n\nHm, looks like you pressed some other key..." << endl;
+			play_again_input = 0;
 		}
 	}
 }
