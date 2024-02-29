@@ -186,7 +186,7 @@ void play_again(){
 			return;
 		} else if (play_again_input != 1 && play_again_input != 2){
 			cout << "\n\n\nHm, looks like you pressed some other key..." << endl;
-			play_again_input = 0;
+			// return; // break; // either of these, return or break, ends the game, which is currently better than the bug where it begins an infinite loop; but I don't want it to do this right now...
 		}
 	}
 }
