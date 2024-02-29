@@ -90,7 +90,6 @@ void find_three_in_a_row(){
 		} else if (round_counter > 9) {
 			cout << "There are no turns left!\nI'm guessing this is a tie. Close game :)\n";
 			game_over = true;
-			play_again();
 		}
 	}
 }
@@ -156,7 +155,6 @@ void start_game(){
 
 void ask_to_play(){
         cout << "\n\n\nThat game ended - and I hope you had fun!\n\nWould you like to play again?\n\nIf you want to play again, press 1. If you're done, press 2.\n\n";
-	//cin >> play_again_input;
 }
 
 void reset_pregame_variables(){
@@ -177,6 +175,7 @@ void play_again(){
 			start_game();
 		} else if (play_again_input == 2){
 			cout << "\n\n\nHave a great day!\n" << endl; // communicates to user that user is exiting
+			game_over = false; // causes play_again loop to exit
 			return;
 		} else {
 			cout << "Hm, looks like you pressed some other key..." << endl;
