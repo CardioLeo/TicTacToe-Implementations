@@ -15,26 +15,18 @@ bool game_over = false;
 
 char blank_spot = '~';
 int spot_to_fill = 0; // for empty, until filled by player and used by player_move()
-char a1 = '1';
-char a2 = '2';
-char a3 = '3';
-char b1 = '4';
-char b2 = '5';
-char b3 = '6';
-char c1 = '7';
-char c2 = '8';
-char c3 = '9';
+char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 void draw_board(){
 	cout << "\n\n";
        	cout << "     |     |     \n";
-	cout << "  " << a1 << "  |  " << a2 << "  |  " << a3 << "  \n";
+	cout << "  " << board_spots[0] << "  |  " << board_spots[1] << "  |  " << board_spots[2] << "  \n";
 	cout << "_____|_____|_____\n";
 	cout << "     |     |     \n";
-        cout << "  " << b1 << "  |  " << b2 << "  |  " << b3 << "  \n";
+        cout << "  " << board_spots[3] << "  |  " << board_spots[4] << "  |  " << board_spots[5] << "  \n";
 	cout << "_____|_____|_____\n";
         cout << "     |     |     \n";
-	cout << "  " << c1 << "  |  " << c2 << "  |  " << c3 << "  \n";
+	cout << "  " << board_spots[6] << "  |  " << board_spots[7] << "  |  " << board_spots[8] << "  \n";
 	cout << "     |     |     \n";
 	cout << "\n\n";
 }
@@ -64,21 +56,21 @@ void display_info(){
 }
 
 void find_three_in_a_row(){
-	if (a1 == a2 && a2 == a3) { // three across middle
+	if (board_spots[0] == board_spots[1] && board_spots[1] == board_spots[2]) { // three across top
 		announce_three_in_a_row();
-	} else if (b1 == b2 && b2 == b3) { // three across middle
+	} else if (board_spots[3] == board_spots[4] && board_spots[4] == board_spots[5]) { // three across middle
         	announce_three_in_a_row();
-	} else if (c1 == c2 && c2 == c3) { // three across bottom
+	} else if (board_spots[6] == board_spots[7] && board_spots[7] == board_spots[8]) { // three across bottom
 		announce_three_in_a_row();
-	} else if (a1 == b1 && b1 == c1) { // three down on right
+	} else if (board_spots[0] == board_spots[3] && board_spots[3] == board_spots[6]) { // three down on left
         	announce_three_in_a_row();
-	} else if (a2 == b2 && b2 == c2) { // three down on middle
+	} else if (board_spots[1] == board_spots[4] && board_spots[4] == board_spots[5]) { // three down on middle
         	announce_three_in_a_row();
-	} else if (a3 == b3 && b3 == c3) { // three down on right
+	} else if (board_spots[2] == board_spots[5] && board_spots[5] == board_spots[8]) { // three down on right
         	announce_three_in_a_row();
-	} else if (a1 == b2 && b2 == c3) { // three diagonal, top left to bottom right
+	} else if (board_spots[0] == board_spots[4] && board_spots[4] == board_spots[8]) { // three diagonal, top left to bottom right
 		announce_three_in_a_row();
-	} else if (a3 == b2 && b2 == c1) { // three diagonal, bottom left to top right
+	} else if (board_spots[2] == board_spots[4] && board_spots[4] == board_spots[6]) { // three diagonal, bottom left to top right
         	announce_three_in_a_row();
 	} else { // no winning combination found; game continues
                 if (round_counter < 9){
@@ -102,31 +94,31 @@ void player_move(){
 	cin >> spot_to_fill; // still need to validate input!
 	switch(spot_to_fill){
 		case 1:
-			a1 = mark;
+			board_spots[0] = mark;
 			break;
 		case 2:
-			a2 = mark;
+			board_spots[1] = mark;
 			break;
 		case 3:
-			a3 = mark;
+			board_spots[2] = mark;
 			break;
 		case 4:
-			b1 = mark;
+			board_spots[3] = mark;
 			break;
 		case 5:
-			b2 = mark;
+			board_spots[4] = mark;
 			break;
 		case 6:
-			b3 = mark;
+			board_spots[5] = mark;
 			break;
 		case 7:
-			c1 = mark;
+			board_spots[6] = mark;
 			break;
 		case 8:
-			c2 = mark;
+			board_spots[7] = mark;
 			break;
 		case 9:
-			c3 = mark;
+			board_spots[8] = mark;
 			break;
 	//	default:
                         // if (spot_to_fill != [1-9]) {
