@@ -16,6 +16,17 @@ bool game_over = false;
 int spot_to_fill = 0; // for empty, until filled by player and used by player_move()
 char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
+void draw_board();
+void announce_three_in_a_row();
+void round_limit_checker();
+void display_info();
+void find_three_in_a_row();
+void change_turn();
+void player_move();
+void start_game();
+void ask_to_play();
+void play_again();
+
 void draw_board(){
 	cout << "\n\n";
        	cout << "     |     |     \n";
@@ -76,6 +87,7 @@ void find_three_in_a_row(){
 			cout << "No wins yet!\n";
 		} else if (round_counter > 9) {
 			cout << "There are no turns left!\nI'm guessing this is a tie. Close game :)\n";
+			play_again();
 		}
 	}
 }
