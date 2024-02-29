@@ -151,8 +151,6 @@ void start_game(){
 	}
 }
 
-//int play_again_input = 0;
-
 void ask_to_play(){
         cout << "\n\n\nThat game ended - and I hope you had fun!\n\nWould you like to play again?\n\nIf you want to play again, press 1. If you're done, press 2.\n\n";
 }
@@ -186,7 +184,7 @@ void play_again(){
 			cout << "\n\n\nHave a great day!\n" << endl; // communicates to user that user is exiting
 			game_over = false; // causes play_again loop to exit
 			return;
-		} else {
+		} else if (play_again_input != 1 && play_again_input != 2){
 			cout << "\n\n\nHm, looks like you pressed some other key..." << endl;
 		}
 	}
