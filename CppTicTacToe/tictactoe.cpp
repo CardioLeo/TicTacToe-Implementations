@@ -26,6 +26,8 @@ void player_move();
 void start_game();
 void ask_to_play();
 void play_again();
+void reset_pregame_variables();
+
 
 void draw_board(){
 	cout << "\n\n";
@@ -157,20 +159,24 @@ void ask_to_play(){
 	//cin >> play_again_input;
 }
 
+void reset_pregame_variables(){
+	game_over = false;
+	round_counter = 1;
+	char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+}
+
 void play_again(){
 	while (game_over = true){
 		int play_again_input = 0;
 		cin >> play_again_input;
 		if (play_again_input == 1){
-			game_over = false;
-			round_counter = 1;
-			char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+			reset_pregame_variables();
 			change_turn();
 			cout << "\n\n\nHere we go again!\n" << endl;
 			start_game();
 		} else if (play_again_input == 2){
-			cout << "\n\n\nHave a great day!\n" << endl;
-			game_over = false;
+			cout << "\n\n\nHave a great day!\n" << endl; // communicates to user that user is exiting
+			game_over = false; // causes while-loop to exit
 			return;
 		} else {
 			cout << "Hm, looks like you pressed some other key..." << endl;
