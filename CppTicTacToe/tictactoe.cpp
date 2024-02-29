@@ -179,7 +179,6 @@ void play_again(){
 			return;
 		} else {
 			cout << "Hm, looks like you pressed some other key..." << endl;
-			ask_to_play();
 		}
 	}
 }
