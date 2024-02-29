@@ -13,7 +13,6 @@ int round_counter = 1;
 char mark = 'X';
 bool game_over = false;
 
-char blank_spot = '~';
 int spot_to_fill = 0; // for empty, until filled by player and used by player_move()
 char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -152,6 +151,7 @@ void play_again(){
 		if (play_again_input == 1){
 			game_over = false;
 			round_counter = 1;
+			char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 			change_turn();
 			cout << "\n\n\nHere we go again!\n" << endl;
 			start_game();
