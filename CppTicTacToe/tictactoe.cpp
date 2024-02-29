@@ -167,6 +167,7 @@ void reset_pregame_variables(){
 
 void play_again(){
 	while (game_over = true){
+		ask_to_play();
 		int play_again_input = 0;
 		cin >> play_again_input;
 		if (play_again_input == 1){
@@ -176,7 +177,6 @@ void play_again(){
 			start_game();
 		} else if (play_again_input == 2){
 			cout << "\n\n\nHave a great day!\n" << endl; // communicates to user that user is exiting
-			game_over = false; // causes while-loop to exit
 			return;
 		} else {
 			cout << "Hm, looks like you pressed some other key..." << endl;
