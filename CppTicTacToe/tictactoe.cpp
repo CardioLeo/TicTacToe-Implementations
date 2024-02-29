@@ -187,7 +187,7 @@ void play_again(){
 			game_over = false; // causes play_again loop to exit
 			return;
 		} else {
-			cout << "Hm, looks like you pressed some other key..." << endl;
+			cout << "\n\n\nHm, looks like you pressed some other key..." << endl;
 		}
 	}
 }
