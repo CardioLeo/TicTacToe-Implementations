@@ -76,7 +76,7 @@ void find_three_in_a_row(){
 		announce_three_in_a_row();
 	} else if (board_spots[0] == board_spots[3] && board_spots[3] == board_spots[6]) { // three down on left
         	announce_three_in_a_row();
-	} else if (board_spots[1] == board_spots[4] && board_spots[4] == board_spots[5]) { // three down on middle
+	} else if (board_spots[1] == board_spots[4] && board_spots[4] == board_spots[7]) { // three down on middle
         	announce_three_in_a_row();
 	} else if (board_spots[2] == board_spots[5] && board_spots[5] == board_spots[8]) { // three down on right
         	announce_three_in_a_row();
@@ -160,7 +160,15 @@ void ask_to_play(){
 void reset_pregame_variables(){
 	game_over = false;
 	round_counter = 1;
-	char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+	board_spots[0] = '1';
+	board_spots[1] = '2';
+	board_spots[2] = '3';
+	board_spots[3] = '4';
+	board_spots[4] = '5';
+	board_spots[5] = '6';
+	board_spots[6] = '7';
+	board_spots[7] = '8';
+	board_spots[8] = '9';
 }
 
 void play_again(){
@@ -171,7 +179,8 @@ void play_again(){
 		if (play_again_input == 1){
 			reset_pregame_variables();
 			change_turn();
-			cout << "\n\n\nHere we go again!\n" << endl;
+			cout << "\n\n\nHere we go again!\n" << endl; // uses endl to clear input buffer
+			draw_board();
 			start_game();
 		} else if (play_again_input == 2){
 			cout << "\n\n\nHave a great day!\n" << endl; // communicates to user that user is exiting
