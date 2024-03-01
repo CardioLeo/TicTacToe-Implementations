@@ -10,7 +10,7 @@
 using namespace std;
 
 
-// main global variables follow here
+// main global variables and initialization follow here
 
 int round_counter = 1;
 char mark = 'X';
@@ -54,6 +54,13 @@ void draw_board(){ // this function is fairly self-explanatory; it draws the boa
 void announce_three_in_a_row(){
         cout << "That's three in a row!\n\nPlayer " << mark << " wins!\n";
         game_over = true;
+	// this was a good function to abstract because
+	// it was something which previously I was going
+	// to have to repeat the code for multiple times,
+	// the tedium of which is abstracted away by
+	// making it its own function like this. This
+	// might not be necessary depending on how I
+	// refactor the find_three_in_a_row() function.
 }
 
 
@@ -123,6 +130,16 @@ void change_turn(){
 	} else {
                 mark = 'O';
 	}
+	// in rather minimalist fashion, I realized
+	// that I could keep track of what turn it
+	// was simply by using the round_counter
+	// and the marks; I originally thought I
+	// should have players and maybe objects to
+	// represent them, but for how I've
+	// constructed the game so far, that just
+	// seemed really unnecessary to the
+	// functionality of the game. Not everything
+	// is an object. Sometimes a cigar is just a cigar.
 }
 
 void attempt_to_fill_spot(){
