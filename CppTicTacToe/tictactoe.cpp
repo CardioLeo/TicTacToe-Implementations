@@ -134,8 +134,13 @@ void player_move(){
 			break;
 		default:
                         cout << "Please only enter a number between 1 and 9.\n\nAll other input causes the game to exit!\n";
-			game_over = true;
-			play_again();
+			game_over = true; // game over set to true so tha
+					  // the game will not go through
+					  // all 9 rounds without input,
+					  // which is what happens when
+					  // this default case becomes
+					  // active, say because a user
+					  // input a character like g or h
 	}
 }
 
