@@ -71,9 +71,26 @@ void display_info(){
         }
 	cout << "Player Turn: " << mark << "\n";
 	round_limit_checker();
+	// I call round_limit_checker with display_info
+	// in large part because it logically and
+	// chronologically belongs with display_info,
+	// and so by calling it at the end of
+	// display_info(), I can make the main loop
+	// of start_game() much more legible, for one-
+	// but another point here is that it increases
+	// the ease of maintaining the code, because
+	// if they were separated, and I had to move
+	// one of them, and forgot to move the other
+	// I could mess up the game_logic flow.
 }
 
 void find_three_in_a_row(){
+		// this could really stand to be refactored;
+		// preferably, I would refactor it by making
+		// a data structure with sets of winning matches
+		// or combinations, and then looping through them;
+		// which would be less lines of code and likely
+		// more readable, to say the least.
 	if (board_spots[0] == board_spots[1] && board_spots[1] == board_spots[2]) { // three across top
 		announce_three_in_a_row();
 	} else if (board_spots[3] == board_spots[4] && board_spots[4] == board_spots[5]) { // three across middle
@@ -109,25 +126,49 @@ void change_turn(){
 }
 
 void attempt_to_fill_spot(){
-// logic for checking if the spot has already been marked
+// this function implements the logic for checking
+// if the spot has already been marked, and then
+// marking it, if appropriate; but I can't get
+// it to stop going into an endless loop if you
+// enter a letter rather than a number.
+// I refactored to this function rather than having
+// like 3-4 lines of code in player_move() for each
+// of the possible spots to fill; I think this is
+// both more slim and more readable, easier to edit.
 	if (board_spots[spot_to_fill-1] == 'X' || board_spots[spot_to_fill-1] == 'O') {
 		cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
 		round_counter--;
+		// because the input is found to be in error,
+		// round_counter must be decremented so that
+		// the erroneous input does not cause the
+		// rounds to keep moving, and turns changing,
+		// even when the input was incorrect.
 	} else if (!(spot_to_fill > 0) || !(spot_to_fill <= 10)) {
 	        cout << "\nPlease only enter a number between 1 and 9.\n";
 	        round_counter--;
+		// this particular conditional is important
+		// for making sure users don't input numbers
+		// below 1 or above 9.
 	}/* else if (!(isalpha(spot_to_fill))) {
 		cout << "\nYou did not enter a digit...\n\nEntering something other than a digit causes the game to fail... :(\n";
 		round_counter--;
 		game_over = true;
+		// this conditional is supposed to stop the
+		// user from entering a letter where they are
+		// supposed to enter a number; but it doesn't
+		// work, so it is commented out.
 	}*/ else {
 		board_spots[spot_to_fill-1] = mark;
+		// this final conditional, having passed all
+		// the other conditionals, implements actually
+		// changing the mark to the mark of whoever's
+		// turn it is.
 	}
 }
 
 void player_move(){
 	cout << "Player " << mark << ", Please select the spot to place your mark.\n";
-	cin >> spot_to_fill; // still need to validate input
+	cin >> spot_to_fill;
 	attempt_to_fill_spot();
 }
 
@@ -146,6 +187,8 @@ void ask_to_play(){
 }
 
 void reset_pregame_variables(){
+		// play_again() doesn't work without resetting these values;
+		// but I figure it is more legible to abstract this reset into it's own function
 	game_over = false;
 	round_counter = 1;
 	board_spots[0] = '1';
@@ -177,6 +220,13 @@ void play_again(){
 		} else if (play_again_input != 1 || play_again_input != 2) {
 			cout << "\nHm, looks like you pressed some key that isn't valid...\n\nUnfortunately this causes the game to exit\n\n" << endl;
 			return;
+			// not sure why this way of validating input works here,
+			// but not in the middle of start_game(); specifically
+			// why does this make the game exit if a letter is typed in,
+			// but it doesn't do the same thing if a letter is typed in
+			// the middle of start_game()?
+			// I think it might be cecause play_game() is the last
+			// function to be called in main;
 		}
 	}
 }
