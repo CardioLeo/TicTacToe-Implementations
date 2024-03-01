@@ -1,7 +1,7 @@
 /*
  * Author: William Z Chadwick
  * Date Created: 02/22/2024
- * Date Modified:
+ * Date Modified: 03/01/2024
  * Description: A basic implementation of Tic Tac Toe
  * Usage:
  */
@@ -9,12 +9,17 @@
 #include<iostream>
 using namespace std;
 
+
+// main global variables follow here
+
 int round_counter = 1;
 char mark = 'X';
 bool game_over = false;
-
-int spot_to_fill = 0; // for empty, until filled by player and used by player_move()
+int spot_to_fill = 0; // for empty spots, until filled by player and used by player_move() and attempt_to_fill_spot()
 char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
+
+// function prototypes follow here
 
 void draw_board();
 void announce_three_in_a_row();
@@ -22,6 +27,7 @@ void round_limit_checker();
 void display_info();
 void find_three_in_a_row();
 void change_turn();
+void attempt_to_fill_spot();
 void player_move();
 void start_game();
 void ask_to_play();
@@ -29,7 +35,9 @@ void play_again();
 void reset_pregame_variables();
 
 
-void draw_board(){
+// function definitions follow here
+
+void draw_board(){ // this function is fairly self-explanatory; it draws the board by referencing the values from the array, board_spots
 	cout << "\n\n";
        	cout << "     |     |     \n";
 	cout << "  " << board_spots[0] << "  |  " << board_spots[1] << "  |  " << board_spots[2] << "  \n";
@@ -46,16 +54,15 @@ void draw_board(){
 void announce_three_in_a_row(){
         cout << "That's three in a row!\n\nPlayer " << mark << " wins!\n";
         game_over = true;
-        // draw_board();
 }
 
 
 void round_limit_checker(){
                 cout << "Round Number: " << round_counter << "\n";
-		if (round_counter >= 9){
-			game_over = true;
-		}
-                round_counter++;
+		if (round_counter > 9){
+                        game_over = true;
+                }
+		round_counter++;
 }
 
 void display_info(){
@@ -101,47 +108,27 @@ void change_turn(){
 	}
 }
 
+void attempt_to_fill_spot(){
+// logic for checking if the spot has already been marked
+	if (board_spots[spot_to_fill-1] == 'X' || board_spots[spot_to_fill-1] == 'O') {
+		cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
+		round_counter--;
+	} else if (!(spot_to_fill > 0) || !(spot_to_fill <= 10)) {
+	        cout << "\nPlease only enter a number between 1 and 9.\n";
+	        round_counter--;
+	}/* else if (!(isalpha(spot_to_fill))) {
+		cout << "\nYou did not enter a digit...\n\nEntering something other than a digit causes the game to fail... :(\n";
+		round_counter--;
+		game_over = true;
+	}*/ else {
+		board_spots[spot_to_fill-1] = mark;
+	}
+}
+
 void player_move(){
 	cout << "Player " << mark << ", Please select the spot to place your mark.\n";
-	cin >> spot_to_fill; // still need to validate input!
-	switch(spot_to_fill){
-		case 1:
-			board_spots[0] = mark;
-			break;
-		case 2:
-			board_spots[1] = mark;
-			break;
-		case 3:
-			board_spots[2] = mark;
-			break;
-		case 4:
-			board_spots[3] = mark;
-			break;
-		case 5:
-			board_spots[4] = mark;
-			break;
-		case 6:
-			board_spots[5] = mark;
-			break;
-		case 7:
-			board_spots[6] = mark;
-			break;
-		case 8:
-			board_spots[7] = mark;
-			break;
-		case 9:
-			board_spots[8] = mark;
-			break;
-		default:
-                        cout << "Please only enter a number between 1 and 9.\n\nAll other input causes the game to exit!\n";
-			game_over = true; // game over set to true so tha
-					  // the game will not go through
-					  // all 9 rounds without input,
-					  // which is what happens when
-					  // this default case becomes
-					  // active, say because a user
-					  // input a character like g or h
-	}
+	cin >> spot_to_fill; // still need to validate input
+	attempt_to_fill_spot();
 }
 
 void start_game(){
