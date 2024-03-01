@@ -132,12 +132,10 @@ void player_move(){
 		case 9:
 			board_spots[8] = mark;
 			break;
-//		default:
-//                      if (cin.fail()) {
-//                              cout << "Please only enter a number between 1 and 9.\n";
-//                      cin.clear();
-//			break;
-//			}
+		default:
+                        cout << "Please only enter a number between 1 and 9.\n\nAll other input causes the game to exit!\n";
+			game_over = true;
+			play_again();
 	}
 }
 
