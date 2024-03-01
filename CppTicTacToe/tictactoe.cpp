@@ -152,7 +152,7 @@ void start_game(){
 }
 
 void ask_to_play(){
-        cout << "\nThat game ended - and I hope you had fun!\n\nWould you like to play again?\n\nIf you want to play again, press 1. If you're done, press 2.\n\n";
+        cout << "\nI hope you had fun!\n\nWould you like to play again?\n\nIf you want to play again, press 1. If you're done, press 2.\n\n";
 }
 
 void reset_pregame_variables(){
@@ -185,7 +185,7 @@ void play_again(){
 			game_over = false; // causes play_again loop to exit
 			return;
 		} else if (play_again_input != 1 || play_again_input != 2) {
-			cout << "\n\nHm, looks like you pressed some key that isn't valid...\n\nUnfortunately this causes the game to exit\n\n" << endl;
+			cout << "\nHm, looks like you pressed some key that isn't valid...\n\nUnfortunately this causes the game to exit\n\n" << endl;
 			return;
 		}
 	}
