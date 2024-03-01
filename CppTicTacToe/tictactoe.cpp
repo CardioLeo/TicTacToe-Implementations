@@ -88,7 +88,7 @@ void find_three_in_a_row(){
                 if (round_counter < 9){
 			cout << "No wins yet!\n";
 		} else if (round_counter > 9) {
-			cout << "There are no turns left!\nI'm guessing this is a tie. Close game :)\n";
+			cout << "There are no turns left!\n\nI'm guessing this is a tie. Close game :)\n";
 			game_over = true;
 		}
 	}
@@ -152,7 +152,7 @@ void start_game(){
 }
 
 void ask_to_play(){
-        cout << "\n\n\nThat game ended - and I hope you had fun!\n\nWould you like to play again?\n\nIf you want to play again, press 1. If you're done, press 2.\n\n";
+        cout << "\nThat game ended - and I hope you had fun!\n\nWould you like to play again?\n\nIf you want to play again, press 1. If you're done, press 2.\n\n";
 }
 
 void reset_pregame_variables(){
@@ -177,15 +177,15 @@ void play_again(){
 		if (play_again_input == 1){
 			reset_pregame_variables();
 			change_turn();
-			cout << "\n\n\nHere we go again!\n" << endl; // uses endl to clear input buffer
+			cout << "\n\nHere we go again!\n" << endl; // uses endl to clear input buffer
 			draw_board();
 			start_game();
 		} else if (play_again_input == 2){
-			cout << "\n\n\nHave a great day!\n" << endl; // communicates to user that user is exiting
+			cout << "\nHave a great day!\n" << endl; // communicates to user that user is exiting
 			game_over = false; // causes play_again loop to exit
 			return;
 		} else if (play_again_input != 1 || play_again_input != 2) {
-			cout << "\n\nHm, looks like you pressed some other key...\n\n\nPressing a key other than 1 causes the game to exit" << endl;
+			cout << "\n\nHm, looks like you pressed some key that isn't valid...\n\nUnfortunately this causes the game to exit\n\n" << endl;
 			return;
 		}
 	}
