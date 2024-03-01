@@ -120,10 +120,7 @@ void attempt_to_fill_spot(){
 		cout << "\nYou did not enter a digit...\n\nEntering something other than a digit causes the game to fail... :(\n";
 		round_counter--;
 		game_over = true;
-	}*/ else if (spot_to_fill != 1 && spot_to_fill != 2 && spot_to_fill != 3 && spot_to_fill != 4 && spot_to_fill != 5 && spot_to_fill != 6 && spot_to_fill != 7 && spot_to_fill != 8 && spot_to_fill != 9) {
-                cout << "\nHm, looks like you pressed some key that isn't valid...\n\nUnfortunately this causes the game to exit\n\n" << endl;
-                return;
-	} else {
+	}*/ else {
 		board_spots[spot_to_fill-1] = mark;
 	}
 }
