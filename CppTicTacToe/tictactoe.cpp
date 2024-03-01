@@ -44,8 +44,7 @@ void draw_board(){
 }
 
 void announce_three_in_a_row(){
-        cout << "That's three in a row!\n";
-        cout << "Player " << mark << " wins!\n";
+        cout << "That's three in a row!\n\nPlayer " << mark << " wins!\n";
         game_over = true;
         // draw_board();
 }
@@ -133,11 +132,12 @@ void player_move(){
 		case 9:
 			board_spots[8] = mark;
 			break;
-	//	default:
-                        // if (spot_to_fill != [1-9]) {
-                        //      cout << "Please only enter a number between 1 and 9.\n";
-			// re-call player_move()? recursion?
-                        // }
+//		default:
+//                      if (cin.fail()) {
+//                              cout << "Please only enter a number between 1 and 9.\n";
+//                      cin.clear();
+//			break;
+//			}
 	}
 }
 
