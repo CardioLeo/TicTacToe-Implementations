@@ -184,9 +184,9 @@ void play_again(){
 			cout << "\n\n\nHave a great day!\n" << endl; // communicates to user that user is exiting
 			game_over = false; // causes play_again loop to exit
 			return;
-		} else if (play_again_input != 1 && play_again_input != 2){
-			cout << "\n\n\nHm, looks like you pressed some other key..." << endl;
-			// return; // break; // either of these, return or break, ends the game, which is currently better than the bug where it begins an infinite loop; but I don't want it to do this right now...
+		} else if (play_again_input != 1 || play_again_input != 2) {
+			cout << "\n\nHm, looks like you pressed some other key...\n\n\nPressing a key other than 1 causes the game to exit" << endl;
+			return;
 		}
 	}
 }
