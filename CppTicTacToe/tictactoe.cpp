@@ -243,7 +243,12 @@ void play_again(){
 		ask_to_play();
 		cin >> play_again_input;
 		validate_input();
-		if (!cin.fail()) {
+		if (!cin.fail()) { // the following 10 or so lines could probably be refactored to be part of validate_input,
+				   // but it would take more careful thinking about how to trigger different cases, based
+				   // on whether some global variable like game_over was true or false; if false, then input
+				   // would refer to what is now spot_to_fill and the functions which follow it; if true,
+				   // then input would refer to what is now play_again_input. I might come back and address
+				   // this another time. But for now, it works smoothly and I am happy.
 			if (play_again_input == 1){
 				reset_pregame_variables();
 				change_turn();
@@ -255,16 +260,6 @@ void play_again(){
 				game_over = false; // causes play_again loop to exit
 				return;
 			}
-	/*} else if (play_again_input != 1 || play_again_input != 2) {
-			cout << "\nHm, looks like you pressed some key that isn't valid...\n\nUnfortunately this causes the game to exit\n\n" << endl;
-			return; */
-			// not sure why this way of validating input works here,
-			// but not in the middle of start_game(); specifically
-			// why does this make the game exit if a letter is typed in,
-			// but it doesn't do the same thing if a letter is typed in
-			// the middle of start_game()?
-			// I think it might be cecause play_game() is the last
-			// function to be called in main;
 		}
 	}
 }
