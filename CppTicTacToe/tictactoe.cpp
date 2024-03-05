@@ -16,6 +16,7 @@ using namespace std;
 int round_counter = 1;
 char mark = 'X';
 bool game_over = false;
+int play_again_input = 0;
 int spot_to_fill = 0; // for empty spots, until filled by player and used by player_move() and attempt_to_fill_spot()
 char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -240,7 +241,6 @@ void reset_pregame_variables(){
 void play_again(){
 	while (game_over = true){
 		ask_to_play();
-		int play_again_input = 0;
 		cin >> play_again_input;
 		validate_input();	
 	}
