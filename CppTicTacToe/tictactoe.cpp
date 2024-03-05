@@ -224,6 +224,12 @@ void play_again(){
 		ask_to_play();
 		int play_again_input = 0;
 		cin >> play_again_input;
+		if (cin.fail()){
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			cout << "\nHm, looks like you pressed some key that isn't valid...\n\n" << endl; cin >> play_again_input;
+		}
+		if (!cin.fail()) {
 		if (play_again_input == 1){
 			reset_pregame_variables();
 			change_turn();
@@ -234,9 +240,10 @@ void play_again(){
 			cout << "\nHave a great day!\n" << endl; // communicates to user that user is exiting
 			game_over = false; // causes play_again loop to exit
 			return;
-		} else if (play_again_input != 1 || play_again_input != 2) {
+		}
+		/*} else if (play_again_input != 1 || play_again_input != 2) {
 			cout << "\nHm, looks like you pressed some key that isn't valid...\n\nUnfortunately this causes the game to exit\n\n" << endl;
-			return;
+			return; */
 			// not sure why this way of validating input works here,
 			// but not in the middle of start_game(); specifically
 			// why does this make the game exit if a letter is typed in,
