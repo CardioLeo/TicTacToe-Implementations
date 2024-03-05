@@ -242,20 +242,19 @@ void play_again(){
 	while (game_over = true){
 		ask_to_play();
 		cin >> play_again_input;
-		validate_input();	
-	}
-	if (!cin.fail()) {
-	if (play_again_input == 1){
-		reset_pregame_variables();
-		change_turn();
-		cout << "\n\nHere we go again!\n" << endl; // uses endl to clear input buffer
-		draw_board();
-		start_game();
-	} else if (play_again_input == 2){
-		cout << "\nHave a great day!\n" << endl; // communicates to user that user is exiting
-		game_over = false; // causes play_again loop to exit
-		return;
-	}
+		validate_input();
+		if (!cin.fail()) {
+			if (play_again_input == 1){
+				reset_pregame_variables();
+				change_turn();
+				cout << "\n\nHere we go again!\n" << endl; // uses endl to clear input buffer
+				draw_board();
+				start_game();
+			} else if (play_again_input == 2){
+				cout << "\nHave a great day!\n" << endl; // communicates to user that user is exiting
+				game_over = false; // causes play_again loop to exit
+				return;
+			}
 	/*} else if (play_again_input != 1 || play_again_input != 2) {
 			cout << "\nHm, looks like you pressed some key that isn't valid...\n\nUnfortunately this causes the game to exit\n\n" << endl;
 			return; */
@@ -266,7 +265,7 @@ void play_again(){
 			// the middle of start_game()?
 			// I think it might be cecause play_game() is the last
 			// function to be called in main;
-
+		}
 	}
 }
 
