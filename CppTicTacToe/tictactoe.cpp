@@ -28,6 +28,7 @@ void round_limit_checker();
 void display_info();
 void find_three_in_a_row();
 void change_turn();
+void validate_input();
 void attempt_to_fill_spot();
 void player_move();
 void start_game();
@@ -187,7 +188,23 @@ void attempt_to_fill_spot(){
 void player_move(){
 	cout << "Player " << mark << ", Please select the spot to place your mark.\n";
 	cin >> spot_to_fill;
-	attempt_to_fill_spot();
+	validate_input();
+	if (!cin.fail()){
+		attempt_to_fill_spot();
+	}
+}
+
+void validate_input(){
+        if (cin.fail()){
+	        cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
+		if (game_over == true){
+			cin >> play_again_input;
+		} else {
+			cin >> spot_to_fill;
+		}
+        }
 }
 
 void start_game(){
@@ -225,11 +242,8 @@ void play_again(){
 		ask_to_play();
 		int play_again_input = 0;
 		cin >> play_again_input;
-		if (cin.fail()){
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(),'\n');
-			cout << "\nHm, looks like you pressed some key that isn't valid...\n\n" << endl; cin >> play_again_input;
-		}
+		validate_input();	
+	}
 		if (!cin.fail()) {
 		if (play_again_input == 1){
 			reset_pregame_variables();
