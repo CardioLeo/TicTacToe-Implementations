@@ -20,8 +20,8 @@ int play_again_input = 0;
 int spot_to_fill = 0;
 char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 bool spot_already_taken = (board_spots[spot_to_fill-1] == 'X' || board_spots[spot_to_fill-1] == 'O');
-bool number_out_of_range = (!(spot_to_fill > 0) || !(spot_to_fill <= 10));
-
+bool number_out_of_range = ((spot_to_fill < 1) || (spot_to_fill > 9));
+bool is_valid = (!(spot_already_taken) && !(number_out_of_range) && !(cin.fail()));
 
 // function prototypes follow here
 
@@ -31,8 +31,11 @@ void display_info();
 void find_three_in_a_row();
 void announce_three_in_a_row();
 void change_turn();
+void input_fail();
+void is_spot_taken();
+void is_number_out_of_range();
 void validate_input();
-void attempt_to_fill_spot();
+void fill_spot();
 void player_move();
 void start_game();
 void ask_to_play();
@@ -147,7 +150,35 @@ void change_turn(){
 	// is an object. Sometimes a cigar is just a cigar.
 }
 
-void attempt_to_fill_spot(){
+void is_spot_taken(){
+        if (spot_already_taken) {
+                cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
+                input_fail();
+		// because the input is found to be in error,
+                // round_counter must be decremented so that
+                // the erroneous input does not cause the
+                // rounds to keep moving, and turns changing,
+                // even when the input was incorrect.
+	}
+}
+
+void is_number_out_of_range(){
+        if (number_out_of_range) {
+                cout << "\nPlease only enter a number between 1 and 9.\n";
+                input_fail();
+                // this particular conditional is important
+                // for making sure users don't input numbers
+                // below 1 or above 9.
+        }
+}
+
+void input_fail(){
+        cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(),'\n');
+	round_counter--;
+}
+
+void fill_spot(){
 // this function implements the logic for checking
 // if the spot has already been marked, and then
 // marking it, if appropriate; but I can't get
@@ -157,48 +188,34 @@ void attempt_to_fill_spot(){
 // like 3-4 lines of code in player_move() for each
 // of the possible spots to fill; I think this is
 // both more slim and more readable, easier to edit.
-	if (spot_already_taken) {
-		cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
-		round_counter--;
-		// because the input is found to be in error,
-		// round_counter must be decremented so that
-		// the erroneous input does not cause the
-		// rounds to keep moving, and turns changing,
-		// even when the input was incorrect.
-	} else if (number_out_of_range) {
-	        cout << "\nPlease only enter a number between 1 and 9.\n";
-	        round_counter--;
-		// this particular conditional is important
-		// for making sure users don't input numbers
-		// below 1 or above 9.
-	} else {
+	
 		board_spots[spot_to_fill-1] = mark;
 		// this final conditional, having passed all
 		// the other conditionals, implements actually
 		// changing the mark to the mark of whoever's
 		// turn it is.
-	}
 }
 
 void player_move(){
 	cout << "Player " << mark << ", Please select the spot to place your mark.\n";
 	cin >> spot_to_fill;
 	validate_input();
-	if (!cin.fail()){
-		attempt_to_fill_spot();
+	if (is_valid){
+		fill_spot();
 	}
 }
 
 void validate_input(){
-        if ((!spot_already_taken && !number_out_of_range) && cin.fail()){
-	        cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(),'\n');
-                cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
-		if (game_over == true){
-			cin >> play_again_input;
-		} else {
-			cin >> spot_to_fill;
-		}
+	//is_spot_taken();
+	//is_number_out_of_range();
+	if (cin.fail()){
+		input_fail();
+		cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
+	}
+	if (game_over == true){
+		cin >> play_again_input;
+	} else {
+		cin >> spot_to_fill;
         }
 }
 
