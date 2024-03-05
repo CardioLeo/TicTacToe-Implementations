@@ -29,7 +29,6 @@ void round_limit_checker();
 void display_info();
 void find_three_in_a_row();
 void change_turn();
-void validate_input();
 void attempt_to_fill_spot();
 void player_move();
 void start_game();
@@ -161,7 +160,8 @@ void attempt_to_fill_spot(){
 // both more slim and more readable, easier to edit.
 	
 	if (cin.fail()) {
-//              validate_input();
+			// this cin.fail() call has to come first - I'm actually not sure why,
+			// but if it doesn't come first I have to call it twice to get the checks to work at all
                 say_invalid();
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(),'\n');
