@@ -169,15 +169,10 @@ void attempt_to_fill_spot(){
 		// this particular conditional is important
 		// for making sure users don't input numbers
 		// below 1 or above 9.
-	}/* else if (!(isalpha(spot_to_fill))) {
-		cout << "\nYou did not enter a digit...\n\nEntering something other than a digit causes the game to fail... :(\n";
+	}else if (cin.fail()) {
+		validate_input();
 		round_counter--;
-		game_over = true;
-		// this conditional is supposed to stop the
-		// user from entering a letter where they are
-		// supposed to enter a number; but it doesn't
-		// work, so it is commented out.
-	}*/ else {
+	} else {
 		board_spots[spot_to_fill-1] = mark;
 		// this final conditional, having passed all
 		// the other conditionals, implements actually
@@ -196,16 +191,14 @@ void player_move(){
 }
 
 void validate_input(){
-        if (cin.fail()){
-	        cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(),'\n');
-                cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
-		if (game_over == true){
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(),'\n');
+	cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
+		/*if (game_over == true){
 			cin >> play_again_input;
 		} else {
 			cin >> spot_to_fill;
-		}
-        }
+		}*/
 }
 
 void start_game(){
