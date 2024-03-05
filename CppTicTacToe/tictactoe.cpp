@@ -7,7 +7,7 @@
  */
 
 #include<iostream>
-#include<limits> // used for validate_input();
+#include<limits>
 using namespace std;
 
 
@@ -17,19 +17,17 @@ int round_counter = 1;
 char mark = 'X';
 bool game_over = false;
 int play_again_input = 0;
-int spot_to_fill = 0;
+int spot_to_fill = 0; // for empty spots, until filled by player and used by player_move() and attempt_to_fill_spot()
 char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-bool spot_already_taken = (board_spots[spot_to_fill-1] == 'X' || board_spots[spot_to_fill-1] == 'O');
-bool number_out_of_range = (!(spot_to_fill > 0) || !(spot_to_fill <= 10));
 
 
 // function prototypes follow here
 
 void draw_board();
+void announce_three_in_a_row();
 void round_limit_checker();
 void display_info();
 void find_three_in_a_row();
-void announce_three_in_a_row();
 void change_turn();
 void validate_input();
 void attempt_to_fill_spot();
@@ -157,7 +155,7 @@ void attempt_to_fill_spot(){
 // like 3-4 lines of code in player_move() for each
 // of the possible spots to fill; I think this is
 // both more slim and more readable, easier to edit.
-	if (spot_already_taken) {
+	if (board_spots[spot_to_fill-1] == 'X' || board_spots[spot_to_fill-1] == 'O') {
 		cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
 		round_counter--;
 		// because the input is found to be in error,
@@ -165,13 +163,21 @@ void attempt_to_fill_spot(){
 		// the erroneous input does not cause the
 		// rounds to keep moving, and turns changing,
 		// even when the input was incorrect.
-	} else if (number_out_of_range) {
+	} else if (!(spot_to_fill > 0) || !(spot_to_fill <= 10)) {
 	        cout << "\nPlease only enter a number between 1 and 9.\n";
 	        round_counter--;
 		// this particular conditional is important
 		// for making sure users don't input numbers
 		// below 1 or above 9.
-	} else {
+	}/* else if (!(isalpha(spot_to_fill))) {
+		cout << "\nYou did not enter a digit...\n\nEntering something other than a digit causes the game to fail... :(\n";
+		round_counter--;
+		game_over = true;
+		// this conditional is supposed to stop the
+		// user from entering a letter where they are
+		// supposed to enter a number; but it doesn't
+		// work, so it is commented out.
+	}*/ else {
 		board_spots[spot_to_fill-1] = mark;
 		// this final conditional, having passed all
 		// the other conditionals, implements actually
@@ -190,7 +196,7 @@ void player_move(){
 }
 
 void validate_input(){
-        if ((!spot_already_taken && !number_out_of_range) && cin.fail()){
+        if (cin.fail()){
 	        cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(),'\n');
                 cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
