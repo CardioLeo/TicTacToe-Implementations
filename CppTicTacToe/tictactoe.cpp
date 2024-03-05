@@ -36,7 +36,7 @@ void start_game();
 void ask_to_play();
 void play_again();
 void reset_pregame_variables();
-
+void say_invalid();
 
 // function definitions follow here
 
@@ -145,6 +145,10 @@ void change_turn(){
 	// is an object. Sometimes a cigar is just a cigar.
 }
 
+void say_invalid(){
+	cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
+}
+
 void attempt_to_fill_spot(){
 // this function implements the logic for checking
 // if the spot has already been marked, and then
@@ -155,7 +159,14 @@ void attempt_to_fill_spot(){
 // like 3-4 lines of code in player_move() for each
 // of the possible spots to fill; I think this is
 // both more slim and more readable, easier to edit.
-	if (board_spots[spot_to_fill-1] == 'X' || board_spots[spot_to_fill-1] == 'O') {
+	
+	if (cin.fail()) {
+//              validate_input();
+                say_invalid();
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                round_counter--;
+	} else if (board_spots[spot_to_fill-1] == 'X' || board_spots[spot_to_fill-1] == 'O') {
 		cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
 		round_counter--;
 		// because the input is found to be in error,
@@ -169,10 +180,7 @@ void attempt_to_fill_spot(){
 		// this particular conditional is important
 		// for making sure users don't input numbers
 		// below 1 or above 9.
-	}else if (cin.fail()) {
-		validate_input();
-		round_counter--;
-	} else {
+	} else if (!cin.fail()){
 		board_spots[spot_to_fill-1] = mark;
 		// this final conditional, having passed all
 		// the other conditionals, implements actually
@@ -184,21 +192,7 @@ void attempt_to_fill_spot(){
 void player_move(){
 	cout << "Player " << mark << ", Please select the spot to place your mark.\n";
 	cin >> spot_to_fill;
-	validate_input();
-	if (!cin.fail()){
-		attempt_to_fill_spot();
-	}
-}
-
-void validate_input(){
-	cin.clear();
-	cin.ignore(numeric_limits<streamsize>::max(),'\n');
-	cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
-		/*if (game_over == true){
-			cin >> play_again_input;
-		} else {
-			cin >> spot_to_fill;
-		}*/
+	attempt_to_fill_spot();
 }
 
 void start_game(){
@@ -235,8 +229,11 @@ void play_again(){
 	while (game_over = true){
 		ask_to_play();
 		cin >> play_again_input;
-		validate_input();
-		if (!cin.fail()) { // the following 10 or so lines could probably be refactored to be part of validate_input,
+		if (cin.fail()){
+			say_invalid();
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		} else if (!cin.fail()) { // the following 10 or so lines could probably be refactored to be part of validate_input,
 				   // but it would take more careful thinking about how to trigger different cases, based
 				   // on whether some global variable like game_over was true or false; if false, then input
 				   // would refer to what is now spot_to_fill and the functions which follow it; if true,
