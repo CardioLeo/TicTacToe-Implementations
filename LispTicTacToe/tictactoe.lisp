@@ -3,8 +3,10 @@
   (terpri))
 
 (defun draw-board ()
-  (terpri)(terpri)
+  (tic-tac-toe)
   (print'"
+
+
      |     |     
   0  |  1  |  2  
 _____|_____|_____
@@ -14,4 +16,6 @@ _____|_____|_____
      |     |     
   6  |  7  |  8  
      |     |     
-")(terpri)(terpri))
+
+
+")(terpri))
