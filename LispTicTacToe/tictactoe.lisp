@@ -4,12 +4,14 @@
 
 (defun draw-board ()
   (terpri)(terpri)
-  (print '"     |     |     ")
-  (print '"  0  |  1  |  2  ")
-  (print '"_____|_____|_____")
-  (print '"     |     |     ")
-  (print '"  3  |  4  |  5  ")
-  (print '"_____|_____|_____")
-  (print '"     |     |     ")
-  (print '"  6  |  7  |  8  ")
-  (print '"     |     |     ")(terpri)(terpri))
+  (print'"
+     |     |     
+  0  |  1  |  2  
+_____|_____|_____
+     |     |     
+  3  |  4  |  5  
+_____|_____|_____
+     |     |     
+  6  |  7  |  8  
+     |     |     
+")(terpri)(terpri))
