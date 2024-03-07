@@ -2,9 +2,12 @@
   (print 'tic-tac-toe)
   (terpri))
 
+;defines global variables
+
 (defvar *false* 'false)
 (defvar *game_over* *false*)
 (defvar *found_a_match* *false*)
+(defvar *a* 5)
 
 (defun my-ttt-list ()
   (print '(ttt-global-vars (round_counter mark play_again_input spot_to_fill board_spots)))
@@ -13,6 +16,12 @@
   (print '"and the varialble found_a_match is set to: ")
   (print *found_a_match*)  
   (terpri))
+
+(defun my-test-loop ()
+  (loop while (>= *a* 0)
+	do (print *a*)
+	   (setf *a* (- *a* 1))
+	   (terpri)))
 
 '(defun announce-three ()
   (or (if (and (= *game_over* *false*) (= *found_a_match* (not *false*))) (print '(You found three in a row!))) (if (= *game_over* *false*) (print '(Keep looking for a match!))))
@@ -47,4 +56,6 @@ _____|_____|_____
   (print *game_over*)
   (print '"and the varialble found_a_match is set to: ")
   (print *found_a_match*)
+  (terpri)
+  (my-test-loop)
   (terpri))
