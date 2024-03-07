@@ -31,7 +31,7 @@
   (terpri))
 
 (defun display-info ()
-  (terpri)(terpri)
+  (terpri)
   (if (= *round_counter* 9) (and (and (format t '"Last Round!")) (and (terpri) (terpri))))
   (terpri)
   (format t '"Current Round is: ")
@@ -54,13 +54,13 @@
 
 
      |     |     
-  0  |  1  |  2  
+  1  |  2  |  3  
 _____|_____|_____
      |     |     
-  3  |  4  |  5  
+  4  |  5  |  6  
 _____|_____|_____
      |     |     
-  6  |  7  |  8  
+  7  |  8  |  9  
      |     |     
 
 
