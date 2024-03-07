@@ -12,6 +12,21 @@
 (defvar *round_counter* 0)
 (defvar *mark* 'X)
 
+(defun test-board-vals ()
+  (setf *board_spots* (make-array '(9)))
+  (terpri)
+  (setf (aref *board_spots* 0) '1)
+  (setf (aref *board_spots* 1) '2)
+  (setf (aref *board_spots* 2) '3)
+  (setf (aref *board_spots* 3) '4)
+  (setf (aref *board_spots* 4) '5)
+  (setf (aref *board_spots* 5) '6)
+  (setf (aref *board_spots* 6) '7)
+  (setf (aref *board_spots* 7) '8)
+  (setf (aref *board_spots* 8) '9)
+  (write *board_spots*)
+  (terpri))
+
 ; test function list main functions I need to create and test
 
 (defun my-t3-list ()
@@ -70,17 +85,17 @@ _____|_____|_____
   ;(print *game_over*)
   ;(print '"and the varialble found_a_match is set to: ")
   ;(print *found_a_match*)
-  ;(terpri)
-  ;(my-test-loop)
   (terpri))
 
 (defun play-game ()
   (change-turn)
   (display-info)
-  (draw-board))
+  (draw-board)
+  (test-board-vals))
 
 (defun main-play-loop ()
   (loop while (< *round_counter* 9)
         do (setf *round_counter* (+ *round_counter* 1))
            (terpri)(terpri)
+	   (draw-board)
 	   (play-game)))
