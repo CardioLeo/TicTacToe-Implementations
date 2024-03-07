@@ -15,7 +15,7 @@
   (terpri))
 
 '(defun announce-three ()
-  (or (if (and (= *game_over* 0) (= *found_a_match* (not 0))) (print '(You found three in a row!))) (if (= *game_over* 0) (print '(Keep looking for a match!))))
+  (or (if (and (= *game_over* *false*) (= *found_a_match* (not *false*))) (print '(You found three in a row!))) (if (= *game_over* *false*) (print '(Keep looking for a match!))))
   (terpri))
 
 (defun my-functions ()
@@ -41,4 +41,10 @@ _____|_____|_____
      |     |     
 
 
-")(terpri))
+")(terpri)
+  (setf *game_over* 'true *found_a_match* 'true)
+  (print '"The variable game_over is set to: ")
+  (print *game_over*)
+  (print '"and the varialble found_a_match is set to: ")
+  (print *found_a_match*)
+  (terpri))
