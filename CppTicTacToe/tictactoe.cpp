@@ -13,6 +13,7 @@ using namespace std;
 
 // main global variables and initialization follow here
 
+// Test
 int round_counter = 1;
 char mark = 'X';
 bool game_over = false;
