@@ -8,6 +8,7 @@
 
 #include<iostream>
 #include<limits>
+#include<array>
 using namespace std;
 
 
@@ -20,8 +21,7 @@ bool game_over = false;
 int play_again_input = 0;
 int spot_to_fill = 0; // for empty spots, until filled by player and used by player_move() and attempt_to_fill_spot()
 // Tony Comment
-char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-
+std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 // function prototypes follow here
 // Tony Comment
