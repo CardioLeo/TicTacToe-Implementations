@@ -13,16 +13,18 @@ using namespace std;
 
 // main global variables and initialization follow here
 
+// Tony Comment
 int round_counter = 1;
 char mark = 'X';
 bool game_over = false;
 int play_again_input = 0;
 int spot_to_fill = 0; // for empty spots, until filled by player and used by player_move() and attempt_to_fill_spot()
+// Tony Comment
 char board_spots[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 
 // function prototypes follow here
-
+// Tony Comment
 void draw_board();
 void announce_three_in_a_row();
 void round_limit_checker();
@@ -65,7 +67,7 @@ void announce_three_in_a_row(){
 	// refactor the find_three_in_a_row() function.
 }
 
-
+// Tony Comment
 void round_limit_checker(){
                 cout << "Round Number: " << round_counter << "\n";
 		if (round_counter > 9){
@@ -93,6 +95,7 @@ void display_info(){
 	// I could mess up the game_logic flow.
 }
 
+// Tony Comment
 void find_three_in_a_row(){
 		// this could really stand to be refactored;
 		// preferably, I would refactor it by making
