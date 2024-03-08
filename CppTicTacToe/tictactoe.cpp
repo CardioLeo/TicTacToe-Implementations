@@ -67,7 +67,7 @@ void announce_three_in_a_row(){
 	// refactor the find_three_in_a_row() function.
 }
 
-
+// Tony Comment
 void round_limit_checker(){
                 cout << "Round Number: " << round_counter << "\n";
 		if (round_counter > 9){
@@ -95,6 +95,7 @@ void display_info(){
 	// I could mess up the game_logic flow.
 }
 
+// Tony Comment
 void find_three_in_a_row(){
 		// this could really stand to be refactored;
 		// preferably, I would refactor it by making
