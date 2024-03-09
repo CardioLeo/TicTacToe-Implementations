@@ -27,9 +27,21 @@ array<array<char,3>,8> matching_rows_of_three = {
 
 void show_all_winning_rows(array<array<char,3>,8>, array<char, 9>){
 	for (int i = 0; i <= 7; i++){
-		cout << "\n\nSolution number: " << i << "\n";
+		cout << "\n\nSolution number: " << i + 1 << "\n";
 		for (int j = 0; j <= 2; j++){
 			cout << "Element: " << matching_rows_of_three[i][j] << "\n";
+			// cout << "This is: " << win_spot[j] << "/n";
+			// array<char,3> win_spot[j] = j;
+			// if win_spots 1,2,3 are identical, return true; else false
+			// Problem is, this really can't be done without more
+			// loops, and it needs to be abstracted away from a
+			// function which merely shows winning rows and into
+			// a function which checks if the three elements of
+			// each winning combination are identical; in which
+			// case I need three temporary variables which change
+			// each time through the i loop to show the three
+			// variables at the j level and checks if they are
+			// identical, making three in a row
 		}
 	}
 }
