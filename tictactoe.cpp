@@ -29,7 +29,7 @@ void draw_board();
 void announce_three_in_a_row();
 void round_limit_checker();
 void display_info();
-bool find_three_in_a_row();
+void find_three_in_a_row();
 void change_turn();
 void attempt_to_fill_spot();
 void player_move();
@@ -96,7 +96,7 @@ void display_info(){
 }
 
 // Tony Comment
-bool find_three_in_a_row(){
+void find_three_in_a_row(){
 		// this could really stand to be refactored;
 		// preferably, I would refactor it by making
 		// a data structure with sets of winning matches
