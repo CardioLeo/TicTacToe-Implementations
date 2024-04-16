@@ -2,6 +2,15 @@
 #include<array>
 using namespace std;
 
+class game_details {
+	private:
+		bool game_over = false;
+	public:
+		bool is_game_over(bool game_over){
+			return game_over;
+		}
+}
+
 class board {
 	private:
                 std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
