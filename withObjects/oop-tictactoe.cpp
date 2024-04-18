@@ -2,16 +2,21 @@
 #include<array>
 using namespace std;
 
-class game_details {
+class Details {
 	private:
-		bool game_over = false;
+		// variables
+                bool over = false;
+		
+		// methods
 	public:
-		bool is_game_over(bool game_over){
+		// bool game_over = over;
+		bool is_game_over(){
+			bool game_over = false;
 			return game_over;
 		}
-}
+};
 
-class board {
+class Board {
 	private:
                 std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
         
@@ -39,7 +44,10 @@ class board {
 };
 
 int main(){
-	board the_board;
-	the_board.draw_board(the_board.give_board_spots());
+	Details details;
+	Board board;
+	board.draw_board(board.give_board_spots());
+	bool what = details.is_game_over();
+	cout << what;
 	return 0;
 }
