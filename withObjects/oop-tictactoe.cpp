@@ -10,11 +10,13 @@ class Details {
 		// methods
 	public:
 		// bool game_over = over;
-		bool is_game_over(){
-			bool game_over = false;
-			return game_over;
-		}
+		bool is_game_over();
 };
+
+bool Details::is_game_over(){
+	bool game_over;
+	return game_over;
+}
 
 class Board {
 	private:
@@ -44,10 +46,10 @@ class Board {
 };
 
 int main(){
-	Details details;
+	Details this_game;
 	Board board;
 	board.draw_board(board.give_board_spots());
-	bool what = details.is_game_over();
+	bool what = this_game.is_game_over();
 	cout << what;
 	return 0;
 }
