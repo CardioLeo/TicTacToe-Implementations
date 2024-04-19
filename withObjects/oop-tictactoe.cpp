@@ -5,7 +5,10 @@ using namespace std;
 class Details {
         public:
 		// methods
-		
+		int round_count(){
+			int r_c = this->round_counter;
+			return r_c;
+		}
                 bool is_game_over(){
 			bool g_o = this->game_over;
 			return g_o;
@@ -13,7 +16,7 @@ class Details {
 
 	private:
 		// variables
-                
+                int round_counter = 1;
 		bool game_over = false;
 
 };
@@ -51,6 +54,8 @@ int main(){
 	board.draw_board(board.give_board_spots());
 		// the following is not intended to be permanent
 	bool game_over = this_game.is_game_over();
-	cout << game_over;
+	cout << game_over << "\n\n\n";
+	int round_counter = this_game.round_count();
+	cout << round_counter << "\n\n\n";
 	return 0;
 }
