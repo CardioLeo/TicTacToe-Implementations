@@ -3,20 +3,20 @@
 using namespace std;
 
 class Details {
+        public:
+		// methods
+		
+                bool is_game_over(){
+			bool g_o = this->game_over;
+			return g_o;
+		}
+
 	private:
 		// variables
-                bool over = false;
-		
-		// methods
-	public:
-		// bool game_over = over;
-		bool is_game_over();
-};
+                
+		bool game_over = false;
 
-bool Details::is_game_over(){
-	bool game_over;
-	return game_over;
-}
+};
 
 class Board {
 	private:
