@@ -80,7 +80,6 @@ class Details {
 			for (this->round_counter; this->round_counter <= 9; this->round_counter++){
 				what_is_round_num();
 				Board::draw_board(Board::give_board_spots());
-				// board::draw_board();
                         }
 			round_limit_checker();
                         return this->round_counter;
