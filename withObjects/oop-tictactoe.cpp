@@ -117,7 +117,7 @@ int main(){
 		this_game.what_is_round_num();
 		board.draw_board(board.give_board_spots());
 		this_game.increment_round_count();
+		this_game.round_limit_checker();
 	}
-	this_game.round_limit_checker();
 	return 0;
 }
