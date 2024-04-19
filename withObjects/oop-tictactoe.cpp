@@ -49,7 +49,8 @@ int main(){
 	Details this_game;
 	Board board;
 	board.draw_board(board.give_board_spots());
-	bool what = this_game.is_game_over();
-	cout << what;
+		// the following is not intended to be permanent
+	bool game_over = this_game.is_game_over();
+	cout << game_over;
 	return 0;
 }
