@@ -1,5 +1,6 @@
 #include<iostream>
 #include<array>
+#include<limits>
 using namespace std;
 
 class Board {
@@ -10,6 +11,10 @@ class Board {
                 std::array<char,9> give_board_spots(){
                         return board_spots;
                 }
+		char give_one_spot(int request){
+			return this->board_spots[request];
+		}
+
                 void draw_board(std::array<char,9>){ // this function is fairly self-explanatory; it draws the board by referencing the values from the array, board_spots
                         cout << "\n\n     |     |     \n";
                         cout << "  " << board_spots[0] << "  |  " << board_spots[1] << "  |  " << board_spots[2] << "  \n";
@@ -113,18 +118,69 @@ class Player {
 	public:
 		void player_move(){
 		        cout << "Player " << this->mark1 << ", Please select the spot to place your mark.\n";
-		        cin >> this->spot_to_fill;
-        		// attempt_to_fill_spot();
+		        cin >> this->requested_spot;
+        		// this->attempt_to_fill_spot();
 		}
+	
+		int give_requested_spot(){
+                        return this->requested_spot;
+                }
+
+
+		/*
+		char (*func) pass_request(){
+			return this->give_requested_spot();
+		}*/ // probably doesn't work ^^ but will save in case
+		    // give_requested_spot() doesn't do the trick
 
 		//
 	private:
 		//
+		
+		// methods
+		void say_invalid(){
+		        cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
+
+		}
+
+		/*
+		void attempt_to_fill_spot(){
+			board_spots[spot_to_fill-1] = mark1;
+		} // this isn't the final ending of func,
+		  // will need to be removed later
+
+		*/
+			/*
+			if (cin.fail()){
+				say_invalid();
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				// round_counter--; //
+					// how shall I implement this?
+			} else if (board_spots[spots_to_fill-1] == 'X' || board_spots[spots_to_fill-1] == 'Y'){
+				cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
+				// round_counter-- //
+			} else if (!(spot_to_fil > 0) || !(spot_to_fill <= 10)){
+				cout << "\nPlease only enter a number between 1 and 9.\n";
+				// round_counter--;
+			} else if (!cin.fail()){
+				board_spots[spots_to_fill-1] = mark1;
+			}*/
+			//
+//}
+
+		// data members
+		
 		int spot_to_fill = 0;
+		int requested_spot = 0;
 		char mark1 = 'X'; // this will later need to be defined
 				  // by initalization at the beginning
 				  // of two separate player objects
 		char mark2 = 'O';
+		int play_again_input = 0; // this may need to be moved
+					  // to details class, or it may
+					  // need to have a counterpart
+					  // there
 };
 
 int main(){
@@ -139,6 +195,11 @@ int main(){
 		// details::display_info();
 		this_game.what_is_round_num();
 		player1.player_move();
+		int request = player1.give_requested_spot();
+		cout << "\n\n\n" << request << "\n\n\n";
+		char response = board.give_one_spot(request);
+		cout << "\n\n\n" << response << "\n\n\n";
+		
 		// ask for move
 		// board.draw_board();
 		board.draw_board(board.give_board_spots());
