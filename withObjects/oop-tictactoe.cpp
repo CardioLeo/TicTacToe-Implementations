@@ -113,9 +113,16 @@ int main(){
 	Details this_game;
 	Board board;
 	this_game.announce_game_over_value();
+	// draw board before getting player input and
+	// beginning regular rounds
 	while (this_game.give_round_count() <= 9){
+		// details::display_info();
 		this_game.what_is_round_num();
+		// player.player_move();
+		// board.draw_board();
 		board.draw_board(board.give_board_spots());
+		// board::find_three_in_a_row();
+		// details::change_turn();
 		this_game.increment_round_count();
 		this_game.round_limit_checker();
 	}
