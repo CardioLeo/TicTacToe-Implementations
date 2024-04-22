@@ -3,16 +3,39 @@
 #include<limits>
 using namespace std;
 
+//
+// // //
+// temporary global variables
+// // //
+//
+        char mark1 = 'X';
+        char mark2 = 'O';
+// // //
+
+
 class Board {
         private:
                 std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+		void attempt_to_fill(int request){
+			if (this->board_spots[request-1] == 'X' || this->board_spots[request-1] == 'Y'){
+				cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
+				// round_counter-- 
+		       	} else {
+               			 this->board_spots[request-1] = mark1;
+        		}               
+		}  
 
         public :
                 std::array<char,9> give_board_spots(){
                         return board_spots;
                 }
+		
 		char give_one_spot(int request){
 			return this->board_spots[request];
+		}
+
+		void apply_spot(int request){
+			this->attempt_to_fill(request);
 		}
 
                 void draw_board(std::array<char,9>){ // this function is fairly self-explanatory; it draws the board by referencing the values from the array, board_spots
@@ -194,9 +217,9 @@ int main(){
 		cout << "\n\n\n" << request << "\n\n\n";
 		char response = board.give_one_spot(request-1);
 		cout << "\n\n\n" << response << "\n\n\n";
-		
-		// ask for move
-		// board.draw_board();
+		// board.attempt_to_fill_spot();
+		board.apply_spot(request); // make this call attempt
+		//
 		board.draw_board(board.give_board_spots());
 		// board::find_three_in_a_row();
 		// details::change_turn();
