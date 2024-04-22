@@ -17,7 +17,7 @@ class Board {
         private:
                 std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 		void attempt_to_fill(int request){
-			if (this->board_spots[request-1] == 'X' || this->board_spots[request-1] == 'Y'){
+			if (this->board_spots[request-1] == 'X' || this->board_spots[request-1] == 'O'){
 				cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
 				// round_counter-- 
 		       	} else {
@@ -164,7 +164,7 @@ class Player {
 		        cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
 		}
 		
-		char validate_input(char requested_spot){
+		void validate_input(char requested_spot){
 			if (cin.fail()){
                 		say_invalid();
                 		cin.clear();
@@ -173,9 +173,8 @@ class Player {
         		} else if (!(requested_spot > 0) || !(requested_spot <= 10)){
                 		cout << "\nPlease only enter a number between 1 and 9.\n";
                 		// round_counter--;
-        		} else {
-				return requested_spot;
-			}
+        		}
+			// return requested_spot;
 }
 
 
@@ -214,9 +213,9 @@ int main(){
 		this_game.what_is_round_num();
 		player1.player_move();
 		int request = player1.give_requested_spot();
-		cout << "\n\n\n" << request << "\n\n\n";
-		char response = board.give_one_spot(request-1);
-		cout << "\n\n\n" << response << "\n\n\n";
+		// cout << "\n\n\n" << request << "\n\n\n";
+		// char response = board.give_one_spot(request-1);
+		// cout << "\n\n\n" << response << "\n\n\n";
 		// board.attempt_to_fill_spot();
 		board.apply_spot(request); // make this call attempt
 		//
