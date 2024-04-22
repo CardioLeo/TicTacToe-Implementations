@@ -147,7 +147,7 @@ class Player {
                 		cin.clear();
                 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 		// round_counter--; //                                                          // how shall I implement this?
-        		} else if (!(spot_to_fill > 0) || !(spot_to_fill <= 10)){
+        		} else if (!(requested_spot > 0) || !(requested_spot <= 10)){
                 		cout << "\nPlease only enter a number between 1 and 9.\n";
                 		// round_counter--;
         		} else {
