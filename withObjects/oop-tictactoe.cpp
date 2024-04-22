@@ -5,7 +5,7 @@ using namespace std;
 
 class Board {
         private:
-                std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+                std::array<char, 9> board_spots = {'1', 'X', '3', 'X', '5', '6', '7', '8', '9'};
 
         public :
                 std::array<char,9> give_board_spots(){
@@ -197,7 +197,7 @@ int main(){
 		player1.player_move();
 		int request = player1.give_requested_spot();
 		cout << "\n\n\n" << request << "\n\n\n";
-		char response = board.give_one_spot(request);
+		char response = board.give_one_spot(request-1);
 		cout << "\n\n\n" << response << "\n\n\n";
 		
 		// ask for move
