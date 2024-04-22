@@ -117,7 +117,8 @@ class Player {
 		void player_move(){
 		        cout << "Player " << this->mark1 << ", Please select the spot to place your mark.\n";
 		        cin >> this->requested_spot;
-        		// this->attempt_to_fill_spot();
+        		this->validate_input(this->requested_spot);
+			// return mark1; // not committed to this yet
 		}
 	
 		int give_requested_spot(){
@@ -138,8 +139,22 @@ class Player {
 		// methods
 		void say_invalid(){
 		        cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
-
 		}
+		
+		char validate_input(char requested_spot){
+			if (cin.fail()){
+                		say_invalid();
+                		cin.clear();
+                		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                		// round_counter--; //                                                          // how shall I implement this?
+        		} else if (!(spot_to_fill > 0) || !(spot_to_fill <= 10)){
+                		cout << "\nPlease only enter a number between 1 and 9.\n";
+                		// round_counter--;
+        		} else {
+				return requested_spot;
+			}
+}
+
 
 		/*
 		void attempt_to_fill_spot(){
@@ -148,24 +163,6 @@ class Player {
 		  // will need to be removed later
 
 		*/
-			/*
-			if (cin.fail()){
-				say_invalid();
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				// round_counter--; //
-					// how shall I implement this?
-			} else if (board_spots[spots_to_fill-1] == 'X' || board_spots[spots_to_fill-1] == 'Y'){
-				cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
-				// round_counter-- //
-			} else if (!(spot_to_fil > 0) || !(spot_to_fill <= 10)){
-				cout << "\nPlease only enter a number between 1 and 9.\n";
-				// round_counter--;
-			} else if (!cin.fail()){
-				board_spots[spots_to_fill-1] = mark1;
-			}*/
-			//
-//}
 
 		// data members
 		
