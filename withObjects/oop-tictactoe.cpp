@@ -109,16 +109,37 @@ class Details {
 		*/
 };
 
+class Player {
+	public:
+		void player_move(){
+		        cout << "Player " << this->mark1 << ", Please select the spot to place your mark.\n";
+		        cin >> this->spot_to_fill;
+        		// attempt_to_fill_spot();
+		}
+
+		//
+	private:
+		//
+		int spot_to_fill = 0;
+		char mark1 = 'X'; // this will later need to be defined
+				  // by initalization at the beginning
+				  // of two separate player objects
+		char mark2 = 'O';
+};
+
 int main(){
 	Details this_game;
 	Board board;
+	Player player1;
 	this_game.announce_game_over_value();
 	// draw board before getting player input and
 	// beginning regular rounds
+	board.draw_board(board.give_board_spots());
 	while (this_game.give_round_count() <= 9){
 		// details::display_info();
 		this_game.what_is_round_num();
-		// player.player_move();
+		player1.player_move();
+		// ask for move
 		// board.draw_board();
 		board.draw_board(board.give_board_spots());
 		// board::find_three_in_a_row();
