@@ -5,7 +5,7 @@ using namespace std;
 
 class Board {
         private:
-                std::array<char, 9> board_spots = {'1', 'X', '3', 'X', '5', '6', '7', '8', '9'};
+                std::array<char, 9> board_spots = {'1', '0', '3', '4', '5', '6', '7', '8', '9'};
 
         public :
                 std::array<char,9> give_board_spots(){
@@ -41,15 +41,13 @@ class Details {
         public:
 		// methods
 		int give_round_count(){
-			int r_c = this->round_counter;
-			return r_c;
+			return this->round_counter;
 		}
 		void increment_round_count(){
 			this->round_counter++;
 		}
                 bool is_game_over(){
-			bool g_o = this->game_over;
-			return g_o;
+			return this->game_over;
 		}
 		//int test_r_c_is_10(){
                 //        return main_game_loop();
