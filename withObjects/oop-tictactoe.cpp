@@ -16,14 +16,6 @@ using namespace std;
 class Board {
         private:
                 std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-		void attempt_to_fill(int request){
-			if (this->board_spots[request-1] == 'X' || this->board_spots[request-1] == 'O'){
-				cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
-				// round_counter-- 
-		       	} else {
-               			 this->board_spots[request-1] = mark1;
-        		}               
-		}  
 
         public :
                 std::array<char,9> give_board_spots(){
@@ -34,9 +26,15 @@ class Board {
 			return this->board_spots[request];
 		}
 
-		void apply_spot(int request){
-			this->attempt_to_fill(request);
-		}
+		int attempt_to_fill(int request){
+			if (this->board_spots[request-1] == 'X' || this->board_spots[request-1] == 'O'){
+				cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
+				return 1;
+                        } else {
+                                 this->board_spots[request-1] = mark1;
+				 return 0;
+                        }
+                }
 
                 void draw_board(std::array<char,9>){ // this function is fairly self-explanatory; it draws the board by referencing the values from the array, board_spots
                         cout << "\n\n     |     |     \n";
@@ -69,7 +67,10 @@ class Details {
 		void increment_round_count(){
 			this->round_counter++;
 		}
-                bool is_game_over(){
+		void decrement_round_count(){
+			this->round_counter--;
+		}
+		bool is_game_over(){
 			return this->game_over;
 		}
 		//int test_r_c_is_10(){
@@ -137,13 +138,17 @@ class Details {
 
 class Player {
 	public:
-		void player_move(){
-		        cout << "Player " << this->mark1 << ", Please select the spot to place your mark.\n";
-		        cin >> this->requested_spot;
-        		this->validate_input(this->requested_spot);
+		int player_move(){
+			cout << "Player " << this->mark1 << ", Please select the spot to place your mark.\n";
+                        cin >> this->requested_spot;
+			int invalid = this->validate_input(this->requested_spot);
+			if (invalid){
+				return 1;
+			}
+			return 0;
 			// return mark1; // not committed to this yet
 		}
-	
+
 		int give_requested_spot(){
                         return this->requested_spot;
                 }
@@ -164,16 +169,19 @@ class Player {
 		        cout << "\nHm, looks like you pressed some key that isn't valid...\n\nPlease try again\n\n" << endl;
 		}
 		
-		void validate_input(char requested_spot){
+		int validate_input(char requested_spot){
 			if (cin.fail()){
                 		say_invalid();
                 		cin.clear();
                 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 		// round_counter--; //                                                          // how shall I implement this?
+				return 1;
         		} else if (!(requested_spot > 0) || !(requested_spot <= 10)){
                 		cout << "\nPlease only enter a number between 1 and 9.\n";
-                		// round_counter--;
+                		return 1;
+				// round_counter--;
         		}
+			return 0;
 			// return requested_spot;
 }
 
@@ -211,14 +219,20 @@ int main(){
 	while (this_game.give_round_count() <= 9){
 		// details::display_info();
 		this_game.what_is_round_num();
-		player1.player_move();
+		int error1 = player1.player_move();
+		if (error1){
+			this_game.decrement_round_count();
+		}
 		int request = player1.give_requested_spot();
 		// cout << "\n\n\n" << request << "\n\n\n";
 		// char response = board.give_one_spot(request-1);
 		// cout << "\n\n\n" << response << "\n\n\n";
 		// board.attempt_to_fill_spot();
-		board.apply_spot(request); // make this call attempt
+		int error2 = board.attempt_to_fill(request); // make this call attempt
 		//
+		if (error2){
+			this_game.decrement_round_count();
+		}
 		board.draw_board(board.give_board_spots());
 		// board::find_three_in_a_row();
 		// details::change_turn();
