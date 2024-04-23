@@ -158,14 +158,6 @@ class Player {
 }
 
 
-		/*
-		void attempt_to_fill_spot(){
-			board_spots[spot_to_fill-1] = mark1;
-		} // this isn't the final ending of func,
-		  // will need to be removed later
-
-		*/
-
 		// data members
 		
 		int spot_to_fill = 0;
