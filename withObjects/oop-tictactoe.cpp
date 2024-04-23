@@ -36,8 +36,8 @@ class Board {
                         }
                 }
 
-                void draw_board(std::array<char,9>){ // this function is fairly self-explanatory; it draws the board by referencing the values from the array, board_spots
-                        cout << "\n\n     |     |     \n";
+                void draw_board(std::array<char,9>){
+			cout << "\n\n     |     |     \n";
                         cout << "  " << board_spots[0] << "  |  " << board_spots[1] << "  |  " << board_spots[2] << "  \n";
                         cout << "_____|_____|_____\n";
                         cout << "     |     |     \n";
@@ -75,9 +75,6 @@ class Details {
 		bool is_game_over(){
 			return this->game_over;
 		}
-		//int test_r_c_is_10(){
-                //        return main_game_loop();
-                //}
 		void announce_game_over_value(){
 			cout << "game_over is now set to: " << this->game_over << "\n\n\n";
 		}
@@ -112,30 +109,7 @@ class Details {
 
 		// methods
 
-/*
-		void round_limit_checker(){
-			// should be final place for what_is_round_num();
-			if (this->round_counter > 9){
-				this->game_over = true;
-				announce_game_over_value();
-				// call or return end game function
-				// here later
-			}
-		}
-*/
 
-
-/*
-                int main_game_loop(){
-			// round_limit_checker();
-			for (i = this_game.give_round_count(); i <= 9; this_game.increment_round_count()){
-				what_is_round_num();
-				// board.draw_board(board.give_board_spots());
-                        }
-			round_limit_checker();
-                        return this->round_counter;
-                }
-		*/
 };
 
 class Player {
@@ -148,7 +122,6 @@ class Player {
 				return 1;
 			}
 			return 0;
-			// return mark1; // not committed to this yet
 		}
 
 		int give_requested_spot(){
@@ -176,15 +149,12 @@ class Player {
                 		say_invalid();
                 		cin.clear();
                 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                		// round_counter--; //                                                          // how shall I implement this?
 				return 1;
         		} else if (!(requested_spot > 0) || !(requested_spot <= 10)){
                 		cout << "\nPlease only enter a number between 1 and 9.\n";
                 		return 1;
-				// round_counter--;
         		}
 			return 0;
-			// return requested_spot;
 }
 
 
@@ -232,8 +202,8 @@ int main(){
 		// details::change_turn();
 		this_game.increment_round_count();
 		this_game.round_limit_checker();
-		error1 = 0;
-		error2 = 0;
+		error1 = 0; // resets error values, just to be safe
+		error2 = 0; // may be superfluous
 	}
 	return 0;
 }
