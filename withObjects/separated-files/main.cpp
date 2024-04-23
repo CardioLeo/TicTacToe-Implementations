@@ -40,10 +40,10 @@ int main(){
 		// errors while calling primary object
 		// methods:
 
-		int error1 = player1.player_move();
+		int invalid_input = player1.player_move();
                 int request = player1.give_requested_spot();
                 int error2 = board.attempt_to_fill(request);
-                if (error1 || error2){
+                if (invalid_input || error2){
                         this_game.decrement_round_count();
                 }
 
