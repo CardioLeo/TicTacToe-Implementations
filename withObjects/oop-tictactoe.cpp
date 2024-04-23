@@ -185,8 +185,6 @@ int main(){
 	Board board;
 	Player player1;
 	this_game.announce_game_over_value();
-	// draw board before getting player input and
-	// beginning regular rounds
 	board.draw_board(board.give_board_spots());
 	while (this_game.give_round_count() <= 9){
 		// details::display_info();
