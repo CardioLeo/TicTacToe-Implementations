@@ -47,9 +47,6 @@ class Board {
                         cout << "  " << board_spots[6] << "  |  " << board_spots[7] << "  |  " << board_spots[8] << "  \n";
                         cout << "     |     |     \n\n\n";
                 };
-		void test_change_board_spot(){
-			board_spots[0] = 'X';
-		}
                 /*bool announce_three_in_a_row(){
                         cout << "That's three in a row!\n\nPlayer \" << mark << \" wins!\n";
                         return game_over = true;
