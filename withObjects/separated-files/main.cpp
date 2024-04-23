@@ -42,8 +42,8 @@ int main(){
 
 		int invalid_input = player1.player_move();
                 int request = player1.give_requested_spot();
-                int error2 = board.attempt_to_fill(request);
-                if (invalid_input || error2){
+                int spot_taken = board.attempt_to_fill(request);
+                if (invalid_input || spot_taken){
                         this_game.decrement_round_count();
                 }
 
