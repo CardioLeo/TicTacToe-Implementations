@@ -60,8 +60,8 @@ int main(){
                 
 		this_game.increment_round_count();
                 this_game.round_limit_checker();
-                error1 = 0; // resets error values, just to be safe
-                error2 = 0; // may be superfluous
+                invalid_input = 0; // resets error values, just to be safe
+                spot_taken = 0; // may be superfluous
         }
         return 0;
 }
