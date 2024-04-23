@@ -7,24 +7,50 @@
 using namespace std;
 
 int main(){
-        Details this_game;
+
+	// instantiating objects
+
+	Details this_game;
         Board board;
         Player player1;
+
+	// initial announcement & board-drawing
+
         this_game.announce_game_over_value();
         board.draw_board(board.give_board_spots());
+
+	// main gameplay loop
+	
         while (this_game.give_round_count() <= 9){
-                // details::display_info();
+        
+		// needs to be put in:
+		// details::display_info();
+
                 this_game.what_is_round_num();
-                int error1 = player1.player_move();
+                
+		// primitive way of keeping track of
+		// errors while calling primary object
+		// methods:
+
+		int error1 = player1.player_move();
                 int request = player1.give_requested_spot();
                 int error2 = board.attempt_to_fill(request);
                 if (error1 || error2){
                         this_game.decrement_round_count();
                 }
+
+		// draws updated board, so long as errors = 0
+
                 board.draw_board(board.give_board_spots());
+
+		// needs to be put in:
                 // board::find_three_in_a_row();
                 // details::change_turn();
-                this_game.increment_round_count();
+		
+		// some housekeeping; hopefully can be done
+		// more cleanly in the future
+                
+		this_game.increment_round_count();
                 this_game.round_limit_checker();
                 error1 = 0; // resets error values, just to be safe
                 error2 = 0; // may be superfluous
