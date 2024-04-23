@@ -17,7 +17,7 @@ class Board {
         private:
                 std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-        public :
+        public:
                 std::array<char,9> give_board_spots(){
                         return board_spots;
                 }
