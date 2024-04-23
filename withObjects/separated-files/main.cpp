@@ -14,6 +14,14 @@ int main(){
         Board board;
         Player player1;
 
+	// player2 of course needs to be instantiated
+	// but that will involve figuring out just how
+	// the class should be designed to have more
+	// than one player; versus how I previously
+	// had a mark variable which alternated
+	// between values based on whether the
+	// round_counter var was divisible by 2
+
 	// initial announcement & board-drawing
 
         this_game.announce_game_over_value();
