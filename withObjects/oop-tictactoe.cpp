@@ -68,7 +68,9 @@ class Details {
 			this->round_counter++;
 		}
 		void decrement_round_count(){
-			this->round_counter--;
+			if (this->round_counter > 0){
+				this->round_counter--;
+			}
 		}
 		bool is_game_over(){
 			return this->game_over;
@@ -220,17 +222,9 @@ int main(){
 		// details::display_info();
 		this_game.what_is_round_num();
 		int error1 = player1.player_move();
-		if (error1){
-			this_game.decrement_round_count();
-		}
 		int request = player1.give_requested_spot();
-		// cout << "\n\n\n" << request << "\n\n\n";
-		// char response = board.give_one_spot(request-1);
-		// cout << "\n\n\n" << response << "\n\n\n";
-		// board.attempt_to_fill_spot();
-		int error2 = board.attempt_to_fill(request); // make this call attempt
-		//
-		if (error2){
+		int error2 = board.attempt_to_fill(request);
+		if (error1 || error2){
 			this_game.decrement_round_count();
 		}
 		board.draw_board(board.give_board_spots());
@@ -238,6 +232,8 @@ int main(){
 		// details::change_turn();
 		this_game.increment_round_count();
 		this_game.round_limit_checker();
+		error1 = 0;
+		error2 = 0;
 	}
 	return 0;
 }
