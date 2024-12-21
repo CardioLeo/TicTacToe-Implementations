@@ -13,14 +13,12 @@ class Board {
 							// to read
 			if (b_s == 'X' || b_s == 'O'){
 				cout << "\nThis spot has already been filled!\n\nPlease choose anothere spot.\n";
-				ask_round_to_decrement();
-				ask_for_new_spot();
+				this->ask_for_new_spot();
+				return false;
 			}
+			return true;
 		}
 
-		bool spot_does_not_fit(int spot){
-			
-		}
 	public:
 		void draw_board(){
                         cout << "\n\n     |     |     \n";
@@ -33,12 +31,7 @@ class Board {
                         cout << "  " << this->board_spots[6] << "  |  " << this->board_spots[7] << "  |  " << this->board_spots[8] << "  \n";
                         cout << "     |     |     \n\n\n";
                 }
-                bool ask_round_to_decrement(bool retake){
-                        if (retake == false){
-                                return false;
-                        }
-                        return true;
-                }
+		
 		bool ask_for_new_spot(){
 			return false;
 		} // this one function can probably be used to signal to the Game_Data class
