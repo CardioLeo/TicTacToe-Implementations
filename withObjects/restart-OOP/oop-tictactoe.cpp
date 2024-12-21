@@ -7,22 +7,9 @@ class Board {
 	private:
 		std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-		char temp_spot;
-		bool attempt_to_fill_spot(int spot){
-			char b_s = board_spots[spot-1]; // I'm purely making this var to make
-							// the rest of this function easier
-							// to read
-			/*
-			if (b_s == 'X' || b_s == 'O'){
-				cout << "\nThis spot has already been filled!\n\nPlease choose anothere spot.\n";
-				this->ask_for_new_spot();
-				return false;
-			}
-			*/
-			b_s == spot; // this probably isn't specific enough, since it will
-				     // need to make the mark, not the spot....
-				     // so I need to make Board ask Player for the mark...
-			return true;
+		char spot;
+		void fill_spot(){
+			board_spots[spot-1] = spot; 
 		}
 
 	public:
@@ -37,17 +24,9 @@ class Board {
                         cout << "  " << this->board_spots[6] << "  |  " << this->board_spots[7] << "  |  " << this->board_spots[8] << "  \n";
                         cout << "     |     |     \n\n\n";
                 }
-		
-		//bool ask_for_new_spot(){
-		//	return false;
-		//} // this one function can probably be used to signal to the Game_Data class
-		  // both that a decrement is needed, and to the Player class that a new
-		  // input is needed
-		  // also, notice the simplicity of this function versus the
-		  // ask_round_to_decrement function; this is better
 		char test_mark(char mark){
-			cout << "The current mark is: " << mark << endl;
-			this->temp_spot = mark;
+			this->spot = mark;
+			this->fill_spot();
 			return mark;
 		}
 };
@@ -66,7 +45,7 @@ class Game_Data {
 			if (this->game_over == true){
 				cout << "The Game is now over\n";
 			} else {
-				cout << "The Game is not yet over; keep playing\n";
+				cout << "Keep playing\n";
 			}
 		}
 
@@ -78,20 +57,24 @@ class Game_Data {
 			}
 		}
 		void tell_current_round(){
-			cout << "The current round is: " << this->current_round << "\n\n";
+			cout << "The current round is: " << this->current_round << "\n";
 			this->last_round_check();
+		}
+		void tell_player_mark(char mark){
+			cout << "The current mark is: " << mark << endl;
 		}
 		void increment_round(){
 			this->current_round++;
 		}
-		void display_round_info(){
+		void display_round_info(char mark){
 			this->tell_current_round();
+			this->tell_player_mark(mark);
 			this->increment_round();
 		}
         public:
-		void display_info(){
+		void display_info(char mark){
 			this->is_game_over();
-			this->display_round_info();
+			this->display_round_info(mark);
 		}
 
 		bool win_check(){
@@ -117,12 +100,12 @@ class Player {
 		// class methods
 
 		void say_invalid(){
-			cout << "\nHm, looks like you pressed some key that isn't valid....\n\nPlease try again\n\n" << endl;
+			cout << "Hm, looks like you pressed some key that isn't valid....\nPlease try again\n" << endl;
 		}
 
 		bool spot_full_check(int spot){
 			if (this->spots_already_tried[spot-1] == spot){
-				cout << "\nThat spot has already been taken!\n\n";
+				cout << "That spot has already been taken!\n";
 				return true;
 			}
 			return false;
@@ -136,7 +119,7 @@ class Player {
 				// must reduce turn counter if false
 				return false;
 			} else if (spot <= 0 || spot >= 10){
-				cout << "\nPlease only enter a number between 1 and 9.\n";
+				cout << "Please only enter a number between 1 and 9.\n";
 				return false;
 			} else if (spot_is_full == true){
 				return false;
@@ -156,7 +139,7 @@ class Player {
                         return spot;
                 }
 		void announce_turn(){
-			cout << "It is now time to pick a move...\n";
+			cout << "It is now time to pick a spot...\n";
 		}
 
 	public:
@@ -197,12 +180,15 @@ int main(){
 	// game play	
 	board.draw_board();
 	while (this_game.win_check() == false){
-		this_game.display_info();
-		player.move();
-		board.draw_board();
 		int round = this_game.give_round();
 		char mark = player.change_turn(round);
+		this_game.display_info(mark);
+		player.move();
 		board.test_mark(mark);
+		board.draw_board();
+		// int round = this_game.give_round();
+		// char mark = player.change_turn(round);
+		// board.test_mark(mark);
 		// board.find_three_in_a_row();
 	};
 
