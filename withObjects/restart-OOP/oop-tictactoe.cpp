@@ -98,20 +98,26 @@ class Player {
 			}
 			return true;
 		}
+
 		bool ask_round_to_decrement(int retake){
 			if (retake == false){
 				return false;
 			}
 			return true;
-		}
+		} // I may not even need this function, actually, since I made
+		  // get_spot_to_fill self-reflexive and the round doesn't even
+		  // unnecesarily increment, hence doesn't need to be decremented...
+		  // I probably need to add this function to Board, though, for when
+		  // the input passed out from get_spot_to_fill doesn't fit with
+		  // the board data
 
  		int get_spot_to_fill(){
                         int spot = 0;
                         cin >> spot;
 			int retake = this->check_input(spot);
-				if (retake == false){
-					get_spot_to_fill();
-				}
+			if (retake == false){
+				get_spot_to_fill();
+			}
                         return spot;
                 }
 		void announce_turn(){
