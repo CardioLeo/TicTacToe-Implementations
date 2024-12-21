@@ -7,6 +7,20 @@ class Board {
 	private:
 		std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
+		bool attempt_to_fill_spot(int spot){
+			char b_s = board_spots[spot-1]; // I'm purely making this var to make
+							// the rest of this function easier
+							// to read
+			if (b_s == 'X' || b_s == 'O'){
+				cout << "\nThis spot has already been filled!\n\nPlease choose anothere spot.\n";
+				ask_round_to_decrement();
+				ask_for_new_spot();
+			}
+		}
+
+		bool spot_does_not_fit(int spot){
+			
+		}
 	public:
 		void draw_board(){
                         cout << "\n\n     |     |     \n";
@@ -19,6 +33,19 @@ class Board {
                         cout << "  " << this->board_spots[6] << "  |  " << this->board_spots[7] << "  |  " << this->board_spots[8] << "  \n";
                         cout << "     |     |     \n\n\n";
                 }
+                bool ask_round_to_decrement(bool retake){
+                        if (retake == false){
+                                return false;
+                        }
+                        return true;
+                }
+		bool ask_for_new_spot(){
+			return false;
+		} // this one function can probably be used to signal to the Game_Data class
+		  // both that a decrement is needed, and to the Player class that a new
+		  // input is needed
+		  // also, notice the simplicity of this function versus the
+		  // ask_round_to_decrement function; this is better
 };
 
 class Game_Data {
