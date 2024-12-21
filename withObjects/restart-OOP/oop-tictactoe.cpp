@@ -16,6 +16,9 @@ class Board {
 				this->ask_for_new_spot();
 				return false;
 			}
+			b_s == spot; // this probably isn't specific enough, since it will
+				     // need to make the mark, not the spot....
+				     // so I need to make Board ask Player for the mark...
 			return true;
 		}
 
@@ -101,6 +104,7 @@ class Player {
 		int play_again_input = 0;
 		int spot_to_fill = 0;
 		bool is_round_odd = true;
+		std::array<int, 9> spots_already_tried = {};
 
 		// class methods
 
@@ -108,6 +112,13 @@ class Player {
 			cout << "\nHm, looks like you pressed some key that isn't valid....\n\nPlease try again\n\n" << endl;
 		}
 
+		bool spot_full_check(int spot){
+			if (this->spots_already_tried[spot-1] == spot){
+				cout << "\nThat spot has already been taken!\n\n";
+				return true;
+			}
+			return false;
+		}
 		bool check_input(int spot){
 			if (cin.fail()){
 				this->say_invalid();
@@ -115,6 +126,11 @@ class Player {
 				cin.ignore(numeric_limits<streamsize>::max(),'\n');
 				// must reduce turn counter if false
 				return false;
+			} else if (spot <= 0 || spot >= 10){
+				cout << "\nPlease only enter a number between 1 and 9.\n";
+				return false;
+			} else if (spot_full_check(spot) != true){
+				this->spots_already_tried[spot-1] = spot;
 			}
 			return true;
 		}
@@ -150,10 +166,11 @@ class Player {
 				this->is_round_odd = true;	
 			}
 		}
-		void move(){
+		int move(){
 				this->announce_turn();
-				this->get_spot_to_fill();
+				spot_to_fill = this->get_spot_to_fill();
 				// pass spot to board
+				return spot_to_fill;
 			}
 			/* bool spot_error_received(bool error){
 					
