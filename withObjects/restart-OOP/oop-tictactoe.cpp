@@ -7,15 +7,18 @@ class Board {
 	private:
 		std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
+		char temp_spot;
 		bool attempt_to_fill_spot(int spot){
 			char b_s = board_spots[spot-1]; // I'm purely making this var to make
 							// the rest of this function easier
 							// to read
+			/*
 			if (b_s == 'X' || b_s == 'O'){
 				cout << "\nThis spot has already been filled!\n\nPlease choose anothere spot.\n";
 				this->ask_for_new_spot();
 				return false;
 			}
+			*/
 			b_s == spot; // this probably isn't specific enough, since it will
 				     // need to make the mark, not the spot....
 				     // so I need to make Board ask Player for the mark...
@@ -35,13 +38,18 @@ class Board {
                         cout << "     |     |     \n\n\n";
                 }
 		
-		bool ask_for_new_spot(){
-			return false;
-		} // this one function can probably be used to signal to the Game_Data class
+		//bool ask_for_new_spot(){
+		//	return false;
+		//} // this one function can probably be used to signal to the Game_Data class
 		  // both that a decrement is needed, and to the Player class that a new
 		  // input is needed
 		  // also, notice the simplicity of this function versus the
 		  // ask_round_to_decrement function; this is better
+		char test_mark(char mark){
+			cout << "The current mark is: " << mark << endl;
+			this->temp_spot = mark;
+			return mark;
+		}
 };
 
 class Game_Data {
@@ -193,7 +201,8 @@ int main(){
 		player.move();
 		board.draw_board();
 		int round = this_game.give_round();
-		player.change_turn(round);
+		char mark = player.change_turn(round);
+		board.test_mark(mark);
 		// board.find_three_in_a_row();
 	};
 
