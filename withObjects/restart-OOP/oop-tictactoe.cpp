@@ -24,7 +24,7 @@ class Board {
 class Game_Data {
         private:
 		bool game_over = false;
-		int current_round = 0;
+		int current_round = 1;
 		void tell_game_over(){
 			if (this->game_over == true){
 				cout << "The Game is now over\n";
@@ -42,16 +42,17 @@ class Game_Data {
 
 		void round_check(){
 			this->increment_round();
-			if (this->current_round >= 9){
-				this->game_over = true;
-			}
+			// if (this->current_round >= 10){
+			// 	this->game_over = true;
+			// }
 		}
 
         public:
                 void give_game_status(){
-			this->round_check();
+			// this->round_check();
 			this->tell_game_over();
                 	this->tell_current_round();
+			this->increment_round();
 		}
 
 		bool win_check(){
@@ -59,16 +60,26 @@ class Game_Data {
 		}
 };
 
+class Player {
+	public:
+			void announce_turn(){
+				cout << "It is now time to pick a move...\n";
+			}
+};
+
 int main(){
 	// initializing objects
 	Board board;
 	Game_Data this_game;
+	Player player;
 
 	// game play
 	board.draw_board();
+	player.announce_turn();
 	while (this_game.win_check() == false){
-		board.draw_board();
 		this_game.give_game_status();
+		board.draw_board();
+		player.announce_turn();
 	}
 
 	return 0;
