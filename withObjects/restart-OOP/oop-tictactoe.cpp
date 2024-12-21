@@ -100,7 +100,7 @@ class Player {
 
 		// data members
 
-		char mark = 'Y';
+		char mark;
 		int play_again_input = 0;
 		int spot_to_fill = 0;
 		bool is_round_odd = true;
@@ -152,11 +152,15 @@ class Player {
 		}
 
 	public:
+
+		/*
 		void compare_round_with_bool(int current_round){
 			if (current_round % 2 == 1){
 				this->is_round_odd = true;	
 			}
 		}
+		*/
+
 		int move(){
 				this->announce_turn();
 				spot_to_fill = this->get_spot_to_fill();
@@ -166,12 +170,13 @@ class Player {
 			/* bool spot_error_received(bool error){
 					
 			} */
-	 	void change_turn(int round){
+	 	char change_turn(int round){
                         if (round % 2 == 1){
-                                this->mark = 'X';
+				this->mark = 'X';
                         } else {
                                 this->mark = 'O';
                         }
+			return mark;
                 }
 };
 
@@ -185,17 +190,11 @@ int main(){
 	board.draw_board();
 	while (this_game.win_check() == false){
 		this_game.display_info();
-		// create a struct of 3-5 values or something
-		// which the board, player, & game pass between each other?
-		// or am I thinking effectively of a global variable again
 		player.move();
-		// player.error_check_and_info_pass();
 		board.draw_board();
 		int round = this_game.give_round();
 		player.change_turn(round);
-		// board.error_check_and_info_pass();
 		// board.find_three_in_a_row();
-		// this_game.change_turn();
 	};
 
 	return 0;
