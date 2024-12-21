@@ -98,10 +98,20 @@ class Player {
 			}
 			return true;
 		}
+		bool ask_round_to_decrement(int retake){
+			if (retake == false){
+				return false;
+			}
+			return true;
+		}
+
  		int get_spot_to_fill(){
                         int spot = 0;
                         cin >> spot;
-			bool retake = this->check_input(spot);
+			int retake = this->check_input(spot);
+				if (retake == false){
+					get_spot_to_fill();
+				}
                         return spot;
                 }
 		void announce_turn(){
