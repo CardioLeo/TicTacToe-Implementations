@@ -16,7 +16,18 @@ using namespace std;
 class Board {
         private:
                 std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+		bool found_three = false;
+		char mark;
+ 		bool find_three_in_a_row(){
+                        if (this->board_spots[0] == this->board_spots[1] && this->board_spots[0]
+== this->board_spots[2]){
+				return true;
+			} else {
+				return false;
+			}
 
+
+                }
         public:
                 std::array<char,9> give_board_spots(){
                         return board_spots;
@@ -26,8 +37,16 @@ class Board {
 			return this->board_spots[request];
 		}
 
+		bool give_found_three(){
+			return this->found_three;
+		}
+		
+		void set_mark(char current_mark){
+			this->mark = current_mark;
+		}
+
 		int attempt_to_fill(int request, char current_mark){
-			char mark = current_mark;
+			this->mark = current_mark;
 			if (this->board_spots[request-1] == 'X' || this->board_spots[request-1] == 'O'){
 				cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
 				return 1;
@@ -48,15 +67,20 @@ class Board {
                         cout << "  " << board_spots[6] << "  |  " << board_spots[7] << "  |  " << board_spots[8] << "  \n";
                         cout << "     |     |     \n\n\n";
                 };
-                /*bool announce_three_in_a_row(){
-                        cout << "That's three in a row!\n\nPlayer \" << mark << \" wins!\n";
-                        return game_over = true;
+                bool announce_three_in_a_row(){
+			this->found_three = this->find_three_in_a_row();
+			if (this->found_three){
+                        	cout << "That's three in a row!\n\nPlayer " << this->mark << " wins!\n";
+                        	return true; // this->game_over = true;
+			} else {
+				return false; // this->game_over = false;
+			}
                         // this var needs to be in the game_details
                         // class.... hm. commenting out this code for now
-                }*/
+                }
 };
 
-class Details {
+class Game_Details {
         public:
 		// methods
 		int give_round_count(){
@@ -73,6 +97,13 @@ class Details {
 		bool is_game_over(){
 			return this->game_over;
 		}
+		bool test_game_over(bool outside_test){
+			if (outside_test == true){
+				this->game_over = true;
+			}
+			return this->game_over;
+		}
+
 		void announce_game_over_value(){
 			cout << "game_over is now set to: " << this->game_over << "\n\n\n";
 		}
@@ -96,7 +127,6 @@ class Details {
 			if (this->round_counter == 9){
 				cout << "\n\nLast round!\n\n\n";
 			}
-			cout << "Player Turn: --not yet declared--";
 			cout << "Player Turn: " << this->current_mark() << "\n\n\n";
 			what_is_round_num(); // remove this later when
 					     // included in
@@ -195,17 +225,20 @@ class Player {
 };
 
 int main(){
-	Details this_game;
+	// initialize objects
+	Game_Details this_game;
 	Board board;
 	Player player1;
+
 	this_game.announce_game_over_value();
 	board.draw_board(board.give_board_spots());
 	// game logic:
-	while (this_game.give_round_count() <= 9){
+	while (this_game.give_round_count() <= 9 || this_game.test_game_over(board.announce_three_in_a_row()) == false){
 		// details::display_info();
 		this_game.what_is_round_num();
 		char current_mark = this_game.give_current_mark();
 		player1.pass_on_mark(current_mark);
+		board.set_mark(current_mark);
 		int error1 = player1.player_move();
 		int request = player1.give_requested_spot();
 		int error2 = board.attempt_to_fill(request, current_mark);
@@ -213,8 +246,7 @@ int main(){
 			this_game.decrement_round_count();
 		}
 		board.draw_board(board.give_board_spots());
-		// board::find_three_in_a_row();
-		// details::change_turn();
+		// this_game.test_game_over(board.announce_three_in_a_row());
 		this_game.increment_round_count();
 		this_game.round_limit_checker();
 		error1 = 0; // resets error values, just to be safe
