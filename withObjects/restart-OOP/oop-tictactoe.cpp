@@ -120,6 +120,7 @@ class Player {
 			return false;
 		}
 		bool check_input(int spot){
+			bool spot_is_full = this->spot_full_check(spot);
 			if (cin.fail()){
 				this->say_invalid();
 				cin.clear();
@@ -129,7 +130,9 @@ class Player {
 			} else if (spot <= 0 || spot >= 10){
 				cout << "\nPlease only enter a number between 1 and 9.\n";
 				return false;
-			} else if (spot_full_check(spot) != true){
+			} else if (spot_is_full == true){
+				return false;
+			} else if (spot_is_full == false){
 				this->spots_already_tried[spot-1] = spot;
 			}
 			return true;
