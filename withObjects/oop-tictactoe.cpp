@@ -8,8 +8,8 @@ using namespace std;
 // temporary global variables
 // // //
 //
-        char mark1 = 'X';
-        char mark2 = 'O';
+        // char mark1 = 'X';
+        // char mark2 = 'O';
 // // //
 
 
@@ -26,12 +26,13 @@ class Board {
 			return this->board_spots[request];
 		}
 
-		int attempt_to_fill(int request){
+		int attempt_to_fill(int request, char current_mark){
+			char mark = current_mark;
 			if (this->board_spots[request-1] == 'X' || this->board_spots[request-1] == 'O'){
 				cout << "\nThis spot has already been filled!\n\nPlease choose another spot.\n";
 				return 1;
                         } else {
-                                 this->board_spots[request-1] = mark1;
+                                 this->board_spots[request-1] = mark;
 				 return 0;
                         }
                 }
@@ -87,13 +88,16 @@ class Details {
                                 // here later
                         }
                 }
-
+		char give_current_mark(){
+			return this->current_mark();
+		}
 	private:
 		void display_info(){
 			if (this->round_counter == 9){
 				cout << "\n\nLast round!\n\n\n";
 			}
-			cout << "Player Turn: --not yet declared--\n\n\n";
+			cout << "Player Turn: --not yet declared--";
+			cout << "Player Turn: " << this->current_mark() << "\n\n\n";
 			what_is_round_num(); // remove this later when
 					     // included in
 					     // round_limit_checker();
@@ -103,7 +107,17 @@ class Details {
 		// variables
                 int round_counter = 1;
 		bool game_over = false;
-
+		// char mark1 = 'X';
+		// char mark2 = 'O';
+		char mark;
+		char current_mark(){
+        		if (this->round_counter % 2 == 1){
+                		this->mark = 'X';
+        		} else {
+                		this->mark = 'O';
+        		}
+			return this->mark;
+		}
 		// methods
 
 
@@ -112,7 +126,7 @@ class Details {
 class Player {
 	public:
 		int player_move(){
-			cout << "Player " << this->mark1 << ", Please select the spot to place your mark.\n";
+			cout << "Player " << this->mark << ", Please select the spot to place your mark.\n";
                         cin >> this->requested_spot;
 			int invalid = this->validate_input(this->requested_spot);
 			if (invalid){
@@ -133,6 +147,12 @@ class Player {
 		    // give_requested_spot() doesn't do the trick
 
 		//
+		
+		char pass_on_mark(char current_mark){
+			this->receive_current_mark(current_mark);
+			return this->mark;
+		}
+
 	private:
 		//
 		
@@ -152,17 +172,22 @@ class Player {
                 		return 1;
         		}
 			return 0;
-}
+		}
+
+		void receive_current_mark(char current_mark){
+			this->mark = current_mark;
+		}
 
 
 		// data members
 		
+		char mark = 'Y';
 		int spot_to_fill = 0;
 		int requested_spot = 0;
-		char mark1 = 'X'; // this will later need to be defined
+		// char mark1 = 'X'; // this will later need to be defined
 				  // by initalization at the beginning
 				  // of two separate player objects
-		char mark2 = 'O';
+		// char mark2 = 'O';
 		int play_again_input = 0; // this may need to be moved
 					  // to details class, or it may
 					  // need to have a counterpart
@@ -175,12 +200,15 @@ int main(){
 	Player player1;
 	this_game.announce_game_over_value();
 	board.draw_board(board.give_board_spots());
+	// game logic:
 	while (this_game.give_round_count() <= 9){
 		// details::display_info();
 		this_game.what_is_round_num();
+		char current_mark = this_game.give_current_mark();
+		player1.pass_on_mark(current_mark);
 		int error1 = player1.player_move();
 		int request = player1.give_requested_spot();
-		int error2 = board.attempt_to_fill(request);
+		int error2 = board.attempt_to_fill(request, current_mark);
 		if (error1 || error2){
 			this_game.decrement_round_count();
 		}
