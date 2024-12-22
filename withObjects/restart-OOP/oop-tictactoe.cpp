@@ -13,6 +13,8 @@ using namespace std;
 
 class Board {
 	private:
+		// class data members
+	
 		array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 		array<array<int, 3>, 8> winning_rows = {
 			{
@@ -28,12 +30,47 @@ class Board {
 		};
 		char mark;
 		int spot;
+		bool winning_row_found = false;
+
+		// class methods
+		
 		void fill_spot(){
 			board_spots[spot-1] = mark; 
 		}
+		void announce_three_in_a_row(){
+			cout << "That's three in a row!\n\n Player " << mark << " wins!\n";
+			// game_over = true;
+		}
+                bool send_win_to_Game_Data(){
+                        return winning_row_found;
+                }
+		bool look_for_winning_rows(bool main_game_over){
+			int temp1, temp2, temp3;
+			for (int i = 0; i < 8; i++){
+				temp1 = winning_rows[i][0];
+				temp2 = winning_rows[i][1];
+				temp3 = winning_rows[i][2];
+				if (board_spots[temp1] == board_spots[temp2] && board_spots[temp2] == board_spots[temp3]){
+					this->announce_three_in_a_row();
+					this->winning_row_found = true;
+					return winning_row_found;
+				}
+				// cout << temp1 << " " << temp2 << " " << temp3 << " - ";
+				// for (int j = 0; j < 3; j++){
+					// temp1 = winning_rows[i][0];
+					// temp2 = winning_rows[i][1];
+					// temp3 = winning_rows[i][2];
+					// cout << temp1 << " " << temp2 << " " << temp3 << " - ";
+					// cout << winning_rows[i][j] << " ";
+				// }
+			}
+			cout << endl;
+			return false;
+		}
 
 	public:
-		void draw_board(){
+
+		bool draw_board(){
                         cout << "\n\n     |     |     \n";
                         cout << "  " << this->board_spots[0] << "  |  " << this->board_spots[1] << "  |  " << this->board_spots[2] << "  \n";
                         cout << "_____|_____|_____\n";
@@ -43,6 +80,7 @@ class Board {
                         cout << "     |     |     \n";
                         cout << "  " << this->board_spots[6] << "  |  " << this->board_spots[7] << "  |  " << this->board_spots[8] << "  \n";
                         cout << "     |     |     \n\n\n";
+			return look_for_winning_rows(winning_row_found);
                 }
 		void test_mark(char mark, int move){
 			this->mark = mark;
@@ -91,14 +129,25 @@ class Game_Data {
 			this->tell_player_mark(mark);
 			this->increment_round();
 		}
+                void receive_game_over(bool main_game_over){
+                        if (main_game_over == true){
+                                this->game_over == true;
+                        }
+                }
         public:
 		void display_info(char mark){
 			this->is_game_over();
 			this->display_round_info(mark);
 		}
 
-		bool win_check(){
-			return (this->game_over || this->current_round >= 10);
+		bool win_check(bool main_game_over){
+			if (this->game_over || this->current_round >= 10){
+				receive_game_over(main_game_over);
+				// this ^^^  may need to be a third bool
+				// in the above if statement...
+				return true;
+			}
+			return false;
 		}
 
 		int give_round(){
@@ -199,14 +248,15 @@ int main(){
 	Player player;
 
 	// game play	
-	board.draw_board();
-	while (this_game.win_check() == false){
+	
+	bool game_over = board.draw_board();
+	while (this_game.win_check(game_over) == false){
 		int round = this_game.give_round();
 		char mark = player.change_turn(round);
 		this_game.display_info(mark);
 		int move = player.move();
 		board.test_mark(mark, move);
-		board.draw_board();
+		game_over = board.draw_board();
 		// int round = this_game.give_round();
 		// char mark = player.change_turn(round);
 		// board.test_mark(mark);
