@@ -133,6 +133,7 @@ class Game_Data {
                         if (main_game_over == true){
                                 this->game_over == true;
                         }
+	//		return game_over;
                 }
         public:
 		void display_info(char mark){
@@ -141,8 +142,9 @@ class Game_Data {
 		}
 
 		bool win_check(bool main_game_over){
+			receive_game_over(main_game_over);
 			if (this->game_over || this->current_round >= 10){
-				receive_game_over(main_game_over);
+				// receive_game_over(main_game_over);
 				// this ^^^  may need to be a third bool
 				// in the above if statement...
 				return true;
@@ -249,14 +251,16 @@ int main(){
 
 	// game play	
 	
-	bool game_over = board.draw_board();
-	while (this_game.win_check(game_over) == false){
+	bool is_game_over = false;
+	board.draw_board();
+	while (is_game_over == false){
 		int round = this_game.give_round();
 		char mark = player.change_turn(round);
 		this_game.display_info(mark);
 		int move = player.move();
 		board.test_mark(mark, move);
-		game_over = board.draw_board();
+		is_game_over = board.draw_board();
+		this_game.win_check(is_game_over);
 		// int round = this_game.give_round();
 		// char mark = player.change_turn(round);
 		// board.test_mark(mark);
