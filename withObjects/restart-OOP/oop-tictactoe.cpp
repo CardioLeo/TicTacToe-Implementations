@@ -39,7 +39,6 @@ class Board {
 		}
 		void announce_three_in_a_row(){
 			cout << "That's three in a row!\n\n Player " << mark << " wins!\n";
-			// game_over = true;
 		}
                 bool send_win_to_Game_Data(){
                         return winning_row_found;
@@ -55,14 +54,6 @@ class Board {
 					this->winning_row_found = true;
 					return winning_row_found;
 				}
-				// cout << temp1 << " " << temp2 << " " << temp3 << " - ";
-				// for (int j = 0; j < 3; j++){
-					// temp1 = winning_rows[i][0];
-					// temp2 = winning_rows[i][1];
-					// temp3 = winning_rows[i][2];
-					// cout << temp1 << " " << temp2 << " " << temp3 << " - ";
-					// cout << winning_rows[i][j] << " ";
-				// }
 			}
 			cout << endl;
 			return false;
@@ -99,15 +90,7 @@ class Game_Data {
 		
 		// class methods
 
-		void is_game_over(){
-			if (this->game_over == true){
-				cout << "The Game is now over\n";
-			} else {
-				cout << "Keep playing\n";
-			}
-		}
-
-		// round info follows here:
+		// round related methods follow here:
 
 		void last_round_check(){
 			if (this->current_round >= 9){
@@ -129,11 +112,23 @@ class Game_Data {
 			this->tell_player_mark(mark);
 			this->increment_round();
 		}
+		
+		// methods for announcing game over & for receiving the bool
+		// passed from the board object, here
+		
+                void is_game_over(){
+                        if (this->game_over == true){
+                                cout << "The Game is now over\n";
+                        } else {
+                                cout << "Keep playing\n";
+                        }
+                }
+
+
                 void receive_game_over(bool main_game_over){
                         if (main_game_over == true){
                                 this->game_over == true;
                         }
-	//		return game_over;
                 }
         public:
 		void display_info(char mark){
@@ -144,9 +139,6 @@ class Game_Data {
 		bool win_check(bool main_game_over){
 			receive_game_over(main_game_over);
 			if (this->game_over || this->current_round >= 10){
-				// receive_game_over(main_game_over);
-				// this ^^^  may need to be a third bool
-				// in the above if statement...
 				return true;
 			}
 			return false;
@@ -181,35 +173,35 @@ class Player {
 			}
 			return false;
 		}
-                void print_spots_already_tried(){
+                /*void print_spots_already_tried(){
                         cout << "here are the spots you've already tried: ";
                         for (int i = 0; i < 9; i++){
                                 cout << spots_already_tried[i] << " ";
                         }
-                }
+                }*/
 
-		void announce_choice(int spot){
+		/*void announce_choice(int spot){
 			cout << "You put " << spot << endl;
 			this->print_spots_already_tried();
-		}
+		}*/
 		bool check_input(int spot){
 			bool spot_is_full = this->spot_full_check(spot);
 			if (cin.fail()){
 				this->say_invalid();
-				this->announce_choice(spot);
+				// this->announce_choice(spot);
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(),'\n');
 				return false;
 			} else if (spot <= 0 || spot >= 10){
 				cout << "Please only enter a number between 1 and 9.\n";
-				this->announce_choice(spot);
+				// this->announce_choice(spot);
 				return false;
 			} else if (spot_is_full == true){
-				this->announce_choice(spot);
+				// this->announce_choice(spot);
 				return false;
 			} else if (spot_is_full == false){
 				this->spots_already_tried[spot-1] = spot;
-				this->announce_choice(spot);
+				// this->announce_choice(spot);
 			}
 			return true;
 		}
@@ -244,7 +236,9 @@ class Player {
 };
 
 int main(){
+	
 	// initializing objects
+	
 	Board board;
 	Game_Data this_game;
 	Player player;
@@ -261,10 +255,6 @@ int main(){
 		board.test_mark(mark, move);
 		is_game_over = board.draw_board();
 		this_game.win_check(is_game_over);
-		// int round = this_game.give_round();
-		// char mark = player.change_turn(round);
-		// board.test_mark(mark);
-		// board.find_three_in_a_row();
 	};
 
 	return 0;
