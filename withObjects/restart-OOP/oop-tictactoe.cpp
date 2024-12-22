@@ -1,3 +1,11 @@
+/*
+ * Author: William Z Chadwick
+ * Date Created: 12/20/2024
+ * Date Modified: 12/21/2024
+ * Description: Basic OOP TicTacToe Implementation in C++
+ * Usage: 
+ */
+
 #include<iostream>
 #include<array>
 #include<limits>
