@@ -7,9 +7,10 @@ class Board {
 	private:
 		std::array<char, 9> board_spots = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-		char spot;
+		char mark;
+		int spot;
 		void fill_spot(){
-			board_spots[spot-1] = spot; 
+			board_spots[spot-1] = mark; 
 		}
 
 	public:
@@ -24,10 +25,10 @@ class Board {
                         cout << "  " << this->board_spots[6] << "  |  " << this->board_spots[7] << "  |  " << this->board_spots[8] << "  \n";
                         cout << "     |     |     \n\n\n";
                 }
-		char test_mark(char mark){
-			this->spot = mark;
+		void test_mark(char mark, int move){
+			this->mark = mark;
+			this->spot = move;
 			this->fill_spot();
-			return mark;
 		}
 };
 
@@ -93,7 +94,7 @@ class Player {
 
 		char mark;
 		int play_again_input = 0;
-		int spot_to_fill = 0;
+		int spot = 0;
 		bool is_round_odd = true;
 		std::array<int, 9> spots_already_tried = {};
 
@@ -110,28 +111,42 @@ class Player {
 			}
 			return false;
 		}
+                void print_spots_already_tried(){
+                        cout << "here are the spots you've already tried: ";
+                        for (int i = 0; i < 9; i++){
+                                cout << spots_already_tried[i] << " ";
+                        }
+                }
+
+		void announce_choice(int spot){
+			cout << "You put " << spot << endl;
+			this->print_spots_already_tried();
+		}
 		bool check_input(int spot){
 			bool spot_is_full = this->spot_full_check(spot);
 			if (cin.fail()){
 				this->say_invalid();
+				this->announce_choice(spot);
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(),'\n');
 				// must reduce turn counter if false
 				return false;
 			} else if (spot <= 0 || spot >= 10){
 				cout << "Please only enter a number between 1 and 9.\n";
+				this->announce_choice(spot);
 				return false;
 			} else if (spot_is_full == true){
+				this->announce_choice(spot);
 				return false;
 			} else if (spot_is_full == false){
 				this->spots_already_tried[spot-1] = spot;
+				this->announce_choice(spot);
 			}
 			return true;
 		}
 
  		int get_spot_to_fill(){
-                        int spot = 0;
-                        cin >> spot;
+                        cin >> this->spot;
 			int retake = this->check_input(spot);
 			if (retake == false){
 				get_spot_to_fill();
@@ -154,9 +169,9 @@ class Player {
 
 		int move(){
 				this->announce_turn();
-				spot_to_fill = this->get_spot_to_fill();
+				spot = this->get_spot_to_fill();
 				// pass spot to board
-				return spot_to_fill;
+				return spot;
 			}
 			/* bool spot_error_received(bool error){
 					
@@ -183,8 +198,8 @@ int main(){
 		int round = this_game.give_round();
 		char mark = player.change_turn(round);
 		this_game.display_info(mark);
-		player.move();
-		board.test_mark(mark);
+		int move = player.move();
+		board.test_mark(mark, move);
 		board.draw_board();
 		// int round = this_game.give_round();
 		// char mark = player.change_turn(round);
