@@ -129,7 +129,6 @@ class Player {
 				this->announce_choice(spot);
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(),'\n');
-				// must reduce turn counter if false
 				return false;
 			} else if (spot <= 0 || spot >= 10){
 				cout << "Please only enter a number between 1 and 9.\n";
@@ -158,24 +157,12 @@ class Player {
 		}
 
 	public:
-
-		/*
-		void compare_round_with_bool(int current_round){
-			if (current_round % 2 == 1){
-				this->is_round_odd = true;	
-			}
-		}
-		*/
-
 		int move(){
 				this->announce_turn();
 				spot = this->get_spot_to_fill();
 				// pass spot to board
 				return spot;
 			}
-			/* bool spot_error_received(bool error){
-					
-			} */
 	 	char change_turn(int round){
                         if (round % 2 == 1){
 				this->mark = 'X';
