@@ -13,7 +13,7 @@ func draw_vert_line() {
 }
 
 func draw_val_line() {
-        fmt.Print("  a  |  b  |  c  \n")
+        fmt.Printf("  %c  |  %c  |  %c  \n", line_values[0], line_values[1], line_values[2])
 	// pass a slice of line_values to this func
 	// then use that slice to print the values each round
 }
