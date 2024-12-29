@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// section for board-related values & functions
+
 var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
 func draw_vert_line() {
@@ -41,12 +43,14 @@ func draw_board() {
 	fmt.Println()
 }
 
-// divide for game data functions
+// Section for game data functions
 
 // type Game_Data struct
 var player_marks [2]rune = [2]rune{'X', 'O'}
-// var round_counter int8 = 0
 var mark rune
+
+// I should probably create an ADT for the above data, then create
+// an interface which enables me to pass around just the values I need
 
 func get_player_turn(round_counter int8) {
         if (round_counter % 2 == 1) {
@@ -91,10 +95,10 @@ func ask_to_play_again() {
 	fmt.Println("Game over! --- Would you like to play again?\nIf yes, press 1; if no, press 2\n")
 	fmt.Scanln(&answer)
 	if (answer >= 3 || answer <= 0) {
-		fmt.Println("\n\nHuh, that input isn't right; try 1 or 2\n\n")
+		fmt.Println("\nHuh, that input isn't right; try 1 or 2\n")
 		ask_to_play_again()
 	} else if (answer == 1) {
-		fmt.Println("\n\n\n\nWow, you want to play again, huh? Okay....\n\n")
+		fmt.Println("\n\nWow, you want to play again, huh? Okay....\n")
 		play_game()
 		ask_to_play_again()
 	} else {
