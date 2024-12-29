@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	// "bytes"
 )
 
 var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
@@ -68,6 +67,12 @@ func tell_game_data(round_counter int8) {
 	fmt.Println()
 }
 
+func ask_player_move() {
+	var move rune
+	fmt.Scanln(&move)
+	fmt.Println("\nYou chose move: ", &move)
+}
+
 // divide for play_game function, separate from the other sections
 
 func play_game(){
@@ -75,6 +80,7 @@ func play_game(){
         for round_counter <= 9 {
                 draw_board()
                 tell_game_data(round_counter)
+		ask_player_move()
                 round_counter++
         }
 }
