@@ -41,10 +41,25 @@ func draw_board() {
 	fmt.Println()
 }
 
+// divide for game data functions
+
+// type Game_Data struct
+var player_marks [2]rune = [2]rune{'X', 'O'}
+// var round_counter int8 = 0
+
+func tell_game_data(round_counter int8) {
+	fmt.Printf("The current Player turn is: %c", player_marks[0])
+	fmt.Println()
+	fmt.Printf("The current round number is: %d", round_counter)
+	fmt.Println()
+	fmt.Println()
+}
+
 func main() {
-	round_counter := 0
+	var round_counter int8 = 0
 	for round_counter <= 9 {
 		draw_board()
+		tell_game_data(round_counter)
 		round_counter++
 	}
 }
