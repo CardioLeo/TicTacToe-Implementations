@@ -78,6 +78,15 @@ func play_game(){
         }
 }
 
+func ask_input() {
+	answer := 1
+	if answer == 1 {
+		fmt.Println("\n\n\n\nWow, you want to play again, huh? Okay....\n\n")
+		play_game()
+	}
+}
+
 func main() {
 	play_game()
+	ask_input()
 }
