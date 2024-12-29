@@ -4,10 +4,6 @@ import (
 	"fmt"
 )
 
-// type line_values struct {
-//      '1', '2', '3', '4', '5', '6', '7', '8', '9' rune
-// }
-
 var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
 func draw_vert_line() {
