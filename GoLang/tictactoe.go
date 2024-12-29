@@ -67,11 +67,15 @@ func tell_game_data(round_counter int8) {
 	fmt.Println()
 }
 
+func play_game(){
+        var round_counter int8 = 0
+        for round_counter <= 9 {
+                draw_board()
+                tell_game_data(round_counter)
+                round_counter++
+        }
+}
+
 func main() {
-	var round_counter int8 = 0
-	for round_counter <= 9 {
-		draw_board()
-		tell_game_data(round_counter)
-		round_counter++
-	}
+	play_game()
 }
