@@ -69,8 +69,9 @@ func tell_game_data(round_counter int8) {
 
 func ask_player_move() {
 	var move rune
+	fmt.Println("What spot would you like to place your mark in?\n")
 	fmt.Scanln(&move)
-	fmt.Println("\nYou chose move: ", &move)
+	fmt.Println("\nYou chose move: ", move)
 }
 
 // divide for play_game function, separate from the other sections
@@ -87,6 +88,7 @@ func play_game(){
 
 func ask_to_play_again() {
 	var answer int8
+	fmt.Println("Game over! --- Would you like to play again?\nIf yes, press 1; if no, press 2\n")
 	fmt.Scanln(&answer)
 	if (answer >= 3 || answer <= 0) {
 		fmt.Println("\n\nHuh, that input isn't right; try 1 or 2\n\n")
