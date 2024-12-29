@@ -24,11 +24,12 @@ func draw_horiz_line() {
 
 func draw_board() {
 	fmt.Println()
-	for i := 0; i <= 1; i++ {
-		draw_vert_line()
-		draw_val_line()
-		draw_horiz_line()
-	}
+	draw_vert_line()
+	draw_val_line()
+	draw_horiz_line()
+	draw_vert_line()
+	draw_val_line()
+	draw_horiz_line()
 	draw_vert_line()
 	draw_val_line()
 	draw_vert_line()
