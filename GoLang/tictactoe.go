@@ -79,18 +79,22 @@ func play_game(){
         }
 }
 
-func ask_input() {
-	// var buf bytes.Buffer
-	// answer := buf.Read(answer)
-
-	answer := 1
-	if answer == 1 {
+func ask_to_play_again() {
+	var answer int8
+	fmt.Scanln(&answer)
+	if (answer >= 3 || answer <= 0) {
+		fmt.Println("\n\nHuh, that input isn't right; try 1 or 2\n\n")
+		ask_to_play_again()
+	} else if (answer == 1) {
 		fmt.Println("\n\n\n\nWow, you want to play again, huh? Okay....\n\n")
 		play_game()
+		ask_to_play_again()
+	} else {
+		fmt.Println("\n\n\nGoodbye!\n\n")
 	}
 }
 
 func main() {
 	play_game()
-	ask_input()
+	ask_to_play_again()
 }
