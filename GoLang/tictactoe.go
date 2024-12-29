@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	// "bytes"
 )
 
 var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
@@ -35,7 +36,7 @@ func draw_board() {
 
 	// test printing values
 	for i := 0; i < len(line_values); i++ {
-		fmt.Print(line_values[i])
+		fmt.Printf("%c", line_values[i])
 		fmt.Print("-")
 	}
 	fmt.Println()
@@ -79,6 +80,9 @@ func play_game(){
 }
 
 func ask_input() {
+	// var buf bytes.Buffer
+	// answer := buf.Read(answer)
+
 	answer := 1
 	if answer == 1 {
 		fmt.Println("\n\n\n\nWow, you want to play again, huh? Okay....\n\n")
