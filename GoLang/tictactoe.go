@@ -73,10 +73,18 @@ func tell_game_data(round_counter int8) {
 	fmt.Println()
 }
 
+func wrong_input_for_move() {
+	fmt.Println("Hmmm, looks like that's not a valid move\nPlease try a number between 1 and 9")
+}
+
 func ask_player_move() rune {
 	var move rune
-	fmt.Println("What spot would you like to place your mark in?\n")
+	fmt.Println("Pick a spot between 1 and 9 to place your mark.\n")
 	fmt.Scanln(&move)
+	if (move <= 0 || move >= 10) {
+		wrong_input_for_move()
+		ask_player_move()
+	}
 	return move
 	// test:
 	// fmt.Println("\nYou chose move: ", move)
