@@ -1,6 +1,5 @@
 package main
 
-
 import (
 	"fmt"
 )
@@ -29,7 +28,6 @@ func draw_board() {
 	draw_val_line()
 	draw_vert_line()
 	fmt.Println()
-
 }
 
 func main() {
@@ -37,6 +35,5 @@ func main() {
 	for i <= 9 {
 		draw_board()
 		round_counter++
-		// fmt.Println(round_counter)
 	}
 }
