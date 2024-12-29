@@ -73,11 +73,13 @@ func tell_game_data(round_counter int8) {
 	fmt.Println()
 }
 
-func ask_player_move() {
+func ask_player_move() rune {
 	var move rune
 	fmt.Println("What spot would you like to place your mark in?\n")
 	fmt.Scanln(&move)
-	fmt.Println("\nYou chose move: ", move)
+	return move
+	// test:
+	// fmt.Println("\nYou chose move: ", move)
 }
 
 // divide for play_game function, separate from the other sections
