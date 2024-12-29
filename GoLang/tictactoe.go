@@ -49,7 +49,6 @@ func draw_board() {
 
 // type Game_Data struct
 var player_marks [2]rune = [2]rune{'X', 'O'}
-// var mark rune
 
 // I should probably create an ADT for the above data, then create
 // an interface which enables me to pass around just the values I need
