@@ -4,6 +4,12 @@ import (
 	"fmt"
 )
 
+// type line_values struct {
+//      '1', '2', '3', '4', '5', '6', '7', '8', '9' rune
+// }
+
+var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
+
 func draw_vert_line() {
 	fmt.Print("     |     |     \n")
 }
@@ -28,11 +34,18 @@ func draw_board() {
 	draw_val_line()
 	draw_vert_line()
 	fmt.Println()
+
+	// test printing values
+	for i := 0; i < len(line_values); i++ {
+		fmt.Print(line_values[i])
+		fmt.Print("-")
+	}
+	fmt.Println()
 }
 
 func main() {
 	round_counter := 0
-	for i <= 9 {
+	for round_counter <= 9 {
 		draw_board()
 		round_counter++
 	}
