@@ -33,5 +33,10 @@ func draw_board() {
 }
 
 func main() {
-	draw_board()
+	round_counter := 0
+	for i <= 9 {
+		draw_board()
+		round_counter++
+		// fmt.Println(round_counter)
+	}
 }
