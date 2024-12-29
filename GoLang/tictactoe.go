@@ -16,6 +16,8 @@ func draw_vert_line() {
 
 func draw_val_line() {
         fmt.Print("  a  |  b  |  c  \n")
+	// pass a slice of line_values to this func
+	// then use that slice to print the values each round
 }
 
 func draw_horiz_line() {
