@@ -24,23 +24,24 @@ func draw_horiz_line() {
 
 func draw_board() {
 	fmt.Println()
+	for i := 0; i <= 1; i++ {
+		draw_vert_line()
+		draw_val_line()
+		draw_horiz_line()
+	}
 	draw_vert_line()
-	draw_val_line()
-	draw_horiz_line()
-	draw_vert_line()
-	draw_val_line()
-	draw_horiz_line()
-        draw_vert_line()
 	draw_val_line()
 	draw_vert_line()
 	fmt.Println()
 
 	// test printing values
+	/*
 	for i := 0; i < len(line_values); i++ {
 		fmt.Printf("%c", line_values[i])
 		fmt.Print("-")
 	}
 	fmt.Println()
+	*/
 }
 
 // Section for game data functions
@@ -58,8 +59,9 @@ func change_player_turn(round_counter int8) {
         } else {
                 mark = player_marks[1]
 	}
-	fmt.Printf("%c", mark)
-	fmt.Println()
+	// test:
+	// fmt.Printf("%c", mark)
+	// fmt.Println()
 }
 
 func tell_game_data(round_counter int8) {
