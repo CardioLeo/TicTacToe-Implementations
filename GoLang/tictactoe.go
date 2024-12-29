@@ -52,7 +52,7 @@ var mark rune
 // I should probably create an ADT for the above data, then create
 // an interface which enables me to pass around just the values I need
 
-func get_player_turn(round_counter int8) {
+func change_player_turn(round_counter int8) {
         if (round_counter % 2 == 1) {
                 mark = player_marks[0]
         } else {
@@ -63,7 +63,7 @@ func get_player_turn(round_counter int8) {
 }
 
 func tell_game_data(round_counter int8) {
-	get_player_turn(round_counter)
+	change_player_turn(round_counter)
 	fmt.Printf("The current Player turn is: %c", mark)
 	fmt.Println()
 	fmt.Printf("The current round number is: %d", round_counter)
