@@ -49,24 +49,26 @@ func draw_board() {
 
 // type Game_Data struct
 var player_marks [2]rune = [2]rune{'X', 'O'}
-var mark rune
+// var mark rune
 
 // I should probably create an ADT for the above data, then create
 // an interface which enables me to pass around just the values I need
 
-func change_player_turn(round_counter int8) {
-        if (round_counter % 2 == 1) {
+func change_player_turn(round_counter int8) rune {
+        var mark rune
+	if (round_counter % 2 == 1) {
                 mark = player_marks[0]
         } else {
                 mark = player_marks[1]
 	}
+	return mark
 	// test:
 	// fmt.Printf("%c", mark)
 	// fmt.Println()
 }
 
 func tell_game_data(round_counter int8) {
-	change_player_turn(round_counter)
+	mark :=	change_player_turn(round_counter)
 	fmt.Printf("The current Player turn is: %c", mark)
 	fmt.Println()
 	fmt.Printf("The current round number is: %d", round_counter)
@@ -95,10 +97,11 @@ func ask_player_move() rune {
 
 func play_game(){
         var round_counter int8 = 0
-        for round_counter <= 9 {
-                draw_board()
+        draw_board()
+	for round_counter <= 9 {
                 tell_game_data(round_counter)
 		ask_player_move()
+		draw_board()
                 round_counter++
         }
 }
