@@ -67,6 +67,8 @@ func tell_game_data(round_counter int8) {
 	fmt.Println()
 }
 
+// divide for play_game function, separate from the other sections
+
 func play_game(){
         var round_counter int8 = 0
         for round_counter <= 9 {
