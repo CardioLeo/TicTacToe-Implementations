@@ -14,9 +14,9 @@ import (
 
 // section for board-related values & functions
 
-var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
+var line_values [9]rune
 
-func reset_game_values() {
+func set_game_values() {
         line_values = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 }
 
@@ -134,6 +134,7 @@ func player_move() int8 {
 
 func play_game(){
         var round_counter int8 = 0
+	set_game_values()
         draw_board()
 	for round_counter <= 8 {
 		mark := tell_game_data(round_counter)
@@ -154,7 +155,6 @@ func ask_to_play_again() {
 		ask_to_play_again()
 	} else if (answer == 1) {
 		fmt.Println("\n\nWow, you want to play again, huh? Okay....\n")
-		reset_game_values()
 		play_game()
 		ask_to_play_again()
 	} else {
