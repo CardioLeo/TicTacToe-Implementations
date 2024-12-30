@@ -45,13 +45,13 @@ func find_winning_rows() bool {
 		temp1 = winning_rows[i][0]
 		temp2 = winning_rows[i][1]
 		temp3 = winning_rows[i][2]
-		// temp_bool := ([temp1]line_values == [temp2]line_values && [temp2]line_values == [temp3]line_values)
+		temp_bool := (line_values[temp1] == line_values[temp2] && line_values[temp2] == line_values[temp3])
 		// if (temp_bool) {
 		// 	winning_round_found = true // I thought of making this just temp_bool,
 							// but decided the if statement was more readable
 		//	return winning_round_found
 		// }
-		fmt.Println(temp1, temp2, temp3)
+		fmt.Println(temp1, temp2, temp3, temp_bool)
 	}
 	return winning_row_found
 }
