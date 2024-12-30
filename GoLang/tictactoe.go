@@ -44,15 +44,19 @@ func draw_board() {
 // type Game_Data struct
 var player_marks [2]rune = [2]rune{'X', 'O'}
 
+func place_mark(move int8, mark rune) {
+	line_values[move] = mark
+}
+
 // I should probably create an ADT for the above data, then create
 // an interface which enables me to pass around just the values I need
 
 func change_player_turn(round_counter int8) rune {
         var mark rune
 	if (round_counter % 2 == 1) {
-                mark = player_marks[0]
-        } else {
                 mark = player_marks[1]
+        } else {
+                mark = player_marks[0]
 	}
 	return mark
 	// test:
@@ -60,13 +64,14 @@ func change_player_turn(round_counter int8) rune {
 	// fmt.Println()
 }
 
-func tell_game_data(round_counter int8) {
+func tell_game_data(round_counter int8) rune {
 	mark :=	change_player_turn(round_counter)
 	fmt.Printf("The current Player turn is: %c", mark)
 	fmt.Println()
 	fmt.Printf("The current round number is: %d", round_counter)
 	fmt.Println()
 	fmt.Println()
+	return mark
 }
 
 func wrong_input_for_move(input_error int8) {
@@ -113,10 +118,11 @@ func test_player_move(move int8) int8 {
 	return move
 }
 
-func player_move() {
+func player_move() int8 {
 	var move int8 = ask_player_move()
 	var tested_move int8 = test_player_move(move)
 	fmt.Println("\nYou chose move: ", tested_move + 1)
+	return tested_move
 }
 
 // divide for play_game function, separate from the other sections
@@ -125,13 +131,17 @@ func play_game(){
         var round_counter int8 = 0
         draw_board()
 	for round_counter <= 8 {
-                tell_game_data(round_counter)
-		player_move()
-		// move := ask_player_move() // for later
+		mark := tell_game_data(round_counter)
+		move := player_move()
+		place_mark(move, mark)
 		// fmt.Print(move + 1) // test
 		draw_board()
                 round_counter++
         }
+}
+
+func reset_game_values() {
+	line_values = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 }
 
 func ask_to_play_again() {
@@ -143,6 +153,7 @@ func ask_to_play_again() {
 		ask_to_play_again()
 	} else if (answer == 1) {
 		fmt.Println("\n\nWow, you want to play again, huh? Okay....\n")
+		reset_game_values()
 		play_game()
 		ask_to_play_again()
 	} else {
