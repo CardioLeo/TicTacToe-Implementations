@@ -148,7 +148,7 @@ func test_player_move(move int8) int8 {
 func player_move() int8 {
 	var move int8 = ask_player_move()
 	var tested_move int8 = test_player_move(move)
-	fmt.Println("\nYou chose move: ", tested_move + 1)
+	// fmt.Println("\nYou chose move: ", tested_move + 1)
 	return tested_move
 }
 
