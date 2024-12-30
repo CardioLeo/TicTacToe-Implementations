@@ -20,19 +20,29 @@ func set_game_values() {
         line_values = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 }
 
-func find_winning_rows() bool {
-	winning_rows := [8][3]int8 {
-		{0, 1, 2},
-    		{3, 4, 5},
-		{6, 7, 8},
-		{0, 3, 6},
-                {1, 4, 7},
-		{2, 5, 8},
-                {0, 4, 8},
-		{6, 4, 2},
+var winning_rows = [8][3]int8 {
+	{0, 1, 2},
+	{3, 4, 5},
+	{6, 7, 8},
+	{0, 3, 6},
+	{1, 4, 7},
+	{2, 5, 8},
+	{0, 4, 8},
+	{6, 4, 2},
+}
+
+func announce_three_in_a_row(three_found bool) {
+	if three_found {
+		fmt.Println("Wow, someone got three in a row!")
 	}
-	fmt.Println(winning_rows)
-	return false
+}
+
+func find_winning_rows() bool {
+	var winning_row_found bool = false
+	announce_three_in_a_row(winning_row_found)
+	
+	// fmt.Println(winning_rows) // test
+	return winning_row_found
 }
 
 func draw_vert_line() {
