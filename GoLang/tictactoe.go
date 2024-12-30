@@ -17,6 +17,10 @@ import (
 
 var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
+func reset_game_values() {
+        line_values = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
+}
+
 func draw_vert_line() {
 	fmt.Print("     |     |     \n")
 }
@@ -59,9 +63,6 @@ func change_player_turn(round_counter int8) rune {
                 mark = player_marks[0]
 	}
 	return mark
-	// test:
-	// fmt.Printf("%c", mark)
-	// fmt.Println()
 }
 
 func tell_game_data(round_counter int8) rune {
@@ -127,10 +128,6 @@ func play_game(){
 		draw_board()
                 round_counter++
         }
-}
-
-func reset_game_values() {
-	line_values = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 }
 
 func ask_to_play_again() {
