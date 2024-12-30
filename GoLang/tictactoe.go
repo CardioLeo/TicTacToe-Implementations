@@ -1,4 +1,5 @@
 /*
+
  * Author: William Z Chadwick
  * Date Created: 12/28/2024
  * Date Modified: 12/28/2024
@@ -14,17 +15,21 @@ import (
 
 // section for board-related values & functions
 
-var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
+var line_values [9]rune = [9]rune{'1', 'X', 'O', '4', '5', '6', '7', '8', '9'}
 
 func draw_vert_line() {
 	fmt.Print("     |     |     \n")
 }
 
+/*
 func draw_val_line() {
         fmt.Printf("  %c  |  %c  |  %c  \n", line_values[0], line_values[1], line_values[2])
+	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[3], line_values[4], line_values[5])
+	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[6], line_values[7], line_values[8])
 	// pass a slice of line_values to this func
 	// then use that slice to print the values each round
 }
+*/
 
 func draw_horiz_line() {
 	fmt.Print("_____|_____|_____\n")
@@ -33,13 +38,16 @@ func draw_horiz_line() {
 func draw_board() {
 	fmt.Println()
 	draw_vert_line()
-	draw_val_line()
+//	draw_val_line()
+	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[0], line_values[1], line_values[2])
 	draw_horiz_line()
 	draw_vert_line()
-	draw_val_line()
+//	draw_val_line()
+	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[3], line_values[4], line_values[5])
 	draw_horiz_line()
 	draw_vert_line()
-	draw_val_line()
+//	draw_val_line()
+	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[6], line_values[7], line_values[8])
 	draw_vert_line()
 	fmt.Println()
 
@@ -83,8 +91,13 @@ func tell_game_data(round_counter int8) {
 	fmt.Println()
 }
 
-func wrong_input_for_move() {
-	fmt.Println("Hmmm, looks like that's not a valid move\nPlease try a number between 1 and 9")
+func wrong_input_for_move(input_error int8) {
+	switch input_error {
+	case 1:
+		fmt.Println("Hmmm, looks like that's not a valid move\nPlease try a number between 1 and 9")
+	case 2:
+		fmt.Println("Oops, that spot is already taken\n")
+	}
 }
 
 func ask_player_move() rune {
@@ -92,12 +105,15 @@ func ask_player_move() rune {
 	fmt.Println("Pick a spot between 1 and 9 to place your mark.\n")
 	fmt.Scanln(&move)
 	if (move <= 0 || move >= 10) {
-		wrong_input_for_move()
+		wrong_input_for_move(1)
 		ask_player_move()
+	} else if (line_values[move] == 'X' || line_values[move] == 'O') {
+		wrong_input_for_move(2)
+                ask_player_move()
 	}
+        // test:
+        fmt.Println("\nYou chose move: ", move)
 	return move
-	// test:
-	// fmt.Println("\nYou chose move: ", move)
 }
 
 // divide for play_game function, separate from the other sections
@@ -107,7 +123,8 @@ func play_game(){
         draw_board()
 	for round_counter <= 9 {
                 tell_game_data(round_counter)
-		ask_player_move()
+		move := ask_player_move()
+		fmt.Print(move) // test
 		draw_board()
                 round_counter++
         }
