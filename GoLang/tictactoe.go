@@ -45,7 +45,6 @@ func find_winning_rows() bool {
 							// but decided the if statement was more readable
 			return winning_row_found
 		}
-		// fmt.Println(temp1, temp2, temp3, temp_bool) // another test
 	}
 	return winning_row_found
 }
@@ -148,7 +147,6 @@ func test_player_move(move int8) int8 {
 func player_move() int8 {
 	var move int8 = ask_player_move()
 	var tested_move int8 = test_player_move(move)
-	// fmt.Println("\nYou chose move: ", tested_move + 1)
 	return tested_move
 }
 
