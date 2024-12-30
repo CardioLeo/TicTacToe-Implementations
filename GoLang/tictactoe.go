@@ -15,7 +15,7 @@ import (
 
 // section for board-related values & functions
 
-var line_values [9]rune = [9]rune{'1', 'X', 'O', '4', '5', '6', '7', '8', '9'}
+var line_values [9]rune = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
 func draw_vert_line() {
 	fmt.Print("     |     |     \n")
@@ -100,19 +100,26 @@ func wrong_input_for_move(input_error int8) {
 	}
 }
 
-func ask_player_move() rune {
-	var move rune
+func move_minus_one() int8 {
+	var minus_one int8
+	fmt.Scanln(&minus_one)
+	minus_one = minus_one - 1
+	return minus_one
+}
+
+func ask_player_move() int8 {
+	var move int8
 	fmt.Println("Pick a spot between 1 and 9 to place your mark.\n")
-	fmt.Scanln(&move)
-	if (move <= 0 || move >= 10) {
+	move = move_minus_one()
+	if (move < 0 || move >= 9) {
 		wrong_input_for_move(1)
 		ask_player_move()
+		fmt.Println("\nYou chose move: ", move + 1)
 	} else if (line_values[move] == 'X' || line_values[move] == 'O') {
 		wrong_input_for_move(2)
                 ask_player_move()
+		fmt.Println("\nYou chose move: ", move + 1)
 	}
-        // test:
-        fmt.Println("\nYou chose move: ", move)
 	return move
 }
 
@@ -121,7 +128,7 @@ func ask_player_move() rune {
 func play_game(){
         var round_counter int8 = 0
         draw_board()
-	for round_counter <= 9 {
+	for round_counter <= 8 {
                 tell_game_data(round_counter)
 		move := ask_player_move()
 		fmt.Print(move) // test
