@@ -31,27 +31,21 @@ var winning_rows = [8][3]int8 {
 	{6, 4, 2},
 }
 
-func announce_three_in_a_row(three_found bool) {
-	if three_found {
-		fmt.Println("Wow, someone got three in a row!")
-	}
-}
-
 func find_winning_rows() bool {
 	var winning_row_found bool = false
-	announce_three_in_a_row(winning_row_found)
+	// announce_three_in_a_row(winning_row_found)
 	var temp1, temp2, temp3 int8
 	for i := 0; i < 8; i++ {
 		temp1 = winning_rows[i][0]
 		temp2 = winning_rows[i][1]
 		temp3 = winning_rows[i][2]
 		temp_bool := (line_values[temp1] == line_values[temp2] && line_values[temp2] == line_values[temp3])
-		// if (temp_bool) {
-		// 	winning_round_found = true // I thought of making this just temp_bool,
+		if (temp_bool) {
+		 	winning_row_found = true // I thought of making this just temp_bool,
 							// but decided the if statement was more readable
-		//	return winning_round_found
-		// }
-		fmt.Println(temp1, temp2, temp3, temp_bool)
+			return winning_row_found
+		}
+		// fmt.Println(temp1, temp2, temp3, temp_bool) // another test
 	}
 	return winning_row_found
 }
@@ -110,6 +104,13 @@ func tell_game_data(round_counter int8) rune {
 	return mark
 }
 
+func announce_winner_found(game_over bool, mark rune) {
+        if game_over {
+                fmt.Printf("Wow, Player %c got three in a row!\nThat's a Win!\n\n", mark)
+        }
+}
+
+
 func wrong_input_for_move(input_error int8) {
 	switch input_error {
 	case 1:
@@ -154,15 +155,17 @@ func player_move() int8 {
 // divide for play_game function, separate from the other sections
 
 func play_game(){
-        var round_counter int8 = 0
+        var game_over bool = false
+	var round_counter int8 = 0
 	set_game_values()
         draw_board()
-	for round_counter <= 8 {
+	for (round_counter <= 8 && !game_over) {
 		mark := tell_game_data(round_counter)
 		move := player_move()
 		place_mark(move, mark)
 		draw_board()
-		find_winning_rows()
+		game_over = find_winning_rows()
+		announce_winner_found(game_over, mark)
                 round_counter++
         }
 }
