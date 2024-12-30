@@ -21,6 +21,21 @@ func reset_game_values() {
         line_values = [9]rune{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 }
 
+func find_winning_rows() bool {
+	winning_rows := [8][3]int8 {
+		{0, 1, 2},
+    		{3, 4, 5},
+		{6, 7, 8},
+		{0, 3, 6},
+                {1, 4, 7},
+		{2, 5, 8},
+                {0, 4, 8},
+		{6, 4, 2},
+	}
+	fmt.Println(winning_rows)
+	return false
+}
+
 func draw_vert_line() {
 	fmt.Print("     |     |     \n")
 }
@@ -126,6 +141,7 @@ func play_game(){
 		move := player_move()
 		place_mark(move, mark)
 		draw_board()
+		find_winning_rows()
                 round_counter++
         }
 }
