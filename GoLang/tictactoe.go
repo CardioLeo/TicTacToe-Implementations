@@ -21,16 +21,6 @@ func draw_vert_line() {
 	fmt.Print("     |     |     \n")
 }
 
-/*
-func draw_val_line() {
-        fmt.Printf("  %c  |  %c  |  %c  \n", line_values[0], line_values[1], line_values[2])
-	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[3], line_values[4], line_values[5])
-	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[6], line_values[7], line_values[8])
-	// pass a slice of line_values to this func
-	// then use that slice to print the values each round
-}
-*/
-
 func draw_horiz_line() {
 	fmt.Print("_____|_____|_____\n")
 }
@@ -38,15 +28,12 @@ func draw_horiz_line() {
 func draw_board() {
 	fmt.Println()
 	draw_vert_line()
-//	draw_val_line()
 	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[0], line_values[1], line_values[2])
 	draw_horiz_line()
 	draw_vert_line()
-//	draw_val_line()
 	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[3], line_values[4], line_values[5])
 	draw_horiz_line()
 	draw_vert_line()
-//	draw_val_line()
 	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[6], line_values[7], line_values[8])
 	draw_vert_line()
 	fmt.Println()
