@@ -40,8 +40,19 @@ func announce_three_in_a_row(three_found bool) {
 func find_winning_rows() bool {
 	var winning_row_found bool = false
 	announce_three_in_a_row(winning_row_found)
-	
-	// fmt.Println(winning_rows) // test
+	var temp1, temp2, temp3 int8
+	for i := 0; i < 8; i++ {
+		temp1 = winning_rows[i][0]
+		temp2 = winning_rows[i][1]
+		temp3 = winning_rows[i][2]
+		// temp_bool := ([temp1]line_values == [temp2]line_values && [temp2]line_values == [temp3]line_values)
+		// if (temp_bool) {
+		// 	winning_round_found = true // I thought of making this just temp_bool,
+							// but decided the if statement was more readable
+		//	return winning_round_found
+		// }
+		fmt.Println(temp1, temp2, temp3)
+	}
 	return winning_row_found
 }
 
