@@ -90,16 +90,6 @@ func move_minus_one() int8 {
 	return minus_one
 }
 
-/*
-func is_spot_full(int8) bool {
-	spots_tried := [9]int8
-	var this_spot_full bool = false
-	for _, x := range spots_tried {
-		fmt.
-	}
-}
-*/
-
 func ask_player_move() int8 {
 	var move int8
 	fmt.Println("Pick a spot between 1 and 9 to place your mark.\n")
@@ -134,7 +124,6 @@ func play_game(){
 		mark := tell_game_data(round_counter)
 		move := player_move()
 		place_mark(move, mark)
-		// fmt.Print(move + 1) // test
 		draw_board()
                 round_counter++
         }
