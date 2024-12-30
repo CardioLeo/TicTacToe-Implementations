@@ -37,15 +37,6 @@ func draw_board() {
 	fmt.Printf("  %c  |  %c  |  %c  \n", line_values[6], line_values[7], line_values[8])
 	draw_vert_line()
 	fmt.Println()
-
-	// test printing values
-	/*
-	for i := 0; i < len(line_values); i++ {
-		fmt.Printf("%c", line_values[i])
-		fmt.Print("-")
-	}
-	fmt.Println()
-	*/
 }
 
 // Section for game data functions
