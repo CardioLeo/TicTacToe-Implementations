@@ -85,6 +85,16 @@ func move_minus_one() int8 {
 	return minus_one
 }
 
+/*
+func is_spot_full(int8) bool {
+	spots_tried := [9]int8
+	var this_spot_full bool = false
+	for _, x := range spots_tried {
+		fmt.
+	}
+}
+*/
+
 func ask_player_move() int8 {
 	var move int8
 	fmt.Println("Pick a spot between 1 and 9 to place your mark.\n")
@@ -92,12 +102,11 @@ func ask_player_move() int8 {
 	if (move < 0 || move >= 9) {
 		wrong_input_for_move(1)
 		ask_player_move()
-		fmt.Println("\nYou chose move: ", move + 1)
 	} else if (line_values[move] == 'X' || line_values[move] == 'O') {
 		wrong_input_for_move(2)
                 ask_player_move()
-		fmt.Println("\nYou chose move: ", move + 1)
 	}
+	fmt.Println("\nYou chose move: ", move + 1)
 	return move
 }
 
@@ -108,8 +117,9 @@ func play_game(){
         draw_board()
 	for round_counter <= 8 {
                 tell_game_data(round_counter)
-		move := ask_player_move()
-		fmt.Print(move) // test
+		ask_player_move()
+		// move := ask_player_move() // for later
+		// fmt.Print(move + 1) // test
 		draw_board()
                 round_counter++
         }
