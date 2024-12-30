@@ -1,8 +1,7 @@
 /*
-
  * Author: William Z Chadwick
  * Date Created: 12/28/2024
- * Date Modified: 12/28/2024
+ * Date Modified: 12/29/2024
  * Description: Basic TicTacToe written in GoLang
  * Usage: 
 */
